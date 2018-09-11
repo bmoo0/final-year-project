@@ -1,0 +1,16 @@
+#+TITLE: Dissertation Organiser
+
+* Ideas for Sections of Report
+*** Ethics and Security
+**** Parity Wallet Leak
+**** MtGox Hack
+
+
+* Tasks
+** TODO Write Project Proposal
+    DEADLINE: <2018-11-19 Mon>
+** TODO Initial Planning Document
+** TODO Complete go tour
+
+
+* Links For research

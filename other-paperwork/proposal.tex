@@ -1,0 +1,82 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{An Android Bitcoin Wallet Application}
+\author{Benjamin Russell Moore}
+\date{11-09-2018}
+
+\begin{document}
+
+\maketitle
+
+I would like to build a Bitcoin wallet application for Android Smartphones. This
+application would provide a save way for Android users to interface with the
+Bitcoin blockchain while providing them with information that they need in order
+to make a purchase using bitcoin. This would include providing live price data
+of bitcoin so they can convert into their chosen fiat currency in order to make
+sure they're not over or underpaying for products as well as providing a level
+of security so that even if someone else were to use their phone they wouldn't
+be able to make purchases without the users authorisation.
+
+\vspace{5mm}
+
+Keywords: Mobile Application, Blockchain, Bitcoin
+
+\section{To Produce}
+
+A mobile application that allows users to send and receive Bitcoin while also
+providing live Bitcoin price information to the user to advise them in paying
+the correct amount of Bitcoin for any given purchases.
+
+\section{Method of Approach}
+
+\begin{center}
+\begin{tabular}{ l l }
+ Agile & Software development process \\ 
+ Kotlin with Android SDK & For developing the front-end application \\  
+ Bitcoind & To provide a JSON-RPC interface to the Bitcoin blockchain \\  
+ Go & For developing the back-end API wrapper for Bitcoind \\  
+ Git and Github & Development source control and hosting
+\end{tabular}
+\end{center}
+
+\section{Learning Requirements}
+
+\begin{itemize}
+
+\item Learn how to provide a secure connection to the Bitcoin blockchain from
+    my android application using the Bitcoin JSON-RPC
+
+\item Learn the Go to write efficient back end code
+
+\item Improve on my current knowledge of Android development by learning
+    Kotlin in order to build a modern Android application codebase 
+
+\end{itemize}
+
+\section{Potential Risks and Courses of Action}
+
+\begin{itemize}
+
+\item Loss of project codebase - I am going to be using Github for repository
+  hosting. By commiting to the repository on a regular basis I will have a
+  stream of backups I can revert to if there is an issue. 
+
+\item Hardware failure - In the event of a hardware failure I will move
+  development to my laptop or utilise the university labs in order to complete
+  my project while using the android simulator as a test-bed.
+
+\item Difficulty meeting all of my learning requirements - If I have difficulty
+  meeting my learning requirements, I will have to more intently focus my
+  research on functionality of the application I'm struggling the most with.
+
+\item Congestion in the Blockchain slows the development process - I will be
+  using the Bitcoin test-net for the development of my application which is
+  purely designed for the testing and debugging of blockchain interfacing
+  applications. In the event that blockchain becomes congested the test-net
+  should remain fast enough to develop with as it contains no real money and
+  just consists of developers reading and writing dummy transactions
+
+\end{itemize}
+
+\end{document}
