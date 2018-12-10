@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2018-12-10 Mon 15:42 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Project Initiation Document</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Benjamin Moore" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Project Initiation Document</h1>
+
+
+<div id="outline-container-org6ef405f" class="outline-2">
+<h2 id="org6ef405f"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Throughout the past few years blockchain has moved from relative obscurity to 
+a dominant technology that is being adopted for various uses throughout many industries
+but it's first application, Bitcoin is still currently the most used application of the
+technology. My project aims to create a Bitcoin wallet application for the Android smartphone
+creating a mobile interface for the Bitcoin blockchain that users can carry around in their pockets
+although there are other applications that also provide Bitcoin wallet, most notably Coinbase's mobile
+application the market for android wallet applications is still relatively small and some are even choosing 
+to forgo decentralisation to create a simpler seeming application. My project will aim to create an interface 
+for the android operating system which is not tied to any single company and can still give users the ease of use 
+of other wallet applications while still providing transparency and not forgoing the core tenant of decentralisation
+that Bitcoin was initially designed to uphold.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgeded2f4" class="outline-2">
+<h2 id="orgeded2f4"><span class="section-number-2">2</span> Background and Motivation</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+As someone with an avid interest in crypto currency I have found there are not many android Bitcoin applications available 
+and although there are some good options and the current most popular application is tied too Coinbase, the current largest 
+cryptocurrency exchange. My wallet application will attempt to create something which can provide an interface to both technical 
+and non-technical users while also remaining not tied to any company or exchange allowing the system to remain decentralised. 
+While my wallet will not be tied to any company or person in the blockchain space my application will aim to provide a simple 
+interface for the Bitcoin blockchain while allowing users to keep their funds on their own device as opposed to keeping them 
+on an external server owned by a third party company.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org6525aa6" class="outline-2">
+<h2 id="org6525aa6"><span class="section-number-2">3</span> Project Objectives</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orgbc8be24" class="outline-3">
+<h3 id="orgbc8be24"><span class="section-number-3">3.1</span> To analyse potential android development methodologies</h3>
+</div>
+<div id="outline-container-orgcd6c7ec" class="outline-3">
+<h3 id="orgcd6c7ec"><span class="section-number-3">3.2</span> To build an understand of how an application interfaces with a blockchain</h3>
+</div>
+<div id="outline-container-orgf826a6d" class="outline-3">
+<h3 id="orgf826a6d"><span class="section-number-3">3.3</span> To implement a system that communicates with the Bitcoin blockchain effectively</h3>
+</div>
+<div id="outline-container-org883b714" class="outline-3">
+<h3 id="org883b714"><span class="section-number-3">3.4</span> To implement a system that allows users of non-technical backgrounds to also utilise the Bitcoin blockchain</h3>
+</div>
+</div>
+
+
+<div id="outline-container-org56b421b" class="outline-2">
+<h2 id="org56b421b"><span class="section-number-2">4</span> Initial Scope</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-orge124f81" class="outline-3">
+<h3 id="orge124f81"><span class="section-number-3">4.1</span> Core Deliverables</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+The proposed application will aim to have the following features
+</p>
+</div>
+<div id="outline-container-orgd411fd6" class="outline-4">
+<h4 id="orgd411fd6"><span class="section-number-4">4.1.1</span> Setting up a new wallet for a user</h4>
+</div>
+<div id="outline-container-org6599f5b" class="outline-4">
+<h4 id="org6599f5b"><span class="section-number-4">4.1.2</span> Allowing for sending and receiving of Bitcoin transactions</h4>
+</div>
+<div id="outline-container-org32b7344" class="outline-4">
+<h4 id="org32b7344"><span class="section-number-4">4.1.3</span> Providing the ability to recover a wallet using a private key</h4>
+</div>
+</div>
+<div id="outline-container-orgabcc48b" class="outline-3">
+<h3 id="orgabcc48b"><span class="section-number-3">4.2</span> Desired features</h3>
+<div class="outline-text-3" id="text-4-2">
+</div>
+<div id="outline-container-orgd27e80a" class="outline-4">
+<h4 id="orgd27e80a"><span class="section-number-4">4.2.1</span> Allowing the user to view the current price of Bitcoin in GBP or USD before sending their transaction</h4>
+</div>
+<div id="outline-container-orgebb1eca" class="outline-4">
+<h4 id="orgebb1eca"><span class="section-number-4">4.2.2</span> Allowing an interface with other blockchain assets such as Ethereum</h4>
+</div>
+<div id="outline-container-org49d1022" class="outline-4">
+<h4 id="org49d1022"><span class="section-number-4">4.2.3</span> Providing an extra layer of security for users such as using biometrics built into the mobile device</h4>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org77fa7ef" class="outline-2">
+<h2 id="org77fa7ef"><span class="section-number-2">5</span> Resources and Dependencies</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+There are no external resources required for the completion of this project
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgf3dcc82" class="outline-2">
+<h2 id="orgf3dcc82"><span class="section-number-2">6</span> Method of Approach</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+When approaching this project I will be utilising an agile development methodology while using a kanban board for
+listing issues and features that require completion, starting with the features in this order.
+</p>
+</div>
+<div id="outline-container-org506eff7" class="outline-3">
+<h3 id="org506eff7"><span class="section-number-3">6.1</span> A user can create a wallet with a bitcoin address</h3>
+</div>
+<div id="outline-container-org099b59b" class="outline-3">
+<h3 id="org099b59b"><span class="section-number-3">6.2</span> A user can send Bitcoin transactions</h3>
+</div>
+<div id="outline-container-org75e8c79" class="outline-3">
+<h3 id="org75e8c79"><span class="section-number-3">6.3</span> A user can receive Bitcoin transactions</h3>
+</div>
+<div id="outline-container-orge1f9f20" class="outline-3">
+<h3 id="orge1f9f20"><span class="section-number-3">6.4</span> A user can recover their funds in the event of losing their device</h3>
+<div class="outline-text-3" id="text-6-4">
+<p>
+Further increments may be added to develop desirable functionality dependant on time.
+</p>
+
+<p>
+After researching various development technologies for this project I have decided that I will be using the Kotlin programming language
+which Google is supporting as the new primary language for the development of android applications. As the focus of this project is an Android
+application it would be desirable to utilise the most modern technologies for building apps for the platform. Kotlin also provides interpolation
+with java libraries allowing for the use of older Android libraries if needed. Kotlin also allows for the use of features like anonymous and higher-order functions
+allowing for programming in a functional style. This will be useful when dealing with a financial application as it will allow me to utilise
+asynchronous functions while not having to worry about bugs which are related to race-conditions, through trying to achieve function purity 
+in as many core functions as possible, I will attempt to achieve better security through good programming practices.
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org54dee9c" class="outline-2">
+<h2 id="org54dee9c"><span class="section-number-2">7</span> Project Plan</h2>
+<div class="outline-text-2" id="text-7">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Stage</th>
+<th scope="col" class="org-left">Expected Start Date</th>
+<th scope="col" class="org-left">Expected Completion Date</th>
+<th scope="col" class="org-left">Products/deliverables/outcomes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">1. Initiation</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">14/12/18</td>
+<td class="org-left">PID Final Draft</td>
+</tr>
+
+<tr>
+<td class="org-left">2. Initial High level design and requirements analysis</td>
+<td class="org-left">28/01/19</td>
+<td class="org-left">03/02/19</td>
+<td class="org-left">Design architecture and HCI</td>
+</tr>
+
+<tr>
+<td class="org-left">3. Phase One</td>
+<td class="org-left">04/02/19</td>
+<td class="org-left">10/02/19</td>
+<td class="org-left">Develop wallet creation functionality</td>
+</tr>
+
+<tr>
+<td class="org-left">3. Phase One</td>
+<td class="org-left">11/02/19</td>
+<td class="org-left">17/02/19</td>
+<td class="org-left">Develop address viewing functionality</td>
+</tr>
+
+<tr>
+<td class="org-left">4. Phase Two</td>
+<td class="org-left">18/02/19</td>
+<td class="org-left">24/02/19</td>
+<td class="org-left">Develop ability to receive Bitcoin</td>
+</tr>
+
+<tr>
+<td class="org-left">5. Phase Three</td>
+<td class="org-left">25/02/19</td>
+<td class="org-left">03/03/19</td>
+<td class="org-left">Develop ability to view wallet balance</td>
+</tr>
+
+<tr>
+<td class="org-left">6. Phase Four</td>
+<td class="org-left">04/03/19</td>
+<td class="org-left">10/03/19</td>
+<td class="org-left">Develop ability to send Bitcoin</td>
+</tr>
+
+<tr>
+<td class="org-left">7. Phase Five</td>
+<td class="org-left">11/03/19</td>
+<td class="org-left">17/03/19</td>
+<td class="org-left">Develop recovery functionality using private key</td>
+</tr>
+
+<tr>
+<td class="org-left">Easter Holiday (Using this time to develop desirable features)</td>
+<td class="org-left">08/04/19</td>
+<td class="org-left">28/04/19</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">8. User Testing</td>
+<td class="org-left">29/04/19</td>
+<td class="org-left">05/05/19</td>
+<td class="org-left">User testing and codebase refactoring</td>
+</tr>
+
+<tr>
+<td class="org-left">9. Writing Report</td>
+<td class="org-left">06/05/19</td>
+<td class="org-left">12/05/19</td>
+<td class="org-left">Draft Report</td>
+</tr>
+
+<tr>
+<td class="org-left">10. Assemble code and complete report final draft</td>
+<td class="org-left">13/05/19</td>
+<td class="org-left">19/05/19</td>
+<td class="org-left">Final report and code submission</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div id="outline-container-org780f398" class="outline-2">
+<h2 id="org780f398"><span class="section-number-2">8</span> Control Plan</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+Throughout the completion of the project the following control techniques will be utilised
+</p>
+</div>
+<div id="outline-container-orgbbb1555" class="outline-3">
+<h3 id="orgbbb1555"><span class="section-number-3">8.1</span> Highlight reports to be submitted as described by the PRCO304 project brief</h3>
+</div>
+<div id="outline-container-org55022d9" class="outline-3">
+<h3 id="org55022d9"><span class="section-number-3">8.2</span> Weekly meetings reviewing my progress with my project supervisor (Dr. Ismini Vasileiou) as described by the PRCO304 project brief allowing for periodical reviewing of my progress</h3>
+</div>
+<div id="outline-container-org1f9c82a" class="outline-3">
+<h3 id="org1f9c82a"><span class="section-number-3">8.3</span> Utilisation of my risk management plan, project plan and, other contingency plans.</h3>
+</div>
+</div>
+
+
+<div id="outline-container-orgd0faffe" class="outline-2">
+<h2 id="orgd0faffe"><span class="section-number-2">9</span> Initial Risk List</h2>
+<div class="outline-text-2" id="text-9">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Risk</th>
+<th scope="col" class="org-left">Management Strategy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Technology failure, loss of data</td>
+<td class="org-left">In the event that I have a technology failure I will be using Git as my version control system</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">while also using Github as a repository hosting solution</td>
+</tr>
+
+<tr>
+<td class="org-left">Schedule Overrun</td>
+<td class="org-left">Schedule Overrun has been considered as part of this project, I have left time free during my</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Easter break (08/04/19 to 28/04/19) to be used to catch up with any overrun if it is needed</td>
+</tr>
+
+<tr>
+<td class="org-left">Difficultly learning how to use the development technologies</td>
+<td class="org-left">As I have not developed a blockchain application or developed with Kotlin before, but as I feel</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">I am a competent developer I should be able to utilise the extensive documentation online to overcome this issue.</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">I have also planned for overrun in my project plan which will allow me to catch up if needed</td>
+</tr>
+
+<tr>
+<td class="org-left">Illness, family emergency</td>
+<td class="org-left">In the event of illness or family emergency, I will contact my project supervisor.</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">If necessary I will apply for extenuating circumstances.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div id="outline-container-orgece4267" class="outline-2">
+<h2 id="orgece4267"><span class="section-number-2">10</span> Initial Quality Plan</h2>
+<div class="outline-text-2" id="text-10">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Quality Check</th>
+<th scope="col" class="org-left">Strategy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Requirements</td>
+<td class="org-left">Requirements will be checked reviewed to check they are correct and adhere to the project objectives as well as being correct,</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">complete and, achievable as these requirements will indicate the criteria of the resulting product.</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Prototypes will be built and assessed by other stakeholders (friends, users and colleagues)</td>
+</tr>
+
+<tr>
+<td class="org-left">Design Validation</td>
+<td class="org-left">Throughout the project I will constantly evaluate the project on the delivery of every significant subsystem.</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">If there are any failures in these systems, they will be handled as part of their development stage,</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">or over the Easter break.</td>
+</tr>
+
+<tr>
+<td class="org-left">End of Stage Verification</td>
+<td class="org-left">To be conducted at the end of each stage.</td>
+</tr>
+
+<tr>
+<td class="org-left">System and User Acceptance</td>
+<td class="org-left">To be concluded at the end of my user testing stage (Stage 8)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div id="outline-container-org88e35b3" class="outline-2">
+<h2 id="org88e35b3"><span class="section-number-2">11</span> Legal, Social, Ethical and Professional Issues</h2>
+<div class="outline-text-2" id="text-11">
+<p>
+The main ethical issue with my project is the storage of users private keys which means their funds.
+To mitigate the issues with this I will be utilising the encryption libraries available on Android alongside making sure that the private key never leaves the device.
+Alongside these issues there may be potentially other issues with losing funds, for example if the user cannot send funds, said funds may become stuck on the device. 
+The main social issues here are that users addresses may be released without them wanting to, therefore allowing people to see the transactions they have made on the blockchain.
+In order to mitigate this issue, I will make sure the addresses are only shared when the user copies and pastes them themselves.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Benjamin Moore</p>
+<p class="date">Created: 2018-12-10 Mon 15:42</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

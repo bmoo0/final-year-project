@@ -1,16 +1,18 @@
+#+TODO: TODO IN-PROGRESS | DONE
 #+TITLE: Dissertation Organiser
 
 * Ideas for Sections of Report
-*** Ethics and Security
-**** Parity Wallet Leak
-**** MtGox Hack
+** Ethics and Security
+*** Parity Wallet Leak
+*** MtGox Hack
 
 
 * Tasks
-** TODO Write Project Proposal
-    DEADLINE: <2018-11-19 Mon>
+** DONE Write Project Proposal
+    CLOSED: [2018-09-11 Tue 13:41] DEADLINE: <2018-11-19 Mon>
 ** TODO Initial Planning Document
 ** TODO Complete go tour
 
 
 * Links For research
+** [[https://github.com/gtcompscientist/KelloCharts][KelloCharts A Kotlin implementation of Android Charts]]
