@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Bitcoinwallet</string>
+    <string name="wallet_present">false</string>
+</resources>

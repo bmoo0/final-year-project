@@ -1,4 +1,4 @@
-% Created 2018-12-10 Mon 19:32
+% Created 2018-12-11 Tue 15:51
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -15,6 +15,7 @@
 \usepackage{capt-of}
 \usepackage{hyperref}
 \usepackage{adjustbox}
+\usepackage[inline]{enumitem}
 \author{Benjamin Moore}
 \date{\today}
 \title{Project Initiation Document}
@@ -30,7 +31,7 @@
 \maketitle
 
 \section{Introduction}
-\label{sec:org87c92f7}
+\label{sec:orgc21b256}
 Throughout the past few years blockchain has moved from relative obscurity to 
 a dominant technology that is being adopted for various uses throughout many industries
 but it's first application, Bitcoin is still currently the most used application of the
@@ -45,7 +46,7 @@ that Bitcoin was initially designed to uphold.
 
 
 \section{Background and Motivation}
-\label{sec:orgdbdb4f8}
+\label{sec:org08f0000}
 As someone with an avid interest in crypto currency I have found there are not many android Bitcoin applications available 
 and although there are some good options and the current most popular application is tied too Coinbase, the current largest 
 cryptocurrency exchange. My wallet application will attempt to create something which can provide an interface to both technical 
@@ -56,78 +57,93 @@ on an external server owned by a third party company.
 
 
 \section{Project Objectives}
-\label{sec:orgba6285c}
-\subsection{To analyse potential android development methodologies}
-\label{sec:org7823110}
-\subsection{To build an understand of how an application interfaces with a blockchain}
-\label{sec:org24b3956}
-\subsection{To implement a system that communicates with the Bitcoin blockchain effectively}
-\label{sec:org2f32b0e}
-\subsection{To implement a system that allows users of non-technical backgrounds to also utilise the Bitcoin blockchain}
-\label{sec:org3430e6a}
+\label{sec:orgdfc5f8e}
+\begin{enumerate}
+\item To analyse potential android development methodologies
+\label{sec:org39cbb94}
+\item To build an understand of how an application interfaces with a blockchain
+\label{sec:orgda3857f}
+\item To implement a system that communicates with the Bitcoin blockchain effectively
+\label{sec:org17774ea}
+\item To implement a system that allows users of non-technical backgrounds to also utilise the Bitcoin blockchain
+\label{sec:org1acc9ed}
+\end{enumerate}
 
 
 \section{Initial Scope}
-\label{sec:orga45b262}
+\label{sec:orgf0603ac}
 \subsection{Core Deliverables}
-\label{sec:orgccfe72b}
+\label{sec:org2fd96fb}
 The proposed application will aim to have the following features
 \begin{enumerate}
 \item Setting up a new wallet for a user
-\label{sec:org511c7f4}
+\label{sec:orgb4e5ea8}
 \item Allowing for sending and receiving of Bitcoin transactions
-\label{sec:org3f569d6}
+\label{sec:org7543029}
 \item Providing the ability to recover a wallet using a private key
-\label{sec:org0f05e87}
+\label{sec:orgb5738ec}
 \end{enumerate}
 \subsection{Desired features}
-\label{sec:org311bc54}
-\subsubsection{Allowing the user to view the current price of Bitcoin in GBP or USD before sending their transaction}
-\label{sec:org77a2a9e}
-\subsubsection{Allowing an interface with other blockchain assets such as Ethereum}
-\label{sec:orgf60c4d8}
-\subsubsection{Providing an extra layer of security for users such as using biometrics built into the mobile device}
-\label{sec:orgad38573}
+\label{sec:orgd277aad}
+\begin{enumerate}
+\item Allowing the user to view the current price of Bitcoin in GBP or USD before sending their transaction
+\label{sec:org4aed705}
+\item Allowing an interface with other blockchain assets such as Ethereum
+\label{sec:org2de98d3}
+\item Providing an extra layer of security for users such as using biometrics built into the mobile device
+\label{sec:orgc940774}
+\end{enumerate}
 
 
 \section{Resources and Dependencies}
-\label{sec:orgb808604}
+\label{sec:org41498a9}
 There are no external resources required for the completion of this project
 
 
 \section{Method of Approach}
-\label{sec:org755554d}
+\label{sec:org054c04e}
 When approaching this project I will be utilising an agile development methodology while using a kanban board for
 listing issues and features that require completion, starting with the features in this order.
-\subsection{A user can create a wallet with a bitcoin address}
-\label{sec:orgb63f69e}
-\subsection{A user can send Bitcoin transactions}
-\label{sec:org34be1ef}
-\subsection{A user can receive Bitcoin transactions}
-\label{sec:org5152bf4}
-\subsection{A user can recover their funds in the event of losing their device}
-\label{sec:orgabac6fd}
+\begin{enumerate}
+\item A user can create a wallet with a bitcoin address
+\label{sec:orge79f723}
+\item A user can send Bitcoin transactions
+\label{sec:orge2a9c70}
+\item A user can receive Bitcoin transactions
+\label{sec:orgbd028fc}
+\item A user can recover their funds in the event of losing their device
+\label{sec:orgd15a632}
+\end{enumerate}
 
 Further increments may be added to develop desirable functionality dependant on time.
-
 After researching various development technologies for this project I have decided that I will be using the Kotlin programming language
 which Google is supporting as the new primary language for the development of android applications. As the focus of this project is an Android
 application it would be desirable to utilise the most modern technologies for building apps for the platform. Kotlin also provides interpolation
 with java libraries allowing for the use of older Android libraries if needed. Kotlin also allows for the use of features like anonymous and higher-order functions
 allowing for programming in a functional style. This will be useful when dealing with a financial application as it will allow me to utilise
 asynchronous functions while not having to worry about bugs which are related to race-conditions, through trying to achieve function purity 
-in as many core functions as possible, I will attempt to achieve better security through good programming practices.
+in as many core functions as possible, I will attempt to achieve better security through good programming practices.\\
 
+The technologies utilised in this project will be as follows
+\begin{enumerate}
+\item The Kotlin Programming language with the Android SDK Developing the Android application
+\label{sec:orgdadfabb}
+\item The Android Operating System
+\label{sec:org2e16f9a}
+\item Android Studio as a development tool for the application
+\label{sec:orgfd67cc8}
+\item Bitcoind to profide a JSON-RPC interface for the Bitcoin Blockchain
+\label{sec:org9f0d7a6}
+\item Git and Github for development source control and hosting
+\label{sec:org52ec42d}
+\end{enumerate}
 
 \section{Project Plan}
-\label{sec:org2e8c60b}
-\begin{table}
-\caption{Project Plan}
-\label{tab:project-plan}
+\label{sec:orge057bc7}
+\begin{adjustbox}{width={\textwidth},keepaspectratio}
 \centering
-\adjustbox{width=\textwidth}{
 \begin{center}
-\begin{tabular}{l|l|l|l|}
+\begin{tabular}{|l|l|l|l|}
 \hline
 Stage & Expected Start Date & Expected Completion Date & Products/deliverables/outcomes\\
 \hline
@@ -146,28 +162,28 @@ Easter Holiday (Using this time to develop desirable features) & 08/04/19 & 28/0
 \hline
 \end{tabular}
 \end{center}
-\end{table}
+\end{adjustbox}
+
 
 \section{Control Plan}
-\label{sec:org5726f4b}
+\label{sec:orgb542949}
 Throughout the completion of the project the following control techniques will be utilised
-\subsection{Highlight reports to be submitted as described by the PRCO304 project brief}
-\label{sec:orgded1b61}
-\subsection{Weekly meetings reviewing my progress with my project supervisor (Dr. Ismini Vasileiou) as described by the PRCO304 project brief allowing for periodical reviewing of my progress}
-\label{sec:org45a1bc3}
-\subsection{Utilisation of my risk management plan, project plan and, other contingency plans.}
-\label{sec:org6090aa2}
+\begin{enumerate}
+\item Highlight reports to be submitted as described by the PRCO304 project brief
+\label{sec:org721fa7e}
+\item Weekly meetings reviewing my progress with my project supervisor (Dr. Ismini Vasileiou) as described by the PRCO304 project brief allowing for periodical reviewing of my progress
+\label{sec:org1f451b3}
+\item Utilisation of my risk management plan, project plan and, other contingency plans.
+\label{sec:org7c0ae71}
+\end{enumerate}
 
 
 \section{Initial Risk List}
-\label{sec:org83fd5fc}
-\begin{table}
-\caption{Initial risk List}
-\label{tab:risk-list}
+\label{sec:org27b4ed8}
+\begin{adjustbox}{width={\textwidth},keepaspectratio}
 \centering
-\adjustbox{max width=\textwidth}{
 \begin{center}
-\begin{tabular}{l|l|}
+\begin{tabular}{|l|l|}
 \hline
 Risk & Management Strategy\\
 \hline
@@ -183,18 +199,15 @@ Illness, family emergency & In the event of illness or family emergency, I will 
 \hline
 \end{tabular}
 \end{center}
-\end{table}
+\end{adjustbox}
 
 
 \section{Initial Quality Plan}
-\label{sec:org38acc8a}
-\begin{table}
-\caption{Initial Quality Plan}
-\label{tab:quality-plan}
+\label{sec:orga463250}
+\begin{adjustbox}{width={\textwidth},keepaspectratio}
 \centering
-\adjustbox{max width=\linewidth}{
 \begin{center}
-\begin{tabular}{l|l|}
+\begin{tabular}{|l|l|}
 \hline
 Quality Check & Strategy\\
 \hline
@@ -209,10 +222,11 @@ System and User Acceptance & To be concluded at the end of my user testing stage
 \hline
 \end{tabular}
 \end{center}
-\end{table}
+\end{adjustbox}
+
 
 \section{Legal, Social, Ethical and Professional Issues}
-\label{sec:org7131f9f}
+\label{sec:org7c75a59}
 The main ethical issue with my project is the storage of users private keys which means their funds.
 To mitigate the issues with this I will be utilising the encryption libraries available on Android alongside making sure that the private key never leaves the device.
 Alongside these issues there may be potentially other issues with losing funds, for example if the user cannot send funds, said funds may become stuck on the device. 

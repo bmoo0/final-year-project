@@ -3,6 +3,7 @@
 #+OPTIONS: toc:nil
 
 #+LATEX_HEADER: \usepackage{adjustbox}
+#+LATEX_HEADER: \usepackage[inline]{enumitem}
 
 * Introduction
   Throughout the past few years blockchain has moved from relative obscurity to 
@@ -27,24 +28,27 @@
    interface for the Bitcoin blockchain while allowing users to keep their funds on their own device as opposed to keeping them 
    on an external server owned by a third party company.
 
-
-* Project Objectives
-** To analyse potential android development methodologies  
-** To build an understand of how an application interfaces with a blockchain
-** To implement a system that communicates with the Bitcoin blockchain effectively
-** To implement a system that allows users of non-technical backgrounds to also utilise the Bitcoin blockchain
    
+* Project Objectives
+**** To analyse potential android development methodologies  
+**** To build an understand of how an application interfaces with a blockchain
+**** To implement a system that communicates with the Bitcoin blockchain effectively
+**** To implement a system that allows users of non-technical backgrounds to also utilise the Bitcoin blockchain
+
 
 * Initial Scope
+#+ATTR_LATEX: :environment itemize*
 ** Core Deliverables
   The proposed application will aim to have the following features
+  #+ATTR_LATEX: :environment itemize*
 **** Setting up a new wallet for a user
 **** Allowing for sending and receiving of Bitcoin transactions
 **** Providing the ability to recover a wallet using a private key
 ** Desired features
-*** Allowing the user to view the current price of Bitcoin in GBP or USD before sending their transaction
-*** Allowing an interface with other blockchain assets such as Ethereum
-*** Providing an extra layer of security for users such as using biometrics built into the mobile device
+   #+ATTR_LATEX: :environment itemize*
+**** Allowing the user to view the current price of Bitcoin in GBP or USD before sending their transaction
+**** Allowing an interface with other blockchain assets such as Ethereum
+**** Providing an extra layer of security for users such as using biometrics built into the mobile device
 
 
 * Resources and Dependencies
@@ -54,29 +58,33 @@
 * Method of Approach
  When approaching this project I will be utilising an agile development methodology while using a kanban board for
  listing issues and features that require completion, starting with the features in this order.
-** A user can create a wallet with a bitcoin address
-** A user can send Bitcoin transactions
-** A user can receive Bitcoin transactions
-** A user can recover their funds in the event of losing their device
+#+ATTR_LATEX: :environment itemize*
+**** A user can create a wallet with a bitcoin address
+**** A user can send Bitcoin transactions
+**** A user can receive Bitcoin transactions
+**** A user can recover their funds in the event of losing their device
+     
+Further increments may be added to develop desirable functionality dependant on time.
+After researching various development technologies for this project I have decided that I will be using the Kotlin programming language
+which Google is supporting as the new primary language for the development of android applications. As the focus of this project is an Android
+application it would be desirable to utilise the most modern technologies for building apps for the platform. Kotlin also provides interpolation
+with java libraries allowing for the use of older Android libraries if needed. Kotlin also allows for the use of features like anonymous and higher-order functions
+allowing for programming in a functional style. This will be useful when dealing with a financial application as it will allow me to utilise
+asynchronous functions while not having to worry about bugs which are related to race-conditions, through trying to achieve function purity 
+in as many core functions as possible, I will attempt to achieve better security through good programming practices.
 
- Further increments may be added to develop desirable functionality dependant on time.
-
- After researching various development technologies for this project I have decided that I will be using the Kotlin programming language
- which Google is supporting as the new primary language for the development of android applications. As the focus of this project is an Android
- application it would be desirable to utilise the most modern technologies for building apps for the platform. Kotlin also provides interpolation
- with java libraries allowing for the use of older Android libraries if needed. Kotlin also allows for the use of features like anonymous and higher-order functions
- allowing for programming in a functional style. This will be useful when dealing with a financial application as it will allow me to utilise
- asynchronous functions while not having to worry about bugs which are related to race-conditions, through trying to achieve function purity 
- in as many core functions as possible, I will attempt to achieve better security through good programming practices.
+The technologies utilised in this project will be as follows
+**** The Kotlin Programming language with the Android SDK Developing the Android application
+**** The Android Operating System
+**** Android Studio as a development tool for the application
+**** Bitcoind to profide a JSON-RPC interface for the Bitcoin Blockchain
+**** Git and Github for development source control and hosting
 
 
 * Project Plan
-  #+begin_table
-  #+LATEX: \caption{Project Plan}
-  #+LATEX: \label{tab:project-plan}
+  #+LATEX: \begin{adjustbox}{width={\textwidth},keepaspectratio}
+  #+ATTR_LATEX: :placement [!h]
   #+LATEX: \centering
-  #+LATEX: \adjustbox{width=\textwidth}{
-  #+ATTR_LATEX: :center t :placement [h]
   |----------------------------------------------------------------+---------------------+--------------------------+--------------------------------------------------|
   | Stage                                                          | Expected Start Date | Expected Completion Date | Products/deliverables/outcomes                   |
   |----------------------------------------------------------------+---------------------+--------------------------+--------------------------------------------------|
@@ -94,22 +102,21 @@
   | 9. Writing Report                                              | 06/05/19            | 12/05/19                 | Draft Report                                     |
   | 10. Assemble code and complete report final draft              | 13/05/19            | 19/05/19                 | Final report and code submission                 |
   |----------------------------------------------------------------+---------------------+--------------------------+--------------------------------------------------|
-  #+end_table
+  #+LATEX: \end{adjustbox}
+
 
 * Control Plan
   Throughout the completion of the project the following control techniques will be utilised
-** Highlight reports to be submitted as described by the PRCO304 project brief
-** Weekly meetings reviewing my progress with my project supervisor (Dr. Ismini Vasileiou) as described by the PRCO304 project brief allowing for periodical reviewing of my progress
-** Utilisation of my risk management plan, project plan and, other contingency plans.
+  #+ATTR_LATEX: :environment itemize*
+**** Highlight reports to be submitted as described by the PRCO304 project brief
+**** Weekly meetings reviewing my progress with my project supervisor (Dr. Ismini Vasileiou) as described by the PRCO304 project brief allowing for periodical reviewing of my progress
+**** Utilisation of my risk management plan, project plan and, other contingency plans.
 
 
 * Initial Risk List
-#+begin_table
-#+LATEX: \caption{Initial risk List}
-#+LATEX: \label{tab:risk-list}
+#+LATEX: \begin{adjustbox}{width={\textwidth},keepaspectratio}
+#+ATTR_LATEX: :placement [!h]
 #+LATEX: \centering
-#+LATEX: \adjustbox{max width=\textwidth}{
-#+ATTR_LATEX: :center t :placement [h]
 |--------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------|
 | Risk                                                         | Management Strategy                                                                                               |
 |--------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------|
@@ -124,16 +131,13 @@
 | Illness, family emergency                                    | In the event of illness or family emergency, I will contact my project supervisor.                                |
 |                                                              | If necessary I will apply for extenuating circumstances.                                                          |
 |--------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------|
-#+end_table
+#+LATEX: \end{adjustbox}
 
 
 * Initial Quality Plan
-#+begin_table
-#+LATEX: \caption{Initial Quality Plan}
-#+LATEX: \label{tab:quality-plan}
+#+LATEX: \begin{adjustbox}{width={\textwidth},keepaspectratio}
+#+ATTR_LATEX: :placement [!h] 
 #+LATEX: \centering
-#+LATEX: \adjustbox{max width=\linewidth}{
-#+ATTR_LATEX: :center t :placement [h]
 |----------------------------+--------------------------------------------------------------------------------------------------------------------------------|
 | Quality Check              | Strategy                                                                                                                       |
 |----------------------------+--------------------------------------------------------------------------------------------------------------------------------|
@@ -147,7 +151,8 @@
 | End of Stage Verification  | To be conducted at the end of each stage.                                                                                      |
 | System and User Acceptance | To be concluded at the end of my user testing stage (Stage 8)                                                                  |
 |----------------------------+--------------------------------------------------------------------------------------------------------------------------------|
-#+end_table
+#+LATEX: \end{adjustbox}
+
 
 * Legal, Social, Ethical and Professional Issues
   The main ethical issue with my project is the storage of users private keys which means their funds.

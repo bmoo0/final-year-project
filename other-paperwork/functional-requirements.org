@@ -1,0 +1,9 @@
+#+TITLE: Functional Requirements
+
+* Functional Requirements of Bitcoin Android Application
+** Allow user to send payments
+** Allow user to receive payments
+** Allow user to secure application using phone bio-authentication or passcode
+** Allow user to recover wallet with private key in the event of a lost phone or forgotten password
+** Allow user to setup new wallet
+** Allow user to view current prices in GBP or USD
