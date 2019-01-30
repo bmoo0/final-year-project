@@ -1,0 +1,3 @@
+<resources>
+    <bool name="wallet_present">false</bool>
+</resources>

@@ -32,9 +32,13 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
 
+    // For bitcoin functionality
     compile 'org.bitcoinj:bitcoinj-core:0.14.4'
 
-    //Logging
+    // For UI components
+    implementation 'com.google.android.material:material:1.0.0'
+
+    // Logging
     compile 'org.slf4j:slf4j-api:1.7.12'
     compile 'org.slf4j:slf4j-simple:1.7.12'
 }
