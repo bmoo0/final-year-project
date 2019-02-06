@@ -14,6 +14,16 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'x86', 'armeabi-v7a', 'x86_64'
+            universalApk true
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -33,10 +43,12 @@ dependencies {
 
 
     // For bitcoin functionality
-    compile 'org.bitcoinj:bitcoinj-core:0.14.4'
+    implementation('org.bitcoinj:bitcoinj-core:0.14.4') {
+        exclude module: 'scrypt'
+    }
 
     // For UI components
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.android.support:design:28.0.0'
 
     // Logging
     compile 'org.slf4j:slf4j-api:1.7.12'
