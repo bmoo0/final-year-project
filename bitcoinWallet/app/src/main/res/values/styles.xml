@@ -10,4 +10,16 @@
 
     <!--  Alert Dialog theme. -->
 
+    <!-- Button theme. -->
+    <style name="MyContainedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:background">@drawable/rounded_shape</item>
+        <item name="android:textColor">#fff</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
+    </style>
+
 </resources>

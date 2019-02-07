@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Bitcoinwallet</string>
+    <string name="no_wallet_message">No wallet found, would you like to either create or setup a wallet?</string>
 </resources>
