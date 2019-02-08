@@ -1,10 +1,12 @@
 package com.bitcoinwallet
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.view.Window
+import android.widget.Button
 import org.bitcoinj.core.NetworkParameters
 import org.bitcoinj.wallet.Wallet
 
@@ -18,10 +20,16 @@ class MainActivity : AppCompatActivity() {
 
         val hasWallet: Boolean = resources.getBoolean(R.bool.wallet_present)
 
-        if(!hasWallet) {
+        if(hasWallet) { // transition to home screen
             // prompt to create or recover wallet
-            val wallet: Wallet =  Wallet(NetworkParameters.fromID(NetworkParameters.ID_TESTNET))
+            //val wallet: Wallet =  Wallet(NetworkParameters.fromID(NetworkParameters.ID_TESTNET))
             //val alertDialog:
         }
+
+        val createWalletButton = findViewById<Button>(R.id.createWalletButton)
+
+        createWalletButton.setOnClickListener {
+            val createWalletIntent = Intent(this, CreateWalletActivity::class.java)
+            startActivity(createWalletIntent)}
     }
 }

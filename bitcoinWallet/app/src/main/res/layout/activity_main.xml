@@ -25,15 +25,15 @@
             android:layout_height="wrap_content"
             android:gravity="center">
 
-        <android.support.design.button.MaterialButton
-            android:id="@+id/createWalletButton"
-            style="@style/MyContainedButton"
-            android:text="Create"/>
+            <android.support.design.button.MaterialButton
+                android:id="@+id/createWalletButton"
+                style="@style/MyContainedButton"
+                android:text="Create" />
 
-        <android.support.design.button.MaterialButton
-            android:id="@+id/recoverWalletButton"
-            style="@style/MyContainedButton"
-            android:text="Recover"/>
+            <android.support.design.button.MaterialButton
+                android:id="@+id/recoverWalletButton"
+                style="@style/MyContainedButton"
+                android:text="Recover" />
 
         </android.support.v7.widget.LinearLayoutCompat>
 
