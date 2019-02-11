@@ -1,4 +1,4 @@
-package com.bitcoinwallet
+package com.bitcoinwallet.utilities
 
 /**
  * Created by Ben Moore on 29/01/2019.

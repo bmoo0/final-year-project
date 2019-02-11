@@ -1,14 +1,11 @@
-package com.bitcoinwallet
+package com.bitcoinwallet.activities
 
-import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
 import android.view.Window
 import android.widget.Button
-import org.bitcoinj.core.NetworkParameters
-import org.bitcoinj.wallet.Wallet
+import com.bitcoinwallet.R
 
 class MainActivity : AppCompatActivity() {
 
