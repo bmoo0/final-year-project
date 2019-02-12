@@ -4,8 +4,8 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
-import android.widget.Button
 import com.bitcoinwallet.R
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,8 +22,6 @@ class MainActivity : AppCompatActivity() {
             //val wallet: Wallet =  Wallet(NetworkParameters.fromID(NetworkParameters.ID_TESTNET))
             //val alertDialog:
         }
-
-        val createWalletButton = findViewById<Button>(R.id.createWalletButton)
 
         createWalletButton.setOnClickListener {
             val createWalletIntent = Intent(this, CreateWalletActivity::class.java)

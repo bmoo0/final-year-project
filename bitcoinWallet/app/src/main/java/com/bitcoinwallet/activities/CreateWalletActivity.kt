@@ -61,6 +61,8 @@ class CreateWalletActivity : Activity() {
             }
         })
 
+        //walletAppKit.wallet().encrypt()
+
         //walletAppKit.setBlockingStartup(false)
         //walletAppKit.startAsync()
     }
