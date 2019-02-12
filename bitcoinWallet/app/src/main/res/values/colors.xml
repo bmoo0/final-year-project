@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#661FFF</color>
+    <color name="offWhite">#E9F1F7</color>
+    <color name="purple">#54426B</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="desertSand">#DBD5B2</color>
 </resources>

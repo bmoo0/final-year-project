@@ -9,6 +9,10 @@
     </style>
 
     <!--  Alert Dialog theme. -->
+    <style name="MyCustomDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:windowBackground">@drawable/dialog_background</item>
+    </style>
 
     <!-- Button theme. -->
     <style name="MyContainedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">

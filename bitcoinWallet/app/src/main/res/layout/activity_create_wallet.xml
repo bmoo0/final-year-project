@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/offWhite"
     tools:context=".activities.CreateWalletActivity">
 
     <LinearLayout
@@ -12,10 +13,10 @@
         android:orientation="vertical"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:id="@+id/loading_screen">
 
-<!--
-<TextView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -27,8 +28,32 @@
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:padding="10dp"
-           android:id="@+id/downloading_blockchain_spinner"/>
--->
+           android:progressTint="@color/colorPrimary"
+           android:min="0"
+           android:max="100"
+           style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+           android:progress="0"
+           android:id="@+id/downloading_blockchain_progress_bar"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/downloading_blockchain_percentage"
+            android:text="0%"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:id="@+id/create_password_form">
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,8 +84,17 @@
                 />
         </android.support.design.widget.TextInputLayout>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Entered passwords did not match, please try again"
+            android:gravity="center"
+            android:visibility="gone"
+            android:id="@+id/errorMessage"
+            android:textColor="@color/colorAccent"/>
+
         <android.support.design.button.MaterialButton
-            android:id="@+id/createWalletButton"
+            android:id="@+id/confirmCreateWalletButton"
             style="@style/MyContainedButton"
             android:text="Create Wallet"/>
     </LinearLayout>
