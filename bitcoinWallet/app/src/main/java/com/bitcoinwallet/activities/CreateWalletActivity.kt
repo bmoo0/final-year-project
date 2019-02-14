@@ -3,21 +3,27 @@ package com.bitcoinwallet.activities
 import android.os.Bundle
 import android.app.Activity
 import android.content.DialogInterface
-import android.os.Handler
 import android.util.Log
 import android.view.View
 import com.bitcoinwallet.R
+import com.bitcoinwallet.utilities.Globals
 import com.bitcoinwallet.utilities.InterfaceUtilities
 import com.bitcoinwallet.utilities.NetworkUtilities
+import com.google.common.base.Joiner
 import kotlinx.android.synthetic.main.activity_create_wallet.*
+import org.bitcoinj.core.BlockChain
 
 import org.bitcoinj.core.ECKey
 import org.bitcoinj.core.NetworkParameters
+import org.bitcoinj.core.PeerGroup
 import org.bitcoinj.core.listeners.DownloadProgressTracker
 import org.bitcoinj.kits.WalletAppKit
+import org.bitcoinj.store.SPVBlockStore
 import org.bitcoinj.utils.BriefLogFormatter
-import org.bitcoinj.utils.Threading
+import org.bitcoinj.wallet.Wallet
 import java.io.File
+import java.time.Instant
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class CreateWalletActivity : Activity() {
@@ -26,9 +32,44 @@ class CreateWalletActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_wallet)
         BriefLogFormatter.init()
-        val file = File(filesDir, "wallet_file")
+        val walletFile = File(filesDir, Globals.WALLET_NAME)
         //val progressDialog = ProgressDialog(this)
         var walletAppKit: WalletAppKit
+
+
+        if (NetworkUtilities.isUsingMobile(this)) {
+            InterfaceUtilities.Companion.showAlertDialog(this, "Download Blockchain",
+                "Your mobile device is not on wifi, downloading the blockchain will be a large download," +
+                        "are you sure you want to continue?",
+                "Yes",
+                DialogInterface.OnClickListener { _, _ ->
+                    // continue
+                },
+                "No",
+                DialogInterface.OnClickListener { _, _ ->
+                    finish() // close activity
+                }
+            )
+        }
+
+
+        // this is all the wallet setup stoof
+        val networkParams = NetworkParameters.fromID(NetworkParameters.ID_TESTNET) // should stay on testnet
+        val wallet = Wallet(networkParams)
+        val blockStore = SPVBlockStore(networkParams, walletFile)
+        val blockChain = BlockChain(networkParams,wallet,blockStore)
+        val peerGroup = PeerGroup(networkParams)
+
+        val recoverySeed = wallet.keyChainSeed
+        val mnemonicCode = recoverySeed.mnemonicCode
+        textViewRecoverySeed.text = Joiner.on(" ").join(mnemonicCode)
+        textViewRecoverySeedBirthday.text =
+                DateTimeFormatter.ISO_INSTANT.format(Instant.ofEpochSecond(recoverySeed.creationTimeSeconds))
+
+        peerGroup.addWallet(wallet)
+        peerGroup.startAsync()
+
+
 
         confirmCreateWalletButton.setOnClickListener {
 
@@ -55,7 +96,7 @@ class CreateWalletActivity : Activity() {
                 val walletPassword = password_input.text.toString()
 
                 walletAppKit = object : WalletAppKit(
-                    NetworkParameters.fromID(NetworkParameters.ID_TESTNET), file,
+                    NetworkParameters.fromID(NetworkParameters.ID_TESTNET), walletFile,
                     "Test Wallet Name"
                 ) {
                     override fun onSetupCompleted() {
@@ -101,11 +142,4 @@ class CreateWalletActivity : Activity() {
             loading_screen.visibility = View.GONE
         }
     }
-
-    /*
-    fun setBTCSDKThread() {
-        var handler = Handler()
-        Threading.USER_THREAD =
-    }
-    */
 }
