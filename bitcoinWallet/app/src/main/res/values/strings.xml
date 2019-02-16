@@ -3,4 +3,7 @@
     <string name="no_wallet_message">No wallet found, would you like to either create or setup a wallet?</string>
     <string name="title_activity_create_wallet">CreateWalletActivity</string>
     <string name="downloading_blockchain_message">Currently creating your wallet and downloading the blockchain, this may take a while...</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

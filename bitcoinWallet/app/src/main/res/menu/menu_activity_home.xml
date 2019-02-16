@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeItem"
+        android:icon="@drawable/icons8_home_page_24"
+        android:title="Home"/>
+    <item
+        android:id="@+id/sendItem"
+        android:icon="@drawable/icons8_bitcoin_24"
+        android:title="Send"/>
+    <item
+        android:id="@+id/setttingsItem"
+        android:icon="@drawable/icons8_services_24"
+        android:title="Settings"/>
+</menu>

@@ -54,7 +54,7 @@
             android:textSize="20dp" />
 
         <android.support.design.button.MaterialButton
-            android:id="@+id/confirmHaveStoredSeed"
+            android:id="@+id/confirmStoredSeedBtn"
             style="@style/MyContainedButton"
             android:text="I have written down my recovery seed" />
     </LinearLayout>

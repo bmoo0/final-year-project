@@ -5,7 +5,10 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
 import com.bitcoinwallet.R
+import com.bitcoinwallet.utilities.BitcoinUtilities
+import com.bitcoinwallet.utilities.Globals
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,13 +18,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val hasWallet: Boolean = resources.getBoolean(R.bool.wallet_present)
+        val walletFile = File(filesDir, Globals.WALLET_NAME)
+        val blockStoreFile = File(filesDir, Globals.BLOCK_STORE_NAME)
 
-        if(hasWallet) { // transition to home screen
-            // prompt to create or recover wallet
-            //val wallet: Wallet =  Wallet(NetworkParameters.fromID(NetworkParameters.ID_TESTNET))
-            //val alertDialog:
+        if (walletFile.exists() && blockStoreFile.exists()) {
+            BitcoinUtilities.loadWalletFromFile(walletFile,blockStoreFile)
+            val homeScreenIntent = Intent(this, HomeActivity::class.java)
+            startActivity(homeScreenIntent)
         }
+
 
         createWalletButton.setOnClickListener {
             val createWalletIntent = Intent(this, CreateWalletActivity::class.java)

@@ -3,24 +3,23 @@ package com.bitcoinwallet.activities
 import android.os.Bundle
 import android.app.Activity
 import android.content.DialogInterface
+import android.content.Intent
+import android.os.Build
 import android.util.Log
 import android.view.View
 import com.bitcoinwallet.R
+import com.bitcoinwallet.utilities.BitcoinUtilities
 import com.bitcoinwallet.utilities.Globals
 import com.bitcoinwallet.utilities.InterfaceUtilities
 import com.bitcoinwallet.utilities.NetworkUtilities
 import com.google.common.base.Joiner
 import kotlinx.android.synthetic.main.activity_create_wallet.*
-import org.bitcoinj.core.BlockChain
 
 import org.bitcoinj.core.ECKey
 import org.bitcoinj.core.NetworkParameters
-import org.bitcoinj.core.PeerGroup
 import org.bitcoinj.core.listeners.DownloadProgressTracker
 import org.bitcoinj.kits.WalletAppKit
-import org.bitcoinj.store.SPVBlockStore
 import org.bitcoinj.utils.BriefLogFormatter
-import org.bitcoinj.wallet.Wallet
 import java.io.File
 import java.time.Instant
 import java.time.format.DateTimeFormatter
@@ -33,6 +32,7 @@ class CreateWalletActivity : Activity() {
         setContentView(R.layout.activity_create_wallet)
         BriefLogFormatter.init()
         val walletFile = File(filesDir, Globals.WALLET_NAME)
+        val blockStoreFile = File(filesDir,Globals.BLOCK_STORE_NAME)
         //val progressDialog = ProgressDialog(this)
         var walletAppKit: WalletAppKit
 
@@ -54,23 +54,27 @@ class CreateWalletActivity : Activity() {
 
 
         // this is all the wallet setup stoof
-        val networkParams = NetworkParameters.fromID(NetworkParameters.ID_TESTNET) // should stay on testnet
-        val wallet = Wallet(networkParams)
-        val blockStore = SPVBlockStore(networkParams, walletFile)
-        val blockChain = BlockChain(networkParams,wallet,blockStore)
-        val peerGroup = PeerGroup(networkParams)
+        BitcoinUtilities.initialiseWallet(walletFile, blockStoreFile)
 
-        val recoverySeed = wallet.keyChainSeed
-        val mnemonicCode = recoverySeed.mnemonicCode
+
+        val recoverySeed = Globals.wallet?.keyChainSeed
+        val mnemonicCode = recoverySeed?.mnemonicCode
         textViewRecoverySeed.text = Joiner.on(" ").join(mnemonicCode)
-        textViewRecoverySeedBirthday.text =
-                DateTimeFormatter.ISO_INSTANT.format(Instant.ofEpochSecond(recoverySeed.creationTimeSeconds))
 
-        peerGroup.addWallet(wallet)
-        peerGroup.startAsync()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            textViewRecoverySeedBirthday.text =
+                    DateTimeFormatter.ISO_INSTANT.format(Instant.ofEpochSecond(recoverySeed?.creationTimeSeconds!!))
+        }
 
+        Globals.peerGroup?.addWallet(Globals.wallet)
+        Globals.peerGroup?.startAsync()
 
+        confirmStoredSeedBtn.setOnClickListener {
+            val homeActivityIntent = Intent(this, HomeActivity::class.java)
+            startActivity(homeActivityIntent)
+        }
 
+        // all code beyond here not run
         confirmCreateWalletButton.setOnClickListener {
 
             if (NetworkUtilities.isUsingMobile(this)) {
@@ -116,13 +120,13 @@ class CreateWalletActivity : Activity() {
                     override fun progress(pct: Double, blocksSoFar: Int, date: Date?) {
                         super.progress(pct, blocksSoFar, date)
                         val percentage: Int = pct.toInt()
-                        downloading_blockchain_progress_bar.setProgress(percentage, true)
+                        //downloading_blockchain_progress_bar.setProgress(percentage, true)
                         downloading_blockchain_percentage.text = percentage.toString() + "%"
                     }
 
                     override fun doneDownload() {
                         super.doneDownload()
-                        downloading_blockchain_progress_bar.setProgress(100,true)
+                        //downloading_blockchain_progress_bar.setProgress(100,true)
                         walletAppKit.wallet().encrypt(walletPassword)
                     }
                 })
@@ -133,7 +137,7 @@ class CreateWalletActivity : Activity() {
         }
     }
 
-    fun changeToLoadingScreen() {
+    private fun changeToLoadingScreen() {
         if (create_password_form.visibility == View.VISIBLE) {
             create_password_form.visibility = View.GONE
             loading_screen.visibility = View.VISIBLE
