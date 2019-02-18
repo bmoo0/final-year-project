@@ -1,17 +1,23 @@
 package com.bitcoinwallet.fragments
 
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat.getSystemService
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 import com.bitcoinwallet.R
 import com.bitcoinwallet.utilities.Globals
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
     lateinit var balance: String
@@ -22,12 +28,21 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
+
         GetBalanceAsync().execute()
         GetAddressAsync().execute()
 
+        view.copyAddressBtn.setOnClickListener {
+            Toast.makeText(context, "Address Copied", Toast.LENGTH_SHORT).show()
+            val clipboardManager = getSystemService(context!!, ClipboardManager::class.java)
+            val clip = ClipData.newPlainText("BTC ADDRESS", addr)
+            clipboardManager?.primaryClip = clip
+        }
+
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        return view
     }
 
     companion object {
@@ -47,6 +62,7 @@ class HomeFragment : Fragment() {
 
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
+            Log.d("BTC WALLET", "Balance = " + balance)
             setWalletbalance(balance)
         }
     }

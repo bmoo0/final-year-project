@@ -20,7 +20,9 @@
                 android:id="@+id/balanceLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="30dp"
+                android:paddingTop="30dp"
+                android:paddingLeft="30dp"
+                android:paddingBottom="30dp"
                 android:text="Balance: "
                 android:textSize="20sp" />
 
@@ -28,9 +30,17 @@
                 android:id="@+id/walletBalanceTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="30dp"
+                android:paddingRight="30dp"
                 android:text="₿0.00"
                 android:textSize="20sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Copy Address"
+                android:id="@+id/copyAddressBtn"
+                />
 
         </LinearLayout>
 
@@ -43,7 +53,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="30dp"
+                android:paddingTop="30dp"
+                android:paddingLeft="30dp"
+                android:paddingBottom="30dp"
                 android:text="Address:"
                 android:textSize="20sp" />
 
@@ -51,7 +63,7 @@
                 android:id="@+id/addressTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="30dp"
+                android:paddingRight="30dp"
                 android:text=""
                 android:textSize="20sp" />
         </LinearLayout>
