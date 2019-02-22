@@ -13,58 +13,6 @@
         android:orientation="vertical"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
-        android:gravity="center">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:text="Below is the recovery seed of you wallet, write it down and keep it somewhere save in case you ever need to recover your wallet"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:padding="5dp"
-            android:backgroundTint="@color/desertSand"
-            android:background="@color/desertSand"
-            android:textColor="@color/colorPrimary"
-            android:gravity="center"
-            android:text=""
-            android:id="@+id/textViewRecoverySeed"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:text="Below you will also find the date your seed which was created, writing it down is reccomended as it can speed up recovery"/>
-
-        <TextView
-            android:id="@+id/textViewRecoverySeedBirthday"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/desertSand"
-            android:backgroundTint="@color/desertSand"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text=""
-            android:textColor="@color/colorPrimary"
-            android:textSize="20dp" />
-
-        <android.support.design.button.MaterialButton
-            android:id="@+id/confirmStoredSeedBtn"
-            style="@style/MyContainedButton"
-            android:text="I have written down my recovery seed" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingLeft="25dp"
-        android:paddingRight="25dp"
         android:gravity="center"
         android:visibility="gone"
         android:id="@+id/loading_screen">
@@ -104,7 +52,6 @@
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
         android:gravity="center"
-        android:visibility="gone"
         android:id="@+id/create_password_form">
 
         <android.support.design.widget.TextInputLayout

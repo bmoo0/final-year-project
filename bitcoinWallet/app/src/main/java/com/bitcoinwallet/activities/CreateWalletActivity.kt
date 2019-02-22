@@ -4,7 +4,8 @@ import android.os.Bundle
 import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
-import android.os.Build
+import android.os.AsyncTask
+import android.os.PowerManager
 import android.util.Log
 import android.view.View
 import com.bitcoinwallet.R
@@ -12,69 +13,28 @@ import com.bitcoinwallet.utilities.BitcoinUtilities
 import com.bitcoinwallet.utilities.Globals
 import com.bitcoinwallet.utilities.InterfaceUtilities
 import com.bitcoinwallet.utilities.NetworkUtilities
-import com.google.common.base.Joiner
 import kotlinx.android.synthetic.main.activity_create_wallet.*
 
-import org.bitcoinj.core.ECKey
-import org.bitcoinj.core.NetworkParameters
 import org.bitcoinj.core.listeners.DownloadProgressTracker
-import org.bitcoinj.kits.WalletAppKit
 import org.bitcoinj.utils.BriefLogFormatter
-import java.io.File
-import java.time.Instant
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 class CreateWalletActivity : Activity() {
+    private lateinit var wakeLock: PowerManager.WakeLock
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_wallet)
         BriefLogFormatter.init()
-        val walletFile = File(filesDir, Globals.WALLET_NAME)
-        val blockStoreFile = File(filesDir,Globals.BLOCK_STORE_NAME)
-        //val progressDialog = ProgressDialog(this)
-        var walletAppKit: WalletAppKit
-
-
-        if (NetworkUtilities.isUsingMobile(this)) {
-            InterfaceUtilities.Companion.showAlertDialog(this, "Download Blockchain",
-                "Your mobile device is not on wifi, downloading the blockchain will be a large download," +
-                        "are you sure you want to continue?",
-                "Yes",
-                DialogInterface.OnClickListener { _, _ ->
-                    // continue
-                },
-                "No",
-                DialogInterface.OnClickListener { _, _ ->
-                    finish() // close activity
-                }
-            )
-        }
-
 
         // this is all the wallet setup stoof
-        BitcoinUtilities.initialiseWallet(walletFile, blockStoreFile)
+        BitcoinUtilities.setupWalletAppKit(filesDir)
+
+        // setup wake lock for download
+        val pm = getSystemService(PowerManager::class.java)
+        wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "BTC WALLET:Download wake lock")
 
 
-        val recoverySeed = Globals.wallet?.keyChainSeed
-        val mnemonicCode = recoverySeed?.mnemonicCode
-        textViewRecoverySeed.text = Joiner.on(" ").join(mnemonicCode)
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            textViewRecoverySeedBirthday.text =
-                    DateTimeFormatter.ISO_INSTANT.format(Instant.ofEpochSecond(recoverySeed?.creationTimeSeconds!!))
-        }
-
-        Globals.peerGroup?.addWallet(Globals.wallet)
-        Globals.peerGroup?.startAsync()
-
-        confirmStoredSeedBtn.setOnClickListener {
-            val homeActivityIntent = Intent(this, HomeActivity::class.java)
-            startActivity(homeActivityIntent)
-        }
-
-        // all code beyond here not run
         confirmCreateWalletButton.setOnClickListener {
 
             if (NetworkUtilities.isUsingMobile(this)) {
@@ -92,50 +52,47 @@ class CreateWalletActivity : Activity() {
                 )
             }
 
+            changeToLoadingScreen()
+            wakeLock.acquire()
 
-            if (password_input.text.toString() != password_input_confirm.text.toString()) {
-                errorMessage.visibility = View.VISIBLE
-            } else {
-                errorMessage.visibility = View.GONE
-                val walletPassword = password_input.text.toString()
-
-                walletAppKit = object : WalletAppKit(
-                    NetworkParameters.fromID(NetworkParameters.ID_TESTNET), walletFile,
-                    "Test Wallet Name"
-                ) {
-                    override fun onSetupCompleted() {
-                        if (wallet().importedKeys.size > 1) {
-                            wallet().importKey(ECKey())
-                        }
-                        wallet().allowSpendingUnconfirmedTransactions()
-
-                        Log.d("BTC WALLET", "My address = " + wallet().freshReceiveAddress())
-                    }
+            Globals.kit?.setDownloadListener(object : DownloadProgressTracker() {
+                override fun progress(pct: Double, blocksSoFar: Int, date: Date?) {
+                    super.progress(pct, blocksSoFar, date)
+                    val percentage: Int = pct.toInt()
+                    downloading_blockchain_progress_bar.setProgress(percentage, true)
+                    downloading_blockchain_percentage.text = percentage.toString() + "%"
                 }
 
-                changeToLoadingScreen()
-                //downloading_blockchain_progress_bar.isAnimating = true
+                override fun doneDownload() {
+                    super.doneDownload()
+                    downloading_blockchain_progress_bar.setProgress(100,true)
+                    Log.d(Globals.LOG_TAG, "Download complete")
 
-                walletAppKit.setDownloadListener(object : DownloadProgressTracker() {
-                    override fun progress(pct: Double, blocksSoFar: Int, date: Date?) {
-                        super.progress(pct, blocksSoFar, date)
-                        val percentage: Int = pct.toInt()
-                        //downloading_blockchain_progress_bar.setProgress(percentage, true)
-                        downloading_blockchain_percentage.text = percentage.toString() + "%"
+                    if(wakeLock.isHeld) {
+                        wakeLock.release()
                     }
 
-                    override fun doneDownload() {
-                        super.doneDownload()
-                        //downloading_blockchain_progress_bar.setProgress(100,true)
-                        walletAppKit.wallet().encrypt(walletPassword)
-                    }
-                })
+                    showRecoverySeed()
+                }
+            })
 
-                walletAppKit.setBlockingStartup(false)
-                walletAppKit.startAsync()
-            }
+            DownloadBlockchain().execute()
         }
     }
+
+    fun showRecoverySeed() {
+        val displayRecoverySeedIntent = Intent(this, DisplayRecoverySeedActivity::class.java)
+        startActivity(displayRecoverySeedIntent)
+    }
+
+    inner class DownloadBlockchain : AsyncTask<Void, Int, String>() {
+        override fun doInBackground(vararg p0: Void?): String {
+            Globals.kit?.setBlockingStartup(false)
+            Globals.kit?.startAsync()
+            Globals.kit?.awaitRunning()
+            return "complete"
+        }
+}
 
     private fun changeToLoadingScreen() {
         if (create_password_form.visibility == View.VISIBLE) {
