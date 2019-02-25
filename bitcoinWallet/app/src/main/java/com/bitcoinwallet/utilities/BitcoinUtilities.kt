@@ -37,7 +37,7 @@ class BitcoinUtilities {
         }
 
         fun setupWalletAppKit(dir: File) {
-            Globals.kit = WalletAppKit(Globals.networkParams,dir, ".")
+            Globals.kit = WalletAppKit(Globals.networkParams,dir, "BTCWALLET")
         }
     }
 }

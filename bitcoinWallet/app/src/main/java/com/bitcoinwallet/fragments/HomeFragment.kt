@@ -43,25 +43,23 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val handler: Handler = Handler()
-
-        val runInUIThread = object : Executor {
-            override fun execute(p0: Runnable?) {
-                handler.post(p0)
-            }
-        }
-
-        //Threading.USER_THREAD = runInUIThread
-
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
 
-        BitcoinUtilities.setupWalletAppKit(context?.filesDir!!)
-        Globals.kit?.startAsync()
-        Globals.kit?.awaitRunning()
-        //context?.startService(Intent(context, BlockchainDownloadService::class.java))
-        GetBalanceAsync().execute()
-        GetAddressAsync().execute()
+        if (Globals.kit == null) {
+            BitcoinUtilities.setupWalletAppKit(context?.filesDir!!)
+        }
+
+        // don't start these until we know the wallet app kit has been initialised
+        if(Globals.kit != null) {
+            GetBalanceAsync().execute()
+            GetAddressAsync().execute()
+        }
+
+        if (!Globals.kit?.isRunning!!) {
+            Globals.kit?.startAsync()
+        }
+
 
         view.copyAddressBtn.setOnClickListener {
             Toast.makeText(context, "Address Copied", Toast.LENGTH_SHORT).show()
@@ -70,57 +68,12 @@ class HomeFragment : Fragment() {
             clipboardManager?.primaryClip = clip
         }
 
-        //Globals.peerGroup?.startAsync()
         Globals.kit?.wallet()?.addCoinsReceivedEventListener { wallet, tx, prevBalance, newBalance ->
             Log.d(Globals.LOG_TAG, "Recieved tx")
             Log.d(Globals.LOG_TAG, "New Balance is" + newBalance.toFriendlyString())
             setWalletbalance(newBalance.toFriendlyString())
         }
 
-
-        /*
-        val walletAppKit = object : WalletAppKit(TestNet3Params.get(), context!!.filesDir, "BTCWallet") {
-            override fun onSetupCompleted() {
-                super.onSetupCompleted()
-                Log.d(Globals.LOG_TAG, "Setup complete")
-
-                wallet().addCoinsReceivedEventListener { wallet, tx, prevBalance, newBalance ->
-                    Log.d(Globals.LOG_TAG, "New balance is" + newBalance.toFriendlyString())
-                }
-            }
-        }
-
-        //walletAppKit.startAsync()
-        //walletAppKit.awaitRunning()
-
-        walletAppKit.setDownloadListener(object: DownloadProgressTracker() {
-            override fun progress(pct: Double, blocksSoFar: Int, date: Date?) {
-                super.progress(pct, blocksSoFar, date)
-                Log.d(Globals.LOG_TAG, "Downloaded: " + blocksSoFar.toString() + " so far")
-            }
-            override fun doneDownload() {
-                super.doneDownload()
-                Log.d(Globals.LOG_TAG, "Download complete!")
-            }
-
-            override fun startDownload(blocks: Int) {
-                super.startDownload(blocks)
-                Log.d(Globals.LOG_TAG, "Download starting!")
-            }
-        })
-
-
-        */
-        //DownloadBlockchain().execute()
-
-        /*
-        if(!Globals.peerGroup?.isRunning!!) {
-            Globals.peerGroup?.startAsync()
-            //Globals.peerGroup?.downloadBlockChain()
-        }
-        */
-
-        // Inflate the layout for this fragment
         return view
     }
 
@@ -148,7 +101,6 @@ class HomeFragment : Fragment() {
 
     inner class GetAddressAsync : AsyncTask<Void, Int, String>() {
         override fun doInBackground(vararg params: Void?): String {
-            //addr = Globals.wallet?.currentReceiveAddress().toString()
             addr = Globals.kit?.wallet()?.currentReceiveAddress().toString()
             return addr
         }

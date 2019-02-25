@@ -18,14 +18,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val walletFile = File(filesDir, Globals.WALLET_NAME)
-        val blockStoreFile = File(filesDir, Globals.BLOCK_STORE_NAME)
-
-        if (walletFile.exists() && blockStoreFile.exists()) {
-            BitcoinUtilities.loadWalletFromFile(walletFile,blockStoreFile)
+        /*
+        if (hasWallet) {
             val homeScreenIntent = Intent(this, HomeActivity::class.java)
             startActivity(homeScreenIntent)
         }
+        */
 
 
         createWalletButton.setOnClickListener {

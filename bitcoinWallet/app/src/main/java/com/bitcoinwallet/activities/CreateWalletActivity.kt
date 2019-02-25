@@ -30,6 +30,8 @@ class CreateWalletActivity : Activity() {
         // this is all the wallet setup stoof
         BitcoinUtilities.setupWalletAppKit(filesDir)
 
+        Log.d(Globals.LOG_TAG, "THE FILES ARE CREATED HERE: " + Globals.)
+
         // setup wake lock for download
         val pm = getSystemService(PowerManager::class.java)
         wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "BTC WALLET:Download wake lock")
@@ -88,6 +90,7 @@ class CreateWalletActivity : Activity() {
     inner class DownloadBlockchain : AsyncTask<Void, Int, String>() {
         override fun doInBackground(vararg p0: Void?): String {
             Globals.kit?.setBlockingStartup(false)
+            Globals.kit?.setAutoSave(true)
             Globals.kit?.startAsync()
             Globals.kit?.awaitRunning()
             return "complete"
