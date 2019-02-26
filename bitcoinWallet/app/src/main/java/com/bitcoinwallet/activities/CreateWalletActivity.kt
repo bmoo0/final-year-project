@@ -20,8 +20,6 @@ import org.bitcoinj.utils.BriefLogFormatter
 import java.util.*
 
 class CreateWalletActivity : Activity() {
-    private lateinit var wakeLock: PowerManager.WakeLock
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_wallet)
@@ -31,10 +29,6 @@ class CreateWalletActivity : Activity() {
         BitcoinUtilities.setupWalletAppKit(filesDir) {
             Log.d(Globals.LOG_TAG, "Wallet created successfully")
         }
-
-        // setup wake lock for download
-        val pm = getSystemService(PowerManager::class.java)
-        wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "BTC WALLET:Download wake lock")
 
 
         confirmCreateWalletButton.setOnClickListener {
@@ -55,7 +49,6 @@ class CreateWalletActivity : Activity() {
             }
 
             changeToLoadingScreen()
-            wakeLock.acquire()
 
             Globals.kit?.setDownloadListener(object : DownloadProgressTracker() {
                 override fun progress(pct: Double, blocksSoFar: Int, date: Date?) {
@@ -69,10 +62,6 @@ class CreateWalletActivity : Activity() {
                     super.doneDownload()
                     downloading_blockchain_progress_bar.setProgress(100, true)
                     Log.d(Globals.LOG_TAG, "Download complete")
-
-                    if (wakeLock.isHeld) {
-                        wakeLock.release()
-                    }
 
                     showRecoverySeed()
                 }

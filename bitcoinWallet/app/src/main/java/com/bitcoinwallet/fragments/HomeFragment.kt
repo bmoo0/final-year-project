@@ -36,7 +36,6 @@ class HomeFragment : Fragment() {
             GetAddressAsync().execute()
         }
 
-
         // copy address
         view.copyAddressBtn.setOnClickListener {
             Toast.makeText(context, "Address Copied", Toast.LENGTH_SHORT).show()
@@ -45,7 +44,7 @@ class HomeFragment : Fragment() {
             clipboardManager?.primaryClip = clip
         }
 
-        Globals.kit?.wallet()?.addCoinsReceivedEventListener { wallet, tx, prevBalance, newBalance ->
+        Globals.kit?.wallet()?.addCoinsReceivedEventListener { _, _, _, newBalance ->
             Log.d(Globals.LOG_TAG, "Recieved tx")
             Log.d(Globals.LOG_TAG, "New Balance is" + newBalance.toFriendlyString())
             setWalletbalance(newBalance.toFriendlyString())
