@@ -34,7 +34,6 @@ class DisplayRecoverySeedActivity : AppCompatActivity() {
                         "without it you could potentially lose your funds",
                 "Yes",
                 DialogInterface.OnClickListener { _, _ ->
-                    //Globals.kit?.setAutoSave(true)
                     val homeActivityIntent = Intent(this, HomeActivity::class.java)
                     startActivity(homeActivityIntent)
                 },

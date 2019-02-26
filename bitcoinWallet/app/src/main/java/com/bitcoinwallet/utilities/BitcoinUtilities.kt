@@ -13,29 +13,6 @@ import java.io.File
 
 class BitcoinUtilities {
     companion object {
-        fun initialiseWallet(walletFile: File, blockStoreFile: File) {
-            Globals.walletFile = walletFile
-            Globals.wallet = Wallet(Globals.networkParams)
-            Globals.blockStore = SPVBlockStore(Globals.networkParams, blockStoreFile)
-            Globals.blockChain = BlockChain(
-                Globals.networkParams,
-                Globals.wallet, Globals.blockStore
-            )
-            Globals.peerGroup = PeerGroup(Globals.networkParams, Globals.blockChain)
-            Globals.wallet!!.saveToFile(walletFile)
-        }
-
-        fun loadWalletFromFile(walletFile: File, blockStoreFile: File) {
-            Globals.walletFile = walletFile
-            Globals.wallet = Wallet.loadFromFile(walletFile)
-            Globals.blockStore = SPVBlockStore(Globals.networkParams, blockStoreFile)
-            Globals.blockChain = BlockChain(
-                Globals.networkParams,
-                Globals.wallet, Globals.blockStore
-            )
-            Globals.peerGroup = PeerGroup(Globals.networkParams, Globals.blockChain)
-        }
-
         fun setupWalletAppKit(dir: File, onComplete: () -> Unit) {
             Globals.kit = object: WalletAppKit(Globals.networkParams,
                 dir,

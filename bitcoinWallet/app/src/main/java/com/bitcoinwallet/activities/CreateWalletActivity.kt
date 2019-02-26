@@ -29,14 +29,12 @@ class CreateWalletActivity : Activity() {
 
         // this is all the wallet setup stoof
         BitcoinUtilities.setupWalletAppKit(filesDir) {
-                Log.d(Globals.LOG_TAG, "Wallet created successfully")
+            Log.d(Globals.LOG_TAG, "Wallet created successfully")
         }
-
-        Log.d(Globals.LOG_TAG, "THE FILES ARE CREATED HERE: " + Globals.kit?.directory()?.absolutePath)
 
         // setup wake lock for download
         val pm = getSystemService(PowerManager::class.java)
-        wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "BTC WALLET:Download wake lock")
+        wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "BTC WALLET:Download wake lock")
 
 
         confirmCreateWalletButton.setOnClickListener {
@@ -69,10 +67,10 @@ class CreateWalletActivity : Activity() {
 
                 override fun doneDownload() {
                     super.doneDownload()
-                    downloading_blockchain_progress_bar.setProgress(100,true)
+                    downloading_blockchain_progress_bar.setProgress(100, true)
                     Log.d(Globals.LOG_TAG, "Download complete")
 
-                    if(wakeLock.isHeld) {
+                    if (wakeLock.isHeld) {
                         wakeLock.release()
                     }
 
@@ -90,14 +88,14 @@ class CreateWalletActivity : Activity() {
     }
 
     inner class DownloadBlockchain : AsyncTask<Void, Int, String>() {
-        override fun doInBackground(vararg p0: Void?): String {
+        override fun doInBackground(vararg p1: Void?): String {
             Globals.kit?.setBlockingStartup(false)
             Globals.kit?.setAutoSave(true)
             Globals.kit?.startAsync()
             Globals.kit?.awaitRunning()
             return "complete"
         }
-}
+    }
 
     private fun changeToLoadingScreen() {
         if (create_password_form.visibility == View.VISIBLE) {

@@ -3,11 +3,8 @@ package com.bitcoinwallet.fragments
 
 import android.content.ClipData
 import android.content.ClipboardManager
-import android.content.ContextWrapper
-import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
-import android.os.Handler
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat.getSystemService
 import android.util.Log
@@ -17,22 +14,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 
 import com.bitcoinwallet.R
-import com.bitcoinwallet.services.BlockchainDownloadService
-import com.bitcoinwallet.utilities.BitcoinUtilities
 import com.bitcoinwallet.utilities.Globals
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
-import org.bitcoinj.core.*
-import org.bitcoinj.core.listeners.DownloadProgressTracker
-import org.bitcoinj.core.listeners.PeerDataEventListener
-import org.bitcoinj.kits.WalletAppKit
-import org.bitcoinj.params.TestNet3Params
-import org.bitcoinj.utils.BriefLogFormatter
-import org.bitcoinj.utils.Threading
-import org.bitcoinj.wallet.Wallet
-import org.bitcoinj.wallet.listeners.WalletCoinsReceivedEventListener
-import java.util.*
-import java.util.concurrent.Executor
 
 class HomeFragment : Fragment() {
     lateinit var balance: String
@@ -46,20 +30,14 @@ class HomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
 
-        if (Globals.kit == null) {
-            //BitcoinUtilities.setupWalletAppKit(context?.filesDir!!)
-        }
-
         // don't start these until we know the wallet app kit has been initialised
         if(Globals.kit != null) {
             GetBalanceAsync().execute()
             GetAddressAsync().execute()
         }
 
-        if (!Globals.kit?.isRunning!!) {
-            //Globals.kit?.startAsync()
-        }
 
+        // copy address
         view.copyAddressBtn.setOnClickListener {
             Toast.makeText(context, "Address Copied", Toast.LENGTH_SHORT).show()
             val clipboardManager = getSystemService(context!!, ClipboardManager::class.java)

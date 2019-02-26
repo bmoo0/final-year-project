@@ -19,9 +19,7 @@ class MainActivity : AppCompatActivity() {
 
 
         if (BitcoinUtilities.walletExists(filesDir)) {
-            Log.d(Globals.LOG_TAG, "Setting up wallet")
             BitcoinUtilities.setupWalletAppKit(filesDir) {
-                Log.d(Globals.LOG_TAG, "Wallet setup")
                 val homeScreenIntent = Intent(this, HomeActivity::class.java)
                 startActivity(homeScreenIntent)
             }
