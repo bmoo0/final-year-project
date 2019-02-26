@@ -15,12 +15,9 @@ import java.io.File
 
 class Globals {
     companion object {
-        val LOG_TAG = "BTC WALLET:"
-        val WALLET_NAME = "wallet_file.dat"
-        val BLOCK_STORE_NAME = "block_store_file.dat"
+        val LOG_TAG = "BTC WALLET"
+        val FILE_PREFIX = "btc_wallet"
         val IS_PRODUCTION = false
-        //var networkParams = if (IS_PRODUCTION) NetworkParameters.fromID(NetworkParameters.ID_MAINNET)
-        //else NetworkParameters.fromID(NetworkParameters.ID_TESTNET)
         val networkParams: TestNet3Params
             get() = TestNet3Params.get()
 

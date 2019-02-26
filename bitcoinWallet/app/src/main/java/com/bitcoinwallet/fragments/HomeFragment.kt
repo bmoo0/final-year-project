@@ -47,7 +47,7 @@ class HomeFragment : Fragment() {
 
 
         if (Globals.kit == null) {
-            BitcoinUtilities.setupWalletAppKit(context?.filesDir!!)
+            //BitcoinUtilities.setupWalletAppKit(context?.filesDir!!)
         }
 
         // don't start these until we know the wallet app kit has been initialised
@@ -57,9 +57,8 @@ class HomeFragment : Fragment() {
         }
 
         if (!Globals.kit?.isRunning!!) {
-            Globals.kit?.startAsync()
+            //Globals.kit?.startAsync()
         }
-
 
         view.copyAddressBtn.setOnClickListener {
             Toast.makeText(context, "Address Copied", Toast.LENGTH_SHORT).show()

@@ -3,6 +3,7 @@ package com.bitcoinwallet.activities
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Window
 import com.bitcoinwallet.R
 import com.bitcoinwallet.utilities.BitcoinUtilities
@@ -13,18 +14,19 @@ import java.io.File
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // remove title bar
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        /*
-        if (hasWallet) {
-            val homeScreenIntent = Intent(this, HomeActivity::class.java)
-            startActivity(homeScreenIntent)
-        }
-        */
 
+        if (BitcoinUtilities.walletExists(filesDir)) {
+            Log.d(Globals.LOG_TAG, "Setting up wallet")
+            BitcoinUtilities.setupWalletAppKit(filesDir) {
+                Log.d(Globals.LOG_TAG, "Wallet setup")
+                val homeScreenIntent = Intent(this, HomeActivity::class.java)
+                startActivity(homeScreenIntent)
+            }
+            Globals.kit?.startAsync()
+        }
 
         createWalletButton.setOnClickListener {
             val createWalletIntent = Intent(this, CreateWalletActivity::class.java)

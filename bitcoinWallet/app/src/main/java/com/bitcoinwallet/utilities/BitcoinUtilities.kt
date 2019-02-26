@@ -36,8 +36,23 @@ class BitcoinUtilities {
             Globals.peerGroup = PeerGroup(Globals.networkParams, Globals.blockChain)
         }
 
-        fun setupWalletAppKit(dir: File) {
-            Globals.kit = WalletAppKit(Globals.networkParams,dir, "BTCWALLET")
+        fun setupWalletAppKit(dir: File, onComplete: () -> Unit) {
+            Globals.kit = object: WalletAppKit(Globals.networkParams,
+                dir,
+                Globals.FILE_PREFIX
+            ) {
+                override fun onSetupCompleted() {
+                    super.onSetupCompleted()
+                    onComplete()
+                }
+            }
+        }
+
+        fun walletExists(dir: File): Boolean {
+            val blockStore = File(dir, Globals.FILE_PREFIX + ".spvchain")
+            val walletFile = File(dir, Globals.FILE_PREFIX + ".wallet")
+
+            return (blockStore.exists() && walletFile.exists())
         }
     }
 }

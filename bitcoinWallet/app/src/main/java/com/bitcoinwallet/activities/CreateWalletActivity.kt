@@ -28,9 +28,11 @@ class CreateWalletActivity : Activity() {
         BriefLogFormatter.init()
 
         // this is all the wallet setup stoof
-        BitcoinUtilities.setupWalletAppKit(filesDir)
+        BitcoinUtilities.setupWalletAppKit(filesDir) {
+                Log.d(Globals.LOG_TAG, "Wallet created successfully")
+        }
 
-        Log.d(Globals.LOG_TAG, "THE FILES ARE CREATED HERE: " + Globals.)
+        Log.d(Globals.LOG_TAG, "THE FILES ARE CREATED HERE: " + Globals.kit?.directory()?.absolutePath)
 
         // setup wake lock for download
         val pm = getSystemService(PowerManager::class.java)
