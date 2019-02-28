@@ -10,30 +10,30 @@ import android.net.NetworkInfo
 
 class NetworkUtilities {
     companion object {
-        fun isConnected(context: Context) : Boolean {
+        fun isConnected(context: Context): Boolean {
             val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            val activeNetwork : NetworkInfo? = cm.activeNetworkInfo
-            val isConnected : Boolean = activeNetwork?.isConnected == true
+            val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+            val isConnected: Boolean = activeNetwork?.isConnected == true
             return isConnected
         }
 
-        fun connectionType(context: Context) : String {
-            val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            val activeNetwork : NetworkInfo? = cm.activeNetworkInfo
+        fun isUsingWifi(context: Context): Boolean {
+            return connectionType(context) == "WIFI"
+        }
 
-            return when(activeNetwork?.type) {
+        fun isUsingMobile(context: Context): Boolean {
+            return connectionType(context) == "MOBILE"
+        }
+
+        private fun connectionType(context: Context): String {
+            val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+
+            return when (activeNetwork?.type) {
                 ConnectivityManager.TYPE_WIFI -> "WIFI"
                 ConnectivityManager.TYPE_MOBILE -> "MOBILE"
                 else -> "Connection unknown"
             }
-        }
-
-        fun isUsingWifi(context: Context) : Boolean {
-            return connectionType(context) == "WIFI"
-        }
-
-        fun isUsingMobile(context: Context) : Boolean {
-            return connectionType(context) == "MOBILE"
         }
     }
 }

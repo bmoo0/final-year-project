@@ -30,7 +30,6 @@ class CreateWalletActivity : Activity() {
             Log.d(Globals.LOG_TAG, "Wallet created successfully")
         }
 
-
         confirmCreateWalletButton.setOnClickListener {
 
             if (NetworkUtilities.isUsingMobile(this)) {

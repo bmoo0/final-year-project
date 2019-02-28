@@ -1,11 +1,11 @@
 package com.bitcoinwallet.utilities
 
-import org.bitcoinj.core.BlockChain
-import org.bitcoinj.core.PeerGroup
 import org.bitcoinj.kits.WalletAppKit
-import org.bitcoinj.store.SPVBlockStore
-import org.bitcoinj.wallet.Wallet
 import java.io.File
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 /**
  * Created by Ben Moore on 15/02/2019.
@@ -30,6 +30,17 @@ class BitcoinUtilities {
             val walletFile = File(dir, Globals.FILE_PREFIX + ".wallet")
 
             return (blockStore.exists() && walletFile.exists())
+        }
+
+        fun creationToFriendlyString(time: Long) : String {
+            val formatter = DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yyyy")
+            return formatter.format(Instant.ofEpochSecond(time))
+        }
+
+        fun stringToEpochLong(dateTimeString: String) : Long {
+            val formatter = DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yyyy")
+            val dt = LocalDateTime.parse(dateTimeString, formatter)
+            return dt.atZone(ZoneId.systemDefault()).toInstant().epochSecond
         }
     }
 }

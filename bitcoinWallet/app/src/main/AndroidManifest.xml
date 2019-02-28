@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.DisplayRecoverySeedActivity"></activity>
+        <activity android:name=".activities.RecoverWalletActivity"></activity>
+        <activity android:name=".activities.DisplayRecoverySeedActivity" />
         <activity android:name=".activities.HomeActivity" />
         <activity
             android:name=".activities.CreateWalletActivity"
