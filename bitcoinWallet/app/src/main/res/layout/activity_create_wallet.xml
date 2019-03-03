@@ -21,8 +21,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textSize="20dp"
-            android:text="@string/downloading_blockchain_message"
+            android:textSize="20sp"
+            android:text="@string/txt_downloading_blockchain_message"
             />
 
        <ProgressBar
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:id="@+id/downloading_blockchain_percentage"
-            android:text="0%"/>
+            android:text="@string/txt_zero_percent"/>
     </LinearLayout>
 
 
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/password_input"
                 android:padding="10sp"
-                android:hint="Password"
+                android:hint="@string/hint_password"
                 android:ems="10"
                 android:inputType="textPassword"
                 />
@@ -78,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/password_input_confirm"
                 android:padding="10sp"
-                android:hint="Confirm Password"
+                android:hint="@string/hint_confirm_password"
                 android:ems="10"
                 android:inputType="textPassword"
                 />
@@ -87,7 +87,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Entered passwords did not match, please try again"
+            android:text=""
             android:gravity="center"
             android:visibility="gone"
             android:id="@+id/errorMessage"
@@ -96,7 +96,7 @@
         <android.support.design.button.MaterialButton
             android:id="@+id/confirmCreateWalletButton"
             style="@style/MyContainedButton"
-            android:text="Create Wallet"/>
+            android:text="@string/btn_create_wallet"/>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="To recover your wallet please enter your recovery seed below and the date and time it was created below"
+            android:text="@string/txt_recover_wallet_message"
             android:textSize="20sp" />
 
         <android.support.design.widget.TextInputLayout
@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Seed"
+                android:hint="@string/hint_seed"
                 android:inputType="text"
                 android:padding="10sp" />
         </android.support.design.widget.TextInputLayout>
@@ -41,13 +41,13 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:id="@+id/creationTimeTxt"
-            android:text="Tap here to set the creation time"
+            android:text="@string/txt_creation_time_message"
             android:textSize="20sp" />
 
         <android.support.design.button.MaterialButton
             android:id="@+id/recoverWalletBtn"
             style="@style/MyContainedButton"
-            android:text="Recover Wallet" />
+            android:text="@string/btn_recover_wallet" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

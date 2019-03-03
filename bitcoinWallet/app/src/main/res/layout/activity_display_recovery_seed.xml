@@ -18,8 +18,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Below is the recovery seed of you wallet, write it down and keep it somewhere save in case you ever need to recover your wallet"
-            android:textSize="20dp" />
+            android:text="@string/txt_recovery_seed_message"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/textViewRecoverySeed"
@@ -31,14 +31,14 @@
             android:padding="5dp"
             android:text=""
             android:textColor="@color/colorPrimary"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Below you will also find the date your seed which was created, writing it down is reccomended as it can speed up recovery"
-            android:textSize="20dp" />
+            android:text="@string/txt_recovery_date_message"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/textViewRecoverySeedBirthday"
@@ -50,11 +50,11 @@
             android:padding="5dp"
             android:text=""
             android:textColor="@color/colorPrimary"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
         <android.support.design.button.MaterialButton
             android:id="@+id/confirmStoredSeedBtn"
             style="@style/MyContainedButton"
-            android:text="I have written down my recovery seed" />
+            android:text="@string/btn_written_recovery_seed" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
