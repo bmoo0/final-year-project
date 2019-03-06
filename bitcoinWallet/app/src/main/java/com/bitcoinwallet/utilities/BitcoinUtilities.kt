@@ -31,16 +31,5 @@ class BitcoinUtilities {
 
             return (blockStore.exists() && walletFile.exists())
         }
-
-        fun creationToFriendlyString(time: Long) : String {
-            val formatter = DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yyyy")
-            return formatter.format(Instant.ofEpochSecond(time))
-        }
-
-        fun stringToEpochLong(dateTimeString: String) : Long {
-            val formatter = DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yyyy")
-            val dt = LocalDateTime.parse(dateTimeString, formatter)
-            return dt.atZone(ZoneId.systemDefault()).toInstant().epochSecond
-        }
     }
 }

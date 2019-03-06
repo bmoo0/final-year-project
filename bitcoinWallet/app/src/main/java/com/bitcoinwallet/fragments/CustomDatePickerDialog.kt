@@ -19,13 +19,13 @@ class CustomDatePickerDialog : ThreePickerDialog() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val dayVals = createPickerRanges(0, 31)
+        val dayVals = createPickerRanges(1, 31)
         val monthVals = createPickerRanges(1, 12)
-        val yearVals = createPickerRanges(2009, 2050)
+        val yearVals = createPickerRanges(2009, 2020)
 
-        setupPicker(dayPicker, dayVals) { _, _, newVal -> mDay = newVal }
-        setupPicker(monthPicker, monthVals) { _, _, newVal -> mMonth = newVal }
-        setupPicker(yearPicker, yearVals) { _, _, newVal -> mYear = newVal }
+        setupPicker(dayPicker, dayVals) { _, _, newVal -> mDay = monthVals[newVal].toInt()}
+        setupPicker(monthPicker, monthVals) { _, _, newVal -> mMonth = monthVals[newVal].toInt()}
+        setupPicker(yearPicker, yearVals) { _, _, newVal -> mYear = yearVals[newVal].toInt() }
 
         cancelBtn.setOnClickListener { dismiss() }
 

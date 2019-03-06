@@ -19,9 +19,9 @@ class TimePickerSecondsDialog : ThreePickerDialog() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val hourVals = createPickerRanges(0, 24)
-        val minVals = createPickerRanges(0, 59)
-        val secVals = createPickerRanges(0, 59)
+        val hourVals = createPickerRanges(to = 24)
+        val minVals = createPickerRanges(to = 59)
+        val secVals = createPickerRanges(to = 59)
 
         setupPicker(hourPicker, hourVals) { _, _, newVal -> mHours = newVal }
         setupPicker(minPicker, minVals) { _, _, newVal -> mMinutes = newVal }

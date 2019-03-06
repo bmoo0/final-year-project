@@ -2,9 +2,11 @@ package com.bitcoinwallet.activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.bitcoinwallet.R
 import com.bitcoinwallet.fragments.CustomDatePickerDialog
 import com.bitcoinwallet.fragments.TimePickerSecondsDialog
+import com.bitcoinwallet.utilities.Globals
 import kotlinx.android.synthetic.main.activity_recover_wallet.*
 
 class RecoverWalletActivity : AppCompatActivity(), TimePickerSecondsDialog.TimePickerDelegate, CustomDatePickerDialog.DatePickerDelegate {

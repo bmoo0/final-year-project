@@ -17,11 +17,10 @@ abstract class ThreePickerDialog : DialogFragment() {
         picker.setOnValueChangedListener(onChange)
     }
 
-    protected fun createPickerRanges(from: Int, to: Int): Array<String> {
-        val lst = mutableListOf("00")
-        val tmp_from = from + 1
+    protected fun createPickerRanges(from: Int = 0, to: Int): Array<String> {
+        val lst =  mutableListOf<String>()
 
-        for (i in tmp_from..to) {
+        for (i in from..to) {
             if (i < 10) {
                 val s = i.toString()
                 val tmp = "0$s"

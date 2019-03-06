@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.bitcoinwallet.R
 import com.bitcoinwallet.utilities.BitcoinUtilities
+import com.bitcoinwallet.utilities.DateTimeUtilities
 import com.bitcoinwallet.utilities.Globals
 import com.bitcoinwallet.utilities.InterfaceUtilities
 import com.google.common.base.Joiner
@@ -22,7 +23,7 @@ class DisplayRecoverySeedActivity : AppCompatActivity() {
         textViewRecoverySeed.text = Joiner.on(" ").join(mnemonicCode)
 
         textViewRecoverySeedBirthday.text =
-            BitcoinUtilities.creationToFriendlyString(recoverySeed?.creationTimeSeconds!!)
+            DateTimeUtilities.epochTimeToFriendlyString(recoverySeed?.creationTimeSeconds!!)
 
         confirmStoredSeedBtn.setOnClickListener {
             InterfaceUtilities.showAlertDialog(
