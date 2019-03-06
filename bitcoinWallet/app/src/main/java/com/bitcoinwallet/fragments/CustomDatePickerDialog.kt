@@ -8,9 +8,10 @@ import com.bitcoinwallet.R
 import kotlinx.android.synthetic.main.dialog_custom_date_picker.*
 
 class CustomDatePickerDialog : ThreePickerDialog() {
-    private var mDay = 0
-    private var mMonth = 0
-    private var mYear = 0
+    private val startYear = 2009
+    private var mDay = 1
+    private var mMonth = 1
+    private var mYear = startYear
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.dialog_custom_date_picker, container, false)
@@ -21,10 +22,10 @@ class CustomDatePickerDialog : ThreePickerDialog() {
 
         val dayVals = createPickerRanges(1, 31)
         val monthVals = createPickerRanges(1, 12)
-        val yearVals = createPickerRanges(2009, 2020)
+        val yearVals = createPickerRanges(startYear, 2050)
 
-        setupPicker(dayPicker, dayVals) { _, _, newVal -> mDay = monthVals[newVal].toInt()}
-        setupPicker(monthPicker, monthVals) { _, _, newVal -> mMonth = monthVals[newVal].toInt()}
+        setupPicker(dayPicker, dayVals) { _, _, newVal -> mDay = newVal+1}
+        setupPicker(monthPicker, monthVals) { _, _, newVal -> mMonth = newVal+1}
         setupPicker(yearPicker, yearVals) { _, _, newVal -> mYear = yearVals[newVal].toInt() }
 
         cancelBtn.setOnClickListener { dismiss() }

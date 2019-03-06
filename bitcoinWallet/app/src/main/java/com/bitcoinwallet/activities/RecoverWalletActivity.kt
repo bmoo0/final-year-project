@@ -2,11 +2,10 @@ package com.bitcoinwallet.activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.bitcoinwallet.R
 import com.bitcoinwallet.fragments.CustomDatePickerDialog
 import com.bitcoinwallet.fragments.TimePickerSecondsDialog
-import com.bitcoinwallet.utilities.Globals
+import com.bitcoinwallet.utilities.DateTimeUtilities
 import kotlinx.android.synthetic.main.activity_recover_wallet.*
 
 class RecoverWalletActivity : AppCompatActivity(), TimePickerSecondsDialog.TimePickerDelegate, CustomDatePickerDialog.DatePickerDelegate {
@@ -29,6 +28,10 @@ class RecoverWalletActivity : AppCompatActivity(), TimePickerSecondsDialog.TimeP
         txtDate.setOnClickListener {
             val datePickerDialog = CustomDatePickerDialog()
             datePickerDialog.show(supportFragmentManager, "date picker")
+
+        }
+
+        recoverWalletBtn.setOnClickListener {
         }
     }
 
@@ -36,11 +39,13 @@ class RecoverWalletActivity : AppCompatActivity(), TimePickerSecondsDialog.TimeP
         mHour = hours
         mMin = minutes
         mSec = seconds
+        txtTime.text = DateTimeUtilities.numbersToTimeString(mHour,mMin,mSec)
     }
 
     override fun onSelectedDateDone(day: Int, month: Int, year: Int) {
         mDay = day
         mMonth = month
         mYear = year
+        txtDate.text = DateTimeUtilities.numbersToDateString(mDay,mMonth,mYear)
     }
 }

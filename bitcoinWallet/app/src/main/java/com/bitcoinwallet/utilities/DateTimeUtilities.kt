@@ -20,20 +20,24 @@ class DateTimeUtilities {
             return dt.atZone(ZoneId.systemDefault()).toInstant().epochSecond
         }
 
-        fun numbersToDateTime(hour: Int, minute: Int, second: Int,
-                              day: Int, month: Int, year: Int) : LocalDateTime {
+        fun numbersToEpochLong(hour: Int, minute: Int, second: Int,
+                              day: Int, month: Int, year: Int) : Long {
             val time =
                 "${if (hour < 10) "0$hour" else hour.toString()}:${if (minute < 10) "0$minute" else minute.toString()}:${if(second < 10) "0$second" else second.toString()}"
 
             val date = "${if (day < 10) "0$day" else day.toString()}-${if (month < 10) "0$month" else month.toString()}-$year"
 
-            val formatter = DateTimeFormatter.ofPattern(dateTimeFormat)
-
             val dtString = "$time $date"
 
-            return LocalDateTime.parse(dtString, formatter)
-
+            return stringToEpochLong(dtString)
         }
 
+        fun numbersToTimeString(hour: Int, minute: Int, second: Int) : String {
+            return "${if (hour < 10) "0$hour" else hour.toString()}:${if (minute < 10) "0$minute" else minute.toString()}:${if(second < 10) "0$second" else second.toString()}"
+        }
+
+        fun numbersToDateString(day: Int, month: Int, year: Int) : String {
+            return "${if (day < 10) "0$day" else day.toString()}-${if (month < 10) "0$month" else month.toString()}-$year"
+        }
     }
 }
