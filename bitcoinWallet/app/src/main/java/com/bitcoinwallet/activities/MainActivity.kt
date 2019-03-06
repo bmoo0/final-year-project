@@ -28,6 +28,12 @@ class MainActivity : AppCompatActivity() {
 
         createWalletButton.setOnClickListener {
             val createWalletIntent = Intent(this, CreateWalletActivity::class.java)
-            startActivity(createWalletIntent)}
+            startActivity(createWalletIntent)
+        }
+
+        recoverWalletButton.setOnClickListener {
+            val createRecoverIntent = Intent(this, RecoverWalletActivity::class.java)
+            startActivity(createRecoverIntent)
+        }
     }
 }

@@ -11,15 +11,23 @@
     <string name="txt_recovery_seed_message">Below is the recovery seed of you wallet, write it down and keep it somewhere save in case you ever need to recover your wallet</string>
     <string name="txt_recovery_date_message">Below you will also find the date your seed which was created, writing it down is recommended as it can speed up recovery</string>
     <string name="txt_recover_wallet_message">To recover your wallet please enter your recovery seed below and the date and time it was created below</string>
-    <string name="txt_creation_time_message">Tap here to set the creation time</string>
+    <string name="txt_creation_time_message">Input the creation time of your recovery seed\nDate (dd-mm-yy)\t Time (hh:mm:ss) </string>
     <string name="txt_balance">Balance:&#x20;</string>
     <string name="txt_zero_balance">₿0.00</string>
     <string name="txt_address">Address:</string>
+    <string name="txt_hour">Hour</string>
+    <string name="txt_mins">Minutes</string>
+    <string name="txt_secs">Seconds</string>
+    <string name="txt_day">Day</string>
+    <string name="txt_month">Month</string>
+    <string name="txt_year">Year</string>
 
     <!-- Buttons -->
     <string name="btn_create">Create</string>
     <string name="btn_recover">Recover</string>
     <string name="btn_send">Send</string>
+    <string name="btn_ok">Ok</string>
+    <string name="btn_cancel">Cancel</string>
     <string name="btn_copy_address">Copy Address</string>
     <string name="btn_create_wallet">Create wallet</string>
     <string name="btn_recover_wallet">Recover Wallet</string>

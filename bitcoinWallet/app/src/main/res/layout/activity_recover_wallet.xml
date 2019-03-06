@@ -36,13 +36,55 @@
                 android:padding="10sp" />
         </android.support.design.widget.TextInputLayout>
 
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:id="@+id/creationTimeTxt"
             android:text="@string/txt_creation_time_message"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Date"
+                android:textAlignment="center"
+                android:inputType="date"
+                android:padding="20sp"
+                android:id="@+id/txtDate"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Time"
+                android:textAlignment="center"
+                android:inputType="time"
+                android:padding="20sp"
+                android:id="@+id/txtTime"/>
+
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
 
         <android.support.design.button.MaterialButton
             android:id="@+id/recoverWalletBtn"
