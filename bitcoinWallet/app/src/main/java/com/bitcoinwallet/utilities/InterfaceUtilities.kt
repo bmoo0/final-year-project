@@ -8,6 +8,9 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 
+/**
+ * All utilities related to working with the user interface
+ */
 class InterfaceUtilities {
     companion object {
         fun showAlertDialog(
