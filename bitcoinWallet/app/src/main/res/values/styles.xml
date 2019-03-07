@@ -13,7 +13,7 @@
     </style>
 
 
-    <style name="AppThemeTitleBar" parent="Theme.MaterialComponents.Light">
+    <style name="AppThemeWithTitleBar" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
