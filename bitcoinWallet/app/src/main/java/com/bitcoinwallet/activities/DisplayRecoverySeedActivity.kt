@@ -1,11 +1,9 @@
 package com.bitcoinwallet.activities
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.bitcoinwallet.R
-import com.bitcoinwallet.utilities.BitcoinUtilities
 import com.bitcoinwallet.utilities.DateTimeUtilities
 import com.bitcoinwallet.utilities.Globals
 import com.bitcoinwallet.utilities.InterfaceUtilities
@@ -31,12 +29,12 @@ class DisplayRecoverySeedActivity : AppCompatActivity() {
                 "Please confirm that you have written down your recovery seed, " +
                         "without it you could potentially lose your funds",
                 "Yes",
-                DialogInterface.OnClickListener { _, _ ->
+                { _, _ ->
                     val homeActivityIntent = Intent(this, HomeActivity::class.java)
                     startActivity(homeActivityIntent)
                 },
                 "No",
-                DialogInterface.OnClickListener { _, _ ->
+                { _, _ ->
                     // do nothing
                 }
             )

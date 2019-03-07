@@ -15,8 +15,8 @@ class InterfaceUtilities {
     companion object {
         fun showAlertDialog(
             context: Context, title: String, message: String,
-            positiveBtnTxt: String, positiveBtnListener: DialogInterface.OnClickListener,
-            negativeBtnTxt: String, negativeBtnListener: DialogInterface.OnClickListener
+            positiveBtnTxt: String, positiveBtnListener: ((DialogInterface, Int) -> Unit),
+            negativeBtnTxt: String, negativeBtnListener: ((DialogInterface, Int) -> Unit)
         ) {
             AlertDialog.Builder(context)
                 .setIcon(android.R.drawable.ic_dialog_alert)
@@ -32,14 +32,9 @@ class InterfaceUtilities {
             title: String,
             message: String,
             buttonTxt: String,
-            buttonListener: DialogInterface.OnClickListener
+            buttonListener: ((DialogInterface, Int) -> Unit)
         ) {
-            AlertDialog.Builder(context)
-                .setIcon(android.R.drawable.ic_delete)
-                .setTitle(title)
-                .setMessage(message)
-                .setPositiveButton(buttonTxt, buttonListener)
-                .show()
+            showOneButtonDialog(context, title, message, android.R.drawable.ic_delete, buttonTxt, buttonListener)
         }
 
         fun showInfoDialog(
@@ -47,10 +42,21 @@ class InterfaceUtilities {
             title: String,
             message: String,
             buttonTxt: String,
-            buttonListener: DialogInterface.OnClickListener
+            buttonListener: ((DialogInterface, Int) -> Unit)
+        ) {
+            showOneButtonDialog(context, title, message, android.R.drawable.ic_dialog_info, buttonTxt, buttonListener)
+        }
+
+        private fun showOneButtonDialog(
+            context: Context,
+            title: String,
+            message: String,
+            icon: Int,
+            buttonTxt: String,
+            buttonListener: ((DialogInterface, Int) -> Unit)
         ) {
             AlertDialog.Builder(context)
-                .setIcon(android.R.drawable.ic_dialog_info)
+                .setIcon(icon)
                 .setTitle(title)
                 .setMessage(message)
                 .setPositiveButton(buttonTxt, buttonListener)

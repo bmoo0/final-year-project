@@ -1,7 +1,6 @@
 package com.bitcoinwallet.fragments
 
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -45,18 +44,15 @@ class SendFragment : Fragment() {
                 InterfaceUtilities.showErrorDialog(context!!,
                     "Invalid Address",
                     "Address not found, are you sure you have written your address correctly",
-                    "Ok",
-                    DialogInterface.OnClickListener { dialogInterface, _ ->
-                        // do nothing
-                        dialogInterface.dismiss()
-                    })
+                    "Ok"
+                ) { dialogInterface, _ -> dialogInterface.dismiss() }
                 return@setOnClickListener
             }
 
             InterfaceUtilities.showAlertDialog(context!!,
                 "Confirm Transaction",
                 "Are you sure you want to send " + value.toFriendlyString() + "BTC to " + toAddr.toBase58() + "?",
-                "Yes", DialogInterface.OnClickListener { dialogInterface, _ ->
+                "Yes", { dialogInterface, _ ->
                     dialogInterface.dismiss()
                     // send transaction
                     try {
@@ -65,25 +61,24 @@ class SendFragment : Fragment() {
                         InterfaceUtilities.showInfoDialog(context!!,
                             "Transaction Sent",
                             "You have successfully sent " + value.toFriendlyString() + " to " + toAddr.toBase58(),
-                            "Ok",
-                            DialogInterface.OnClickListener { dialogInterface, _ ->
-                                dialogInterface.dismiss()
-                                address_input.setText("")
-                                amount_input.setText("")
-                            })
+                            "Ok"
+                        ) { dialogInterface, _ ->
+                            dialogInterface.dismiss()
+                            address_input.setText("")
+                            amount_input.setText("")
+                        }
                     } catch (e : InsufficientMoneyException) {
                         InterfaceUtilities.showErrorDialog(
                             context!!,
                             "Insufficient Funds",
                             "You have isufficient funds to make this transaction",
-                            "Ok",
-                            DialogInterface.OnClickListener { dialogInterface, _ ->
-                                dialogInterface.dismiss()
-                                return@OnClickListener
-                            })
+                            "Ok"
+                        ) { dialogInterface, _ ->
+                            dialogInterface.dismiss()
+                        }
                     }
                 },
-                "No", DialogInterface.OnClickListener { dialogInterface, _ ->
+                "No", { dialogInterface, _ ->
                     dialogInterface.dismiss()
                 })
         }

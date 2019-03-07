@@ -37,11 +37,11 @@ class CreateWalletActivity : Activity() {
                     "Your mobile device is not on wifi, downloading the blockchain will be a large download," +
                             "are you sure you want to continue?",
                     "Yes",
-                    DialogInterface.OnClickListener { _, _ ->
+                    { _, _ ->
                         // continue
                     },
                     "No",
-                    DialogInterface.OnClickListener { _, _ ->
+                    { _, _ ->
                         finish() // close activity
                     }
                 )
@@ -54,7 +54,7 @@ class CreateWalletActivity : Activity() {
                     super.progress(pct, blocksSoFar, date)
                     val percentage: Int = pct.toInt()
                     downloading_blockchain_progress_bar.setProgress(percentage, true)
-                    downloading_blockchain_percentage.text = percentage.toString() + "%"
+                    downloading_blockchain_percentage.text = "${percentage.toString()}%"
                 }
 
                 override fun doneDownload() {
