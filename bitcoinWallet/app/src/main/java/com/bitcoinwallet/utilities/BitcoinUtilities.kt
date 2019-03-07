@@ -1,5 +1,6 @@
 package com.bitcoinwallet.utilities
 
+import android.util.Log
 import org.bitcoinj.kits.WalletAppKit
 import java.io.File
 import java.time.Instant
@@ -30,6 +31,19 @@ class BitcoinUtilities {
             val walletFile = File(dir, Globals.FILE_PREFIX + ".wallet")
 
             return (blockStore.exists() && walletFile.exists())
+        }
+
+        fun removeWalletFiles(dir: File) {
+            val blockStore = File(dir, Globals.FILE_PREFIX + ".spvchain")
+            val walletFile = File(dir, Globals.FILE_PREFIX + ".wallet")
+
+            if(!blockStore.delete()) {
+                Log.d(Globals.LOG_TAG, "Error deleting block file")
+            }
+
+            if(!walletFile.delete()) {
+                Log.d(Globals.LOG_TAG, "Error deleting block file")
+            }
         }
     }
 }

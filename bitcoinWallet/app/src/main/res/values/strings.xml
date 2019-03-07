@@ -8,6 +8,7 @@
     <string name="txt_zero_percent">0%</string>
     <string name="txt_password_not_match">Entered passwords did not match, please try again</string>
     <string name="txt_downloading_blockchain_message">Currently creating your wallet and downloading the blockchain, this may take a while&#8230;</string>
+    <string name="txt_recovering_wallet_message">Currently recovering your wallet and re-downloading the blockchain, this may take a while&#8230;</string>
     <string name="txt_recovery_seed_message">Below is the recovery seed of you wallet, write it down and keep it somewhere save in case you ever need to recover your wallet</string>
     <string name="txt_recovery_date_message">Below you will also find the date your seed which was created, writing it down is recommended as it can speed up recovery</string>
     <string name="txt_recover_wallet_message">To recover your wallet please enter your recovery seed below and the date and time it was created below</string>

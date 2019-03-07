@@ -7,9 +7,47 @@
     tools:context=".activities.RecoverWalletActivity">
 
     <LinearLayout
+        android:id="@+id/loading_screen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/txt_recovering_wallet_message"
+            android:textSize="20sp" />
+
+        <ProgressBar
+            android:id="@+id/downloading_blockchain_progress_bar"
+            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:min="0"
+            android:padding="10dp"
+            android:progress="0"
+            android:progressTint="@color/colorPrimary" />
+
+        <TextView
+            android:id="@+id/downloading_blockchain_percentage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/txt_zero_percent" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:id="@+id/recoverWalletScreen"
         android:orientation="vertical"
         android:paddingLeft="25dp"
         android:paddingRight="25dp">
@@ -38,10 +76,10 @@
 
 
         <TextView
+            android:id="@+id/creationTimeTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:id="@+id/creationTimeTxt"
             android:text="@string/txt_creation_time_message"
             android:textSize="18sp" />
 
@@ -56,15 +94,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Date"
-                android:textAlignment="center"
-                android:inputType="date"
-                android:padding="20sp"
-                android:id="@+id/txtDate"/>
+                <TextView
+                    android:id="@+id/txtDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Date"
+                    android:inputType="date"
+                    android:padding="20sp"
+                    android:textAlignment="center" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -73,15 +111,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Time"
-                android:textAlignment="center"
-                android:inputType="time"
-                android:padding="20sp"
-                android:id="@+id/txtTime"/>
+                <TextView
+                    android:id="@+id/txtTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Time"
+                    android:inputType="time"
+                    android:padding="20sp"
+                    android:textAlignment="center" />
 
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
