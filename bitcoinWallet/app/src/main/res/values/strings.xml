@@ -27,7 +27,7 @@
     <string name="btn_create">Create</string>
     <string name="btn_recover">Recover</string>
     <string name="btn_send">Send</string>
-    <string name="btn_ok">Ok</string>
+    <string name="btn_ok">OK</string>
     <string name="btn_cancel">Cancel</string>
     <string name="btn_copy_address">Copy Address</string>
     <string name="btn_create_wallet">Create wallet</string>

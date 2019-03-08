@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.util.Log
+import android.view.Window
 import com.bitcoinwallet.R
 import com.bitcoinwallet.fragments.HomeFragment
 import com.bitcoinwallet.fragments.SendFragment
@@ -41,7 +42,9 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //setTheme(R.style.AppTheme)
         setContentView(R.layout.activity_home)
+
         openFragment(HomeFragment.newInstance())
         homeNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }

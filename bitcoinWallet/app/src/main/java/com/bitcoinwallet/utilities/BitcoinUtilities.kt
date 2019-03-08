@@ -3,10 +3,6 @@ package com.bitcoinwallet.utilities
 import android.util.Log
 import org.bitcoinj.kits.WalletAppKit
 import java.io.File
-import java.time.Instant
-import java.time.LocalDateTime
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
 
 /**
  * Created by Ben Moore on 15/02/2019.
