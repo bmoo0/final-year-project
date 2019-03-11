@@ -1,6 +1,7 @@
 package com.bitcoinwallet.fragments
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.bitcoinwallet.R
+import com.bitcoinwallet.activities.DisplayRecoverySeedActivity
 import com.bitcoinwallet.adapters.SettingsAdapter
 import kotlinx.android.synthetic.main.fragment_settings.*
 
@@ -29,10 +31,10 @@ class SettingsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val dataset = arrayOf("View Recovery seed", "Set password")
+        val dataset = arrayOf("View Recovery Seed", "Set Password")
 
         recyclerSettings.layoutManager = LinearLayoutManager(context)
-        recyclerSettings.adapter = SettingsAdapter(dataset)
+        recyclerSettings.adapter = SettingsAdapter(context!!, dataset)
     }
 
     companion object {

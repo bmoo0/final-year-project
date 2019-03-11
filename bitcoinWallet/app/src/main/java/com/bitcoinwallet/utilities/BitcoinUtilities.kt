@@ -38,7 +38,7 @@ class BitcoinUtilities {
             }
 
             if(!walletFile.delete()) {
-                Log.d(Globals.LOG_TAG, "Error deleting block file")
+                Log.d(Globals.LOG_TAG, "Error deleting wallet file")
             }
         }
     }

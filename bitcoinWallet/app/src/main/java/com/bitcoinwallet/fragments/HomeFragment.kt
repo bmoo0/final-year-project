@@ -29,7 +29,6 @@ class HomeFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-
         // don't start these until we know the wallet app kit has been initialised
         if(Globals.kit != null) {
             GetBalanceAsync().execute()
