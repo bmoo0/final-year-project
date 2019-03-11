@@ -3,6 +3,7 @@ package com.bitcoinwallet.utilities
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
+import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 
 class DateTimeUtilities {
@@ -11,7 +12,7 @@ class DateTimeUtilities {
 
         fun epochTimeToFriendlyString(time: Long) : String {
             val formatter = DateTimeFormatter.ofPattern(dateTimeFormat)
-            return formatter.format(Instant.ofEpochSecond(time))
+            return formatter.format(LocalDateTime.ofEpochSecond(time, 0, ZoneOffset.UTC))
         }
 
         fun stringToEpochLong(dateTimeString: String) : Long {

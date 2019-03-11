@@ -3,6 +3,7 @@ package com.bitcoinwallet.activities
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.bitcoinwallet.R
 import com.bitcoinwallet.utilities.DateTimeUtilities
 import com.bitcoinwallet.utilities.Globals
@@ -22,6 +23,7 @@ class DisplayRecoverySeedActivity : AppCompatActivity() {
         val recoverySeed = Globals.kit?.wallet()?.keyChainSeed
         val mnemonicCode = recoverySeed?.mnemonicCode
         textViewRecoverySeed.text = Joiner.on(" ").join(mnemonicCode)
+
 
         textViewRecoverySeedBirthday.text =
             DateTimeUtilities.epochTimeToFriendlyString(recoverySeed?.creationTimeSeconds!!)
