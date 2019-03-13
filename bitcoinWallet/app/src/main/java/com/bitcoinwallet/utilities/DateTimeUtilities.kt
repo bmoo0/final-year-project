@@ -18,7 +18,7 @@ class DateTimeUtilities {
         fun stringToEpochLong(dateTimeString: String) : Long {
             val formatter = DateTimeFormatter.ofPattern(dateTimeFormat)
             val dt = LocalDateTime.parse(dateTimeString, formatter)
-            return dt.atZone(ZoneId.systemDefault()).toInstant().epochSecond
+            return dt.atZone(ZoneId.of("UTC")).toInstant().epochSecond
         }
 
         fun numbersToEpochLong(hour: Int, minute: Int, second: Int,

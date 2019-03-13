@@ -1,5 +1,6 @@
 package com.bitcoinwallet.activities
 
+import android.content.Intent
 import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -14,6 +15,7 @@ import com.bitcoinwallet.utilities.Globals
 import kotlinx.android.synthetic.main.activity_recover_wallet.*
 import org.bitcoinj.core.listeners.DownloadProgressTracker
 import org.bitcoinj.wallet.DeterministicSeed
+import org.bitcoinj.wallet.Wallet
 import java.util.*
 
 class RecoverWalletActivity : AppCompatActivity(), TimePickerSecondsDialog.TimePickerDelegate,
@@ -43,23 +45,22 @@ class RecoverWalletActivity : AppCompatActivity(), TimePickerSecondsDialog.TimeP
 
         recoverWalletBtn.setOnClickListener {
             if (!isDateSet || !isTimeSet) {
+                // TODO: Add error message functionality
                 // show error message
                 return@setOnClickListener
             }
             val creationTime = DateTimeUtilities.numbersToEpochLong(mHour, mMin, mSec, mDay, mMonth, mYear)
+            val seedList: List<String> = recoverySeedTxt.text.toString().split(" ").map { it.trim() }
 
             // TODO: Add password functionality
             // if no password
-            val deterministicSeed = DeterministicSeed(recoverySeedTxt.text.toString(), null, "", creationTime)
+            val deterministicSeed = DeterministicSeed(seedList, null, "", creationTime)
 
             BitcoinUtilities.setupWalletAppKit(filesDir) {
-                Globals.kit?.restoreWalletFromSeed(deterministicSeed)
+                Globals.kit?.wallet()?.allowSpendingUnconfirmedTransactions()
             }
 
             changeToLoadingScreen()
-            if (BitcoinUtilities.walletExists(filesDir)) {
-                BitcoinUtilities.removeWalletFiles(filesDir)
-            }
 
             Globals.kit?.setDownloadListener(object : DownloadProgressTracker() {
                 override fun progress(pct: Double, blocksSoFar: Int, date: Date?) {
@@ -73,11 +74,19 @@ class RecoverWalletActivity : AppCompatActivity(), TimePickerSecondsDialog.TimeP
                     super.doneDownload()
                     downloading_blockchain_progress_bar.setProgress(100, true)
                     Log.d(Globals.LOG_TAG, "Download complete")
+
+                    goToHomeScreen()
                 }
             })
 
+            Globals.kit?.restoreWalletFromSeed(deterministicSeed)
             DownloadBlockchain().execute()
         }
+    }
+
+    private fun goToHomeScreen() {
+        val homeIntent = Intent(this, HomeActivity::class.java)
+        startActivity(homeIntent)
     }
 
     private fun changeToLoadingScreen() {
