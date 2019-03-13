@@ -9,8 +9,8 @@ import org.bitcoinj.params.TestNet3Params
 
 class Globals {
     companion object {
-        val LOG_TAG = "BTC WALLET"
-        val FILE_PREFIX = "btc_wallet"
+        const val LOG_TAG = "BTC WALLET"
+        const val FILE_PREFIX = "btc_wallet"
         val networkParams: TestNet3Params
             get() = TestNet3Params.get()
         var kit: WalletAppKit? = null

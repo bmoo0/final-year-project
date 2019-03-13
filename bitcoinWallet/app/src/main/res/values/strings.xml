@@ -16,6 +16,7 @@
     <string name="txt_balance">Balance:&#x20;</string>
     <string name="txt_zero_balance">₿0.00</string>
     <string name="txt_address">Address:</string>
+    <string name="txt_address_no_colon">Address</string>
     <string name="txt_hour">Hour</string>
     <string name="txt_mins">Minutes</string>
     <string name="txt_secs">Seconds</string>
@@ -28,6 +29,7 @@
     <string name="btn_recover">Recover</string>
     <string name="btn_send">Send</string>
     <string name="btn_ok">OK</string>
+    <string name="btn_close">close</string>
     <string name="btn_cancel">Cancel</string>
     <string name="btn_copy_address">Copy Address</string>
     <string name="btn_create_wallet">Create wallet</string>
@@ -40,4 +42,8 @@
     <string name="hint_amount">Amount</string>
     <string name="hint_password">Password</string>
     <string name="hint_confirm_password">Confirm Password</string>
+
+
+    <!-- Menu Items  -->
+    <string name="menu_qr">Recieve</string>
 </resources>

@@ -7,6 +7,14 @@
     android:background="@color/offWhite"
     tools:context=".activities.HomeActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/homeToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="8dp"
+        android:theme="@style/AppTheme" />
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
