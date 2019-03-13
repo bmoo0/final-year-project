@@ -14,10 +14,12 @@ import com.bitcoinwallet.fragments.SendFragment
 import com.bitcoinwallet.fragments.SettingsFragment
 import com.bitcoinwallet.fragments.ShowQrDialog
 import com.bitcoinwallet.utilities.Globals
+import com.bitcoinwallet.utilities.HttpRequester
 import kotlinx.android.synthetic.main.activity_home.*
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
     private lateinit var address: String
+    val httpRequester = HttpRequester.getInstance(this)
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -59,6 +61,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
         supportActionBar?.title = "Home"
+        httpRequester.requestCurrentPrice()
         openFragment(HomeFragment.newInstance())
         homeNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
@@ -82,6 +85,14 @@ class HomeActivity : AppCompatActivity() {
     // TODO: Fix back button on home screen so it closes app
     override fun onBackPressed() {
         super.onBackPressed()
+    }
+
+    override fun onCurrentPriceReturned(price: Double) {
+        Log.d(Globals.LOG_TAG, "Current price: " + price.toString())
+    }
+
+    override fun onHttpError(errorMessage: String) {
+        Log.d(Globals.LOG_TAG, "Http request failed dude")
     }
 
     inner class GetAddressAsync : AsyncTask<Void, Int, String>() {
