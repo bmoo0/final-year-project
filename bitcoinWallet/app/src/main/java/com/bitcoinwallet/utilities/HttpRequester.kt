@@ -6,11 +6,15 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import org.json.JSONObject
+import com.beust.klaxon.Klaxon
+import com.beust.klaxon.PathMatcher
+import java.io.StringReader
+import java.util.regex.Pattern
 
 class HttpRequester(context: Context) {
     // TODO: Add functionality for switching currencies like USD
-    private var TAG = "BTC WALLET REQUEST"
+    private val COIN_API_KEY = "67544CAE-2A21-4718-A009-B6211B456707"
+    private val TAG = "BTC WALLET REQUEST"
     private var fiatCurrency = "GBP"
 
     companion object {
@@ -40,13 +44,27 @@ class HttpRequester(context: Context) {
     }
 
     fun requestCurrentPrice() {
-        val url = "https://api.coindesk.com/v1/bpi/currentprice/$fiatCurrency.json"
+        val url = "https://api.coindesk.com/v1/bpi/currentprice.json"
+        var price: Double = 0.00
+
+        val pathMatcher = object : PathMatcher {
+            override fun pathMatches(path: String): Boolean
+                    = Pattern.matches(".*bpi.*$fiatCurrency.*", path)
+
+            override fun onMatch(path: String, value: Any) {
+                when(path) {
+                        "$.bpi.GBP.rate_float" -> {
+                            val strResponse = value.toString()
+                            price = strResponse.toDouble()
+                        }
+                }
+            }
+        }
+
         val stringReq = StringRequest(
             Request.Method.GET, url,
             Response.Listener<String> { response ->
-                val jsonObj = JSONObject(response)
-                val price = jsonObj.getJSONObject("bpi").getJSONObject(fiatCurrency)
-                    .getDouble("rate_float")
+                Klaxon().pathMatcher(pathMatcher).parseJsonObject(StringReader(response))
                 delegate.onCurrentPriceReturned(price)
             }, Response.ErrorListener
             {
@@ -54,6 +72,10 @@ class HttpRequester(context: Context) {
             }
         )
         addToRequestQueue(stringReq)
+    }
+
+    fun requestHistoricPriceBetweenPeriods(start: String, end: String) {
+        val url = ""
     }
 
     interface HttpRequestDelegate {

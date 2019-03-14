@@ -51,6 +51,9 @@ dependencies {
     // For HTTP Requests
     implementation 'com.android.volley:volley:1.1.1'
 
+    // For JSON Parsing
+    implementation 'com.beust:klaxon:5.0.1'
+
     // For UI components
     implementation 'com.android.support:design:28.0.0'
     // Logging
