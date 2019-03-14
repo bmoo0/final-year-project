@@ -2,6 +2,11 @@
 #+TITLE: Dissertation Organiser
 
 * Ideas for Sections of Report
+** Overview
+*** Bitcoin Whitepaper
+*** Lightening Network Paper
+*** SPV verification wallets
+
 ** Ethics and Security
 *** Parity Wallet Leak
 *** MtGox Hack
@@ -10,9 +15,68 @@
 * Tasks
 ** DONE Write Project Proposal
     CLOSED: [2018-09-11 Tue 13:41] DEADLINE: <2018-11-19 Mon>
-** TODO Initial Planning Document
-** TODO Complete go tour
+** DONE Initial Planning Document
+   CLOSED: [2019-01-08 Tue 15:32]
 
 
 * Links For research
 ** [[https://github.com/gtcompscientist/KelloCharts][KelloCharts A Kotlin implementation of Android Charts]]
+
+
+* Weekly Planner
+** Week One 28/01/19
+*** DONE Outline functional Requirements
+    CLOSED: [2019-01-29 Thu 12:08]
+*** DONE Research possible libraries to use in order implement the wallet functionality
+    CLOSED: [2019-01-30 Thu 16:22]
+*** DONE Begin outline of the app
+    CLOSED: [2019-01-00 Thu 17:22]
+** Week Two 04/02/19
+*** DONE Create project repository
+    CLOSED: [2019-02-04 Thu 14:30]
+*** DONE Construct paper walkthrough of the app
+    CLOSED: [2019-02-06 Thu 17:09]
+*** DONE Fix build errors from inporting the BitcoinJ library
+    CLOSED: [2019-02-08 Thu 14:16]
+** Week Three 11/02/19
+*** DONE Create the initial UI screens for testing the app
+    CLOSED: [2019-02-12 Thu 13:10]
+*** DONE Fix bug which stopped BitcoinJ downloading wallet file onto device and therefore syncing with the application
+    CLOSED: [2019-02-19 Thu 19:21]
+*** DONE Fix bug which caused downloading of blockchain to lock up UI
+    CLOSED: [2019-02-19 Thu 21:12]
+** Week Four 18/02/19
+*** DONE Implement listener functionality for incoming transactions
+    CLOSED: [2019-02-21 Thu 18:45]
+*** DONE Complete use case diagram
+    CLOSED: [2019-02-26 Thu 11:56]
+** Week Five 25/02/19
+*** DONE Implement sending of money to other wallets.
+    CLOSED: [2019-03-27 Thu 14:38]
+*** IN-PROGRESS Implement notifications when money is received
+*** DONE Add copy address button functionality on home screen
+    CLOSED: [2019-02-28 Thu 16:44]
+** Week Six 04/03/19
+*** DONE Build UI for recovery system of wallet
+    CLOSED: [2019-03-11 Thu 15:32]
+**** DONE Build settings screen
+     CLOSED: [2019-03-08 Thu 15:30]
+**** DONE Access view recovery seed screen from settings menu
+     CLOSED: [2019-03-11 Thu 16:22]
+**** DONE Build recovery screen
+     CLOSED: [2019-03-07 Thu 17:42]
+** Week Seven 11/03/19
+*** DONE Complete and test recovery system of wallet
+    CLOSED: [2019-03-13 Thu 12:25]
+*** DONE Implement generation of QR codes from address
+    CLOSED: [2019-03-13 Thu 17:40]
+*** DONE Implement initial HTTP request functionality for pulling the data to graphs
+    CLOSED: [2019-03-14 Thu 16:26]
+*** Implement parsing of JSON for CoinAPI responses
+*** Add responsed from CoinAPI to price graphs and implement caching system to make them more effecient
+
+
+* Outstanding Miscellaneous Bugs And Refactoring jobs
+** TODO Back button on home screen still goes to create screen
+** TODO Need to refactor date dialog using interface inheritance to make code cleaner
+** TODO Refactor HTTP Request code once JSON parson functionality is complete
