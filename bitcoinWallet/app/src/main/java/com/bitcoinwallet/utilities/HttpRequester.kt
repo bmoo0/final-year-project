@@ -1,13 +1,11 @@
 package com.bitcoinwallet.utilities
 
 import android.content.Context
-import android.util.Log
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.beust.klaxon.JsonArray
 import com.beust.klaxon.Klaxon
 import com.beust.klaxon.PathMatcher
 import java.io.StringReader
@@ -90,15 +88,24 @@ class HttpRequester(context: Context) {
         val url = "https://rest.coinapi.io/v1/ohlcv/BTC/" +
                 "$fiatCurrency/history?period_id=$timePeriod&time_start=$start&time_end=$end"
 
-        var result = ArrayList<Double>()
+        val result = ArrayList<PriceEntry>()
 
         val pathMatcher = object : PathMatcher {
+            private lateinit var priceClose : String
+            private lateinit var timeClose : String
+
             override fun pathMatches(path: String): Boolean
-                = Pattern.matches("\\$\\[\\d\\].price_close", path)
+                = Pattern.matches("\\$\\[\\d\\].price_close|\\$\\[\\d\\].time_close", path)
 
             override fun onMatch(path: String, value: Any) {
-                val str = value.toString()
-                result.add(str.toDouble())
+                if(Pattern.matches("\\$\\[\\d\\].time_close", path)) {
+                    timeClose = value.toString()
+                }
+                if(Pattern.matches("\\$\\[\\d\\].price_close", path)) {
+                    priceClose = value.toString()
+                    result.add(PriceEntry(priceClose.toDouble(),
+                        DateTimeUtilities.isoStringToEpochLong(timeClose)))
+                }
             }
         }
 
@@ -120,9 +127,11 @@ class HttpRequester(context: Context) {
         addToRequestQueue(stringReq)
     }
 
+    data class PriceEntry(val price: Double, val timestamp: Long)
+
     interface HttpRequestDelegate {
         fun onHttpError(errorMessage: String)
         fun onCurrentPriceReturned(price: Double)
-        fun onPriceRangeReturned(price: List<Double>)
+        fun onPriceRangeReturned(price: List<PriceEntry>)
     }
 }

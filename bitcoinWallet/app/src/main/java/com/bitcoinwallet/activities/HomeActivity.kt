@@ -19,14 +19,16 @@ import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
     private lateinit var address: String
-    lateinit var weeklyPrices: List<Double>
+    lateinit var weeklyPrices: List<HttpRequester.PriceEntry>
     val httpRequester = HttpRequester.getInstance(this)
+    private val homeFragment = HomeFragment.newInstance()
+    private val sendFragment = SendFragment.newInstance()
+    private val settingsFragment = SettingsFragment.newInstance()
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.homeItem -> {
                 Log.d("BTC WALLET", "home pressed")
-                val homeFragment = HomeFragment.newInstance()
                 supportActionBar?.title = "Home"
                 openFragment(homeFragment)
                 return@OnNavigationItemSelectedListener true
@@ -34,7 +36,6 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
 
             R.id.sendItem -> {
                 Log.d("BTC WALLET", "send pressed")
-                val sendFragment = SendFragment.newInstance()
                 supportActionBar?.title = "Send"
                 openFragment(sendFragment)
                 return@OnNavigationItemSelectedListener true
@@ -42,7 +43,6 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
 
             R.id.setttingsItem -> {
                 Log.d("BTC WALLET", "settings pressed")
-                val settingsFragment = SettingsFragment.newInstance()
                 supportActionBar?.title = "Settings"
                 openFragment(settingsFragment)
                 return@OnNavigationItemSelectedListener true
@@ -62,9 +62,10 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
         }
 
         supportActionBar?.title = "Home"
+
         httpRequester.requestCurrentPrice()
         httpRequester.requestWeeklyData()
-        openFragment(HomeFragment.newInstance())
+        openFragment(homeFragment)
         homeNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
 
@@ -97,7 +98,11 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
         Log.d(Globals.LOG_TAG, "Http request failed")
     }
 
-    override fun onPriceRangeReturned(price: List<Double>) { weeklyPrices = price }
+    override fun onPriceRangeReturned(price: List<HttpRequester.PriceEntry>) {
+        val priceDataReciever = homeFragment as PriceDataReceiver
+        priceDataReciever.priceDataRecieved(price)
+        weeklyPrices = price
+    }
 
     inner class GetAddressAsync : AsyncTask<Void, Int, String>() {
         override fun doInBackground(vararg params: Void?): String {
@@ -111,5 +116,9 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
         transaction.replace(R.id.homeScreenContainer, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
+    }
+
+    interface PriceDataReceiver {
+        fun priceDataRecieved(prices: List<HttpRequester.PriceEntry>)
     }
 }
