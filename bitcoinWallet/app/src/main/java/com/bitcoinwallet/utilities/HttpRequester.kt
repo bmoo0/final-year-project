@@ -1,11 +1,13 @@
 package com.bitcoinwallet.utilities
 
 import android.content.Context
+import android.util.Log
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.beust.klaxon.JsonArray
 import com.beust.klaxon.Klaxon
 import com.beust.klaxon.PathMatcher
 import java.io.StringReader
@@ -34,9 +36,7 @@ class HttpRequester(context: Context) {
         Volley.newRequestQueue(context.applicationContext)
     }
 
-    private val delegate: HttpRequestDelegate by lazy {
-        context as HttpRequestDelegate
-    }
+    private val delegate: HttpRequestDelegate by lazy { context as HttpRequestDelegate }
 
     private fun <T> addToRequestQueue(req: Request<T>) {
         req.tag = TAG
@@ -66,20 +66,61 @@ class HttpRequester(context: Context) {
             Response.Listener<String> { response ->
                 Klaxon().pathMatcher(pathMatcher).parseJsonObject(StringReader(response))
                 delegate.onCurrentPriceReturned(price)
-            }, Response.ErrorListener
-            {
+            }, Response.ErrorListener {
                 delegate.onHttpError("Failed to get the current price")
             }
         )
         addToRequestQueue(stringReq)
     }
 
-    fun requestHistoricPriceBetweenPeriods(start: String, end: String) {
-        val url = ""
+    fun requestWeeklyData() {
+        requestHistoricPriceBetweenPeriods("2019-03-06T00:00:00","2019-03-13T00:00:00","1DAY")
+    }
+
+    private fun requestHistoricPriceBetweenPeriods(start: String, end: String, timePeriod: String) {
+        val url = "https://rest.coinapi.io/v1/ohlcv/BTC/" +
+                "$fiatCurrency/history?period_id=$timePeriod&time_start=$start&time_end=$end"
+
+        var result = ArrayList<Double>()
+
+        val pathMatcher = object : PathMatcher {
+            override fun pathMatches(path: String): Boolean
+                    = Pattern.matches(".*price_match", path)
+
+            override fun onMatch(path: String, value: Any) {
+                Log.d(Globals.LOG_TAG, "Response path: " + path.toString())
+                Log.d(Globals.LOG_TAG, "Response array outside switch: " + value.toString())
+                when(path) {
+                    "$[*].price_close" -> {
+                        val arr = value.toString()
+                        Log.d(Globals.LOG_TAG, "Response array: " + arr)
+                        //arr.map { result.add(it) }
+                    }
+                }
+            }
+        }
+
+        val stringReq = object : StringRequest(
+            Request.Method.GET, url,
+            Response.Listener<String> { response ->
+                Klaxon().pathMatcher(pathMatcher).parseJsonArray(StringReader(response))
+                delegate.onPriceRangeReturned(result)
+            }, Response.ErrorListener {
+                delegate.onHttpError("Failed to get the price range $timePeriod between $start and $end")
+            }) {
+            override fun getHeaders(): MutableMap<String, String> {
+                val headers = HashMap<String, String>()
+                headers["X-CoinAPI-Key"] = COIN_API_KEY
+                return headers
+            }
+        }
+
+        addToRequestQueue(stringReq)
     }
 
     interface HttpRequestDelegate {
-        fun onCurrentPriceReturned(price: Double)
         fun onHttpError(errorMessage: String)
+        fun onCurrentPriceReturned(price: Double)
+        fun onPriceRangeReturned(price: List<Double>)
     }
 }

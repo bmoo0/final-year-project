@@ -62,6 +62,7 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
 
         supportActionBar?.title = "Home"
         httpRequester.requestCurrentPrice()
+        httpRequester.requestWeeklyData()
         openFragment(HomeFragment.newInstance())
         homeNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
@@ -92,7 +93,13 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
     }
 
     override fun onHttpError(errorMessage: String) {
-        Log.d(Globals.LOG_TAG, "Http request failed dude")
+        Log.d(Globals.LOG_TAG, "Http request failed")
+    }
+
+    override fun onPriceRangeReturned(price: List<Double>) {
+        price.map {
+            Log.d(Globals.LOG_TAG, "Daily Price for week is: " + it.toString())
+        }
     }
 
     inner class GetAddressAsync : AsyncTask<Void, Int, String>() {
