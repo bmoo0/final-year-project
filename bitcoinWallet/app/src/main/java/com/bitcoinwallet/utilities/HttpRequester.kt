@@ -16,6 +16,7 @@ import java.util.regex.Pattern
 class HttpRequester(context: Context) {
     // TODO: Add functionality for switching currencies like USD
     private val COIN_API_KEY = "67544CAE-2A21-4718-A009-B6211B456707"
+    private val BACKUP_COIN_API_KEY = "3C0805F4-EA70-4F6A-8A70-DAE85236195E"
     private val TAG = "BTC WALLET REQUEST"
     private var fiatCurrency = "GBP"
 
@@ -85,18 +86,11 @@ class HttpRequester(context: Context) {
 
         val pathMatcher = object : PathMatcher {
             override fun pathMatches(path: String): Boolean
-                    = Pattern.matches(".*price_match", path)
+                = Pattern.matches("\\$\\[\\d\\].price_close", path)
 
             override fun onMatch(path: String, value: Any) {
-                Log.d(Globals.LOG_TAG, "Response path: " + path.toString())
-                Log.d(Globals.LOG_TAG, "Response array outside switch: " + value.toString())
-                when(path) {
-                    "$[*].price_close" -> {
-                        val arr = value.toString()
-                        Log.d(Globals.LOG_TAG, "Response array: " + arr)
-                        //arr.map { result.add(it) }
-                    }
-                }
+                val str = value.toString()
+                result.add(str.toDouble())
             }
         }
 
@@ -110,7 +104,7 @@ class HttpRequester(context: Context) {
             }) {
             override fun getHeaders(): MutableMap<String, String> {
                 val headers = HashMap<String, String>()
-                headers["X-CoinAPI-Key"] = COIN_API_KEY
+                headers["X-CoinAPI-Key"] = BACKUP_COIN_API_KEY
                 return headers
             }
         }
