@@ -15,12 +15,14 @@ import android.widget.Toast
 
 import com.bitcoinwallet.R
 import com.bitcoinwallet.utilities.Globals
+import com.github.mikephil.charting.data.Entry
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
     lateinit var balance: String
     lateinit var addr: String
+    private lateinit var entries : List<Entry>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +51,8 @@ class HomeFragment : Fragment() {
             setWalletbalance(newBalance.toFriendlyString())
         }
 
+        // setup graph
+
         return view
     }
 
@@ -59,6 +63,14 @@ class HomeFragment : Fragment() {
     private fun setWalletbalance(balance: String) {
         walletBalanceTxt.text = "₿" + balance
 
+    }
+
+    private fun setupGraph(graphData: List<Double>) {
+        entries = ArrayList<Entry>()
+
+        graphData.map {
+            entries.add()
+        }
     }
 
     inner class GetBalanceAsync : AsyncTask<Void, Int, String>() {

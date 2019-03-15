@@ -11,6 +11,8 @@ import com.beust.klaxon.JsonArray
 import com.beust.klaxon.Klaxon
 import com.beust.klaxon.PathMatcher
 import java.io.StringReader
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.regex.Pattern
 
 class HttpRequester(context: Context) {
@@ -75,7 +77,13 @@ class HttpRequester(context: Context) {
     }
 
     fun requestWeeklyData() {
-        requestHistoricPriceBetweenPeriods("2019-03-06T00:00:00","2019-03-13T00:00:00","1DAY")
+        val time = LocalDateTime.now()
+        val lastWeek = time.minusWeeks(1)
+
+        requestHistoricPriceBetweenPeriods(
+            lastWeek.format(DateTimeFormatter.ISO_DATE_TIME),
+            time.format(DateTimeFormatter.ISO_DATE_TIME),
+            "1DAY")
     }
 
     private fun requestHistoricPriceBetweenPeriods(start: String, end: String, timePeriod: String) {

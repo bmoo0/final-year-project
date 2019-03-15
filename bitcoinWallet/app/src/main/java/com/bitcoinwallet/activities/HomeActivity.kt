@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
     private lateinit var address: String
+    lateinit var weeklyPrices: List<Double>
     val httpRequester = HttpRequester.getInstance(this)
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -96,11 +97,7 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
         Log.d(Globals.LOG_TAG, "Http request failed")
     }
 
-    override fun onPriceRangeReturned(price: List<Double>) {
-        price.map {
-            Log.d(Globals.LOG_TAG, "Daily Price for week is: " + it.toString())
-        }
-    }
+    override fun onPriceRangeReturned(price: List<Double>) { weeklyPrices = price }
 
     inner class GetAddressAsync : AsyncTask<Void, Int, String>() {
         override fun doInBackground(vararg params: Void?): String {
