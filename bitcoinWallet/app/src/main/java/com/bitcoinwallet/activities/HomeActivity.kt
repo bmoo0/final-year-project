@@ -64,7 +64,7 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
         supportActionBar?.title = "Home"
 
         httpRequester.requestCurrentPrice()
-        httpRequester.requestWeeklyData()
+        httpRequester.requestPriceData()
         openFragment(homeFragment)
         homeNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
@@ -98,10 +98,9 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
         Log.d(Globals.LOG_TAG, "Http request failed")
     }
 
-    override fun onPriceRangeReturned(price: List<HttpRequester.PriceEntry>) {
+    override fun onPriceDataFound(data: HttpRequester.PriceData) {
         val priceDataReciever = homeFragment as PriceDataReceiver
-        priceDataReciever.priceDataRecieved(price)
-        weeklyPrices = price
+        priceDataReciever.priceDataRecieved(data)
     }
 
     inner class GetAddressAsync : AsyncTask<Void, Int, String>() {
@@ -119,6 +118,6 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
     }
 
     interface PriceDataReceiver {
-        fun priceDataRecieved(prices: List<HttpRequester.PriceEntry>)
+        fun priceDataRecieved(prices: HttpRequester.PriceData)
     }
 }

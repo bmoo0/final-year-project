@@ -32,7 +32,6 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
     lateinit var addr: String
     private var referenceTimestamp: Long = 0
     private lateinit var entries: ArrayList<Entry>
-    private lateinit var price: ArrayList<HttpRequester.PriceEntry>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -77,7 +76,7 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
     private fun drawGraph(graphData: List<HttpRequester.PriceEntry>) {
         entries = ArrayList<Entry>()
         referenceTimestamp = graphData[0].timestamp
-        val gradientDrawable = ContextCompat.getDrawable(context!!, R.drawable.fade_blue)
+        //val gradientDrawable = ContextCompat.getDrawable(context!!, R.drawable.fade_blue)
 
         graphData.map {
             val graphTime = it.timestamp - referenceTimestamp
@@ -86,6 +85,9 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
 
         priceGraph.description.text = ""
         priceGraph.axisRight.setDrawLabels(false)
+        priceGraph.xAxis.setDrawGridLines(false)
+        priceGraph.legend.isEnabled = false
+
         // format dates correctely
         val axisValueFormatter = DateAxisValueFormatter(referenceTimestamp)
         val xAxis = priceGraph.xAxis
@@ -93,15 +95,21 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
         xAxis.valueFormatter = axisValueFormatter
 
         val lineDataSet = LineDataSet(entries, "")
-        lineDataSet.fillDrawable = gradientDrawable
+        //lineDataSet.fillDrawable = gradientDrawable
+        lineDataSet.fillColor = R.color.colorPrimary
+        lineDataSet.color = R.color.colorPrimary
         lineDataSet.setDrawFilled(true)
+        lineDataSet.setDrawCircles(false)
+        lineDataSet.fillAlpha = 168 //transparency 0 being completely transparrent
+        lineDataSet.mode = LineDataSet.Mode.CUBIC_BEZIER
+
         val lineData = LineData(lineDataSet)
         priceGraph.data = lineData
         priceGraph.invalidate()
     }
 
-    override fun priceDataRecieved(prices: List<HttpRequester.PriceEntry>) {
-        drawGraph(prices)
+    override fun priceDataRecieved(prices: HttpRequester.PriceData) {
+        drawGraph(prices.weeklyPrice)
     }
 
     inner class GetBalanceAsync : AsyncTask<Void, Int, String>() {

@@ -17,6 +17,10 @@ class DateTimeUtilities {
             return epochTimeToFormattedString(time, "dd/MM/yy")
         }
 
+        fun epochTimeToISOTime(time: Long) : String{
+            return epochTimeToFormattedString(time)
+        }
+
         fun isoStringToEpochLong(dateTimeString: String): Long {
             return stringToEpochLong(dateTimeString)
         }
@@ -58,8 +62,9 @@ class DateTimeUtilities {
             return dt.atZone(ZoneId.of("UTC")).toInstant().epochSecond
         }
 
-        private fun epochTimeToFormattedString(time: Long, format: String): String {
-            val formatter = DateTimeFormatter.ofPattern(format)
+        private fun epochTimeToFormattedString(time: Long, format: String? = null): String {
+            val formatter = if(format == null) DateTimeFormatter.ISO_DATE_TIME
+            else DateTimeFormatter.ofPattern(format)
             return formatter.format(LocalDateTime.ofEpochSecond(time, 0, ZoneOffset.UTC))
         }
     }
