@@ -26,10 +26,12 @@ class FileCacher(private val mFile: File) {
         val clazz = prices.javaClass.kotlin
 
         clazz.memberProperties.forEach {// I am your god now
-            val rowString = "${it.name}: ${listToString(it.get(prices) as List<HttpRequester.PriceEntry>)}"
-            mFile.appendText(rowString)
-            mFile.appendText("\n")
-            Log.d(Globals.LOG_TAG, rowString)
+            if(it.name != "isFromCache") {
+                val rowString = "${it.name}: ${listToString(it.get(prices) as List<HttpRequester.PriceEntry>)}"
+                mFile.appendText(rowString)
+                mFile.appendText("\n")
+                Log.d(Globals.LOG_TAG, rowString)
+            }
         }
     }
 
@@ -61,7 +63,7 @@ class FileCacher(private val mFile: File) {
             }
         }
 
-        return HttpRequester.PriceData(hourlyPrice, dailyPrice, weeklyPrice, monthlyPrice)
+        return HttpRequester.PriceData(true, hourlyPrice, dailyPrice, weeklyPrice, monthlyPrice)
     }
 
     fun isCacheValid(): Boolean {

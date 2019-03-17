@@ -30,8 +30,10 @@ import kotlinx.android.synthetic.main.fragment_home.view.*
 class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
     lateinit var balance: String
     lateinit var addr: String
+    private var isDateFromCache: Boolean = false
     private var referenceTimestamp: Long = 0
     private lateinit var entries: ArrayList<Entry>
+    private lateinit var priceData: HttpRequester.PriceData
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,8 +62,15 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
             setWalletbalance(newBalance.toFriendlyString())
         }
 
-
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        if (isDateFromCache) {
+            drawGraph(priceData.weeklyPrice)
+        }
     }
 
     companion object {
@@ -77,6 +86,8 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
         entries = ArrayList<Entry>()
         referenceTimestamp = graphData[0].timestamp
         //val gradientDrawable = ContextCompat.getDrawable(context!!, R.drawable.fade_blue)
+
+        Log.d(Globals.LOG_TAG, "DRAWING")
 
         graphData.map {
             val graphTime = it.timestamp - referenceTimestamp
@@ -109,7 +120,11 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
     }
 
     override fun priceDataRecieved(prices: HttpRequester.PriceData) {
-        drawGraph(prices.weeklyPrice)
+        isDateFromCache = prices.isFromCache
+        priceData = prices
+        if(!isDateFromCache) {
+            drawGraph(prices.weeklyPrice)
+        }
     }
 
     inner class GetBalanceAsync : AsyncTask<Void, Int, String>() {

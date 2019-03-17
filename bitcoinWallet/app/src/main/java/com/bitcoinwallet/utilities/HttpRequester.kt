@@ -108,9 +108,9 @@ class HttpRequester(context: Context) {
         val time = LocalDateTime.now()
         val yesterday = time.minusDays(1)
 
-        requestHistoricPriceBetweenPeriods(
-            yesterday.format(DateTimeFormatter.ISO_DATE_TIME),
-            time.format(DateTimeFormatter.ISO_DATE_TIME),
+        requestHistoricPriceBetweenPeriods( // ISO date acting freaky, let's hope this hack works
+            yesterday.format(DateTimeFormatter.ISO_DATE_TIME).split(".")[0],
+            time.format(DateTimeFormatter.ISO_DATE_TIME).split(".")[0],
             "1HRS",
             PriceRange.HOURLY
         )
@@ -121,8 +121,8 @@ class HttpRequester(context: Context) {
         val lastWeek = time.minusWeeks(1)
 
         requestHistoricPriceBetweenPeriods(
-            lastWeek.format(DateTimeFormatter.ISO_DATE_TIME),
-            time.format(DateTimeFormatter.ISO_DATE_TIME),
+            lastWeek.format(DateTimeFormatter.ISO_DATE_TIME).split(".")[0],
+            time.format(DateTimeFormatter.ISO_DATE_TIME).split(".")[0],
             "1DAY",
             PriceRange.DAILY)
     }
@@ -132,8 +132,8 @@ class HttpRequester(context: Context) {
         val lastMonth = time.minusMonths(1)
 
         requestHistoricPriceBetweenPeriods(
-            lastMonth.format(DateTimeFormatter.ISO_DATE_TIME),
-            time.format(DateTimeFormatter.ISO_DATE_TIME),
+            lastMonth.format(DateTimeFormatter.ISO_DATE_TIME).split(".")[0],
+            time.format(DateTimeFormatter.ISO_DATE_TIME).split(".")[0],
             "7DAY",
             PriceRange.WEEKLY
         )
@@ -144,8 +144,8 @@ class HttpRequester(context: Context) {
         val sixMonthsAgo = time.minusMonths(6)
 
         requestHistoricPriceBetweenPeriods(
-            sixMonthsAgo.format(DateTimeFormatter.ISO_DATE_TIME),
-            time.format(DateTimeFormatter.ISO_DATE_TIME),
+            sixMonthsAgo.format(DateTimeFormatter.ISO_DATE_TIME).split(".")[0],
+            time.format(DateTimeFormatter.ISO_DATE_TIME).split(".")[0],
             "1MTH",
             PriceRange.MONTHLY
         )
@@ -189,16 +189,16 @@ class HttpRequester(context: Context) {
                 }
 
                 returnedRequestCounter++
-                if (returnedRequestCounter == 5) {
+                if (returnedRequestCounter == 4) {
                     returnedRequestCounter = 0
 
-                    val priceData = PriceData(mHourlyPrices, mDailyPrices, mWeeklyPrices, mMonthlyPrices)
+                    val priceData = PriceData(false, mHourlyPrices, mDailyPrices, mWeeklyPrices, mMonthlyPrices)
                     fileCacher.writeFile(priceData)
                     delegate.onPriceDataFound(priceData)
                 }
             }, Response.ErrorListener {
                 returnedRequestCounter++
-                if (returnedRequestCounter == 5) {
+                if (returnedRequestCounter == 4) {
                     returnedRequestCounter = 0
                     requestPriceData(true)
                 }
@@ -206,7 +206,7 @@ class HttpRequester(context: Context) {
             }) {
             override fun getHeaders(): MutableMap<String, String> {
                 val headers = HashMap<String, String>()
-                headers["X-CoinAPI-Key"] = BACKUP_COIN_API_KEY
+                headers["X-CoinAPI-Key"] = COIN_API_KEY
                 return headers
             }
         }
@@ -216,7 +216,8 @@ class HttpRequester(context: Context) {
 
     data class PriceEntry(val price: Double, val timestamp: Long)
     // uncoment after debugging
-    data class PriceData(val hourlyPrice: List<PriceEntry>,
+    data class PriceData(val isFromCache: Boolean,
+                         val hourlyPrice: List<PriceEntry>,
                          val dailyPrice: List<PriceEntry>,
                          val weeklyPrice: List<PriceEntry>,
                          val monthlyPrice: List<PriceEntry>)
