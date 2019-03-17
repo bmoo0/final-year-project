@@ -14,7 +14,7 @@
 
         <LinearLayout
             android:id="@+id/balanceLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
@@ -35,21 +35,13 @@
                 android:paddingRight="30dp"
                 android:text="@string/txt_zero_balance"
                 android:textSize="20sp" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="@string/btn_copy_address"
-                android:id="@+id/copyAddressBtn"
-                />
-
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/balanceLayout"
+            android:visibility="gone"
             android:id="@+id/addressLayout"
             android:orientation="horizontal">
 
@@ -75,13 +67,58 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="400dp"
-            android:layout_below="@id/addressLayout"
+            android:layout_below="@id/balanceLayout"
+            android:id="@+id/graphLayout"
             android:orientation="horizontal">
 
             <com.github.mikephil.charting.charts.LineChart
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/priceGraph"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/graphLayout">
+
+            <android.support.design.button.MaterialButton
+                android:id="@+id/btnHourlyPrice"
+                android:layout_margin="5dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/btn_one_day"
+                style="@style/InvertedButton"
+                android:layout_height="wrap_content" />
+
+            <android.support.design.button.MaterialButton
+                android:id="@+id/btnDailyPrice"
+                android:layout_margin="5dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/btn_one_week"
+                style="@style/InvertedButton"
+                android:layout_height="wrap_content" />
+
+            <android.support.design.button.MaterialButton
+                android:id="@+id/btnWeeklyPrice"
+                android:layout_margin="5dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/btn_one_month"
+                style="@style/InvertedButton"
+                android:layout_height="wrap_content" />
+
+            <android.support.design.button.MaterialButton
+                android:id="@+id/btnMonthlyPrice"
+                android:layout_margin="5dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/btn_six_months"
+                style="@style/InvertedButton"
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
     </RelativeLayout>
 </FrameLayout>

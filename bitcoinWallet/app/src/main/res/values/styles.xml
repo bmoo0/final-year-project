@@ -37,9 +37,15 @@
         <item name="android:layout_margin">10dp</item>
         <item name="android:padding">10dp</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:background">@drawable/rounded_shape</item>
         <item name="android:textColor">#fff</item>
         <item name="backgroundTint">@color/colorPrimary</item>
     </style>
+
+    <!-- Inverted Button theme. -->
+    <style name="InvertedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:background">@drawable/rounded_shape</item>
+    </style>
+
 
 </resources>

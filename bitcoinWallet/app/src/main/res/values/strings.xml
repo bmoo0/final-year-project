@@ -25,6 +25,10 @@
     <string name="txt_year">Year</string>
 
     <!-- Buttons -->
+    <string name="btn_one_day">1D</string>
+    <string name="btn_one_week">1W</string>
+    <string name="btn_one_month">1M</string>
+    <string name="btn_six_months">6M</string>
     <string name="btn_create">Create</string>
     <string name="btn_recover">Recover</string>
     <string name="btn_send">Send</string>

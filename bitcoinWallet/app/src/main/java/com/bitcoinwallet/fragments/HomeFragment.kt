@@ -1,19 +1,14 @@
 package com.bitcoinwallet.fragments
 
-
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.graphics.drawable.Drawable
 import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.ContextCompat.getSystemService
 import android.util.Log
+import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.Button
 
 import com.bitcoinwallet.R
 import com.bitcoinwallet.activities.HomeActivity
@@ -25,7 +20,6 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
     lateinit var balance: String
@@ -48,14 +42,6 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
             GetAddressAsync().execute()
         }
 
-        // copy address
-        view.copyAddressBtn.setOnClickListener {
-            Toast.makeText(context, "Address Copied", Toast.LENGTH_SHORT).show()
-            val clipboardManager = getSystemService(context!!, ClipboardManager::class.java)
-            val clip = ClipData.newPlainText("BTC ADDRESS", addr)
-            clipboardManager?.primaryClip = clip
-        }
-
         Globals.kit?.wallet()?.addCoinsReceivedEventListener { _, _, _, newBalance ->
             Log.d(Globals.LOG_TAG, "Recieved tx")
             Log.d(Globals.LOG_TAG, "New Balance is" + newBalance.toFriendlyString())
@@ -69,7 +55,23 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
         super.onViewCreated(view, savedInstanceState)
 
         if (isDateFromCache) {
+            drawGraph(priceData.hourlyPrice)
+        }
+
+        btnHourlyPrice.setOnClickListener {
+            drawGraph(priceData.hourlyPrice)
+        }
+
+        btnDailyPrice.setOnClickListener {
+            drawGraph(priceData.dailyPrice)
+        }
+
+        btnWeeklyPrice.setOnClickListener {
             drawGraph(priceData.weeklyPrice)
+        }
+
+        btnMonthlyPrice.setOnClickListener {
+            drawGraph(priceData.monthlyPrice)
         }
     }
 
@@ -123,9 +125,10 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
         isDateFromCache = prices.isFromCache
         priceData = prices
         if(!isDateFromCache) {
-            drawGraph(prices.weeklyPrice)
+            drawGraph(prices.hourlyPrice)
         }
     }
+
 
     inner class GetBalanceAsync : AsyncTask<Void, Int, String>() {
         override fun doInBackground(vararg params: Void?): String {

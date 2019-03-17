@@ -6,7 +6,11 @@ import java.time.LocalDateTime
 import java.time.ZoneOffset
 import kotlin.reflect.full.memberProperties
 
-
+/*
+    This class saves the price data gotten from the API to a local file so that it can lower the amount of HTTP calls
+    needed, if the date in the file is < 24 hours old the cacher will extract the local data, if it is older it will
+    pull the date from online.
+ */
 class FileCacher(private val mFile: File) {
     private val delimiter = ";"
 
