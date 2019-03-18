@@ -72,11 +72,18 @@
     CLOSED: [2019-03-13 Thu 17:40]
 *** DONE Implement initial HTTP request functionality for pulling the data to graphs
     CLOSED: [2019-03-14 Thu 16:26]
-*** Implement parsing of JSON for CoinAPI responses
-*** Add responsed from CoinAPI to price graphs and implement caching system to make them more effecient
+*** DONE Implement parsing of JSON for CoinAPI responses
+    CLOSED: [2019-03-15 Fri 23:38]
+*** DONE Add responsed from CoinAPI to price graphs 
+    CLOSED: [2019-03-15 Fri 23:39]
+*** DONE Add redrawing ability for different datasets on graph
+    CLOSED: [2019-03-18 Mon 09:23]
+*** IN-PROGRESS Implement caching system to make API calls more effecient
 
 
 * Outstanding Miscellaneous Bugs And Refactoring jobs
 ** TODO Back button on home screen still goes to create screen
 ** TODO Need to refactor date dialog using interface inheritance to make code cleaner
 ** TODO Refactor HTTP Request code once JSON parson functionality is complete
+** TODO Refactor UI names into cohesive naming convention
+** TODO Refactor classes to have all similar layouts
