@@ -4,15 +4,14 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
-import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 
 import com.bitcoinwallet.R
 import com.bitcoinwallet.activities.HomeActivity
 import com.bitcoinwallet.formatters.DateAxisValueFormatter
+import com.bitcoinwallet.formatters.TimeAxisValueFormatter
 import com.bitcoinwallet.utilities.Globals
 import com.bitcoinwallet.utilities.HttpRequester
 import com.github.mikephil.charting.components.XAxis
@@ -28,6 +27,7 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
     private var referenceTimestamp: Long = 0
     private lateinit var entries: ArrayList<Entry>
     private lateinit var priceData: HttpRequester.PriceData
+    private var currentPrice: Double = 0.00
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,22 +55,39 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
         super.onViewCreated(view, savedInstanceState)
 
         if (isDateFromCache) {
-            drawGraph(priceData.hourlyPrice)
+            drawGraph(priceData.hourlyPrice, true)
         }
 
         btnHourlyPrice.setOnClickListener {
-            drawGraph(priceData.hourlyPrice)
+            it.setBackgroundResource(R.drawable.button_selected)
+            btnDailyPrice.setBackgroundResource(R.drawable.button_deselected)
+            btnWeeklyPrice.setBackgroundResource(R.drawable.button_deselected)
+            btnMonthlyPrice.setBackgroundResource(R.drawable.button_deselected)
+            drawGraph(priceData.hourlyPrice, true)
         }
 
         btnDailyPrice.setOnClickListener {
+            it.setBackgroundResource(R.drawable.button_selected)
+            btnHourlyPrice.setBackgroundResource(R.drawable.button_deselected)
+            btnWeeklyPrice.setBackgroundResource(R.drawable.button_deselected)
+            btnMonthlyPrice.setBackgroundResource(R.drawable.button_deselected)
             drawGraph(priceData.dailyPrice)
         }
 
         btnWeeklyPrice.setOnClickListener {
+            it.setBackgroundResource(R.drawable.button_selected)
+            btnHourlyPrice.setBackgroundResource(R.drawable.button_deselected)
+            btnDailyPrice.setBackgroundResource(R.drawable.button_deselected)
+            btnMonthlyPrice.setBackgroundResource(R.drawable.button_deselected)
             drawGraph(priceData.weeklyPrice)
+            btnDailyPrice.setBackgroundResource(R.drawable.button_deselected)
         }
 
         btnMonthlyPrice.setOnClickListener {
+            it.setBackgroundResource(R.drawable.button_selected)
+            btnHourlyPrice.setBackgroundResource(R.drawable.button_deselected)
+            btnDailyPrice.setBackgroundResource(R.drawable.button_deselected)
+            btnWeeklyPrice.setBackgroundResource(R.drawable.button_deselected)
             drawGraph(priceData.monthlyPrice)
         }
     }
@@ -84,7 +101,11 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
 
     }
 
-    private fun drawGraph(graphData: List<HttpRequester.PriceEntry>) {
+    private fun setFiatBalance(balance: String) {
+        walletBalanceFiatTxt.text = "£" + balance
+    }
+
+    private fun drawGraph(graphData: List<HttpRequester.PriceEntry>, isHourly: Boolean = false) {
         entries = ArrayList<Entry>()
         referenceTimestamp = graphData[0].timestamp
         //val gradientDrawable = ContextCompat.getDrawable(context!!, R.drawable.fade_blue)
@@ -102,7 +123,9 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
         priceGraph.legend.isEnabled = false
 
         // format dates correctely
-        val axisValueFormatter = DateAxisValueFormatter(referenceTimestamp)
+        val axisValueFormatter = if(isHourly) TimeAxisValueFormatter(referenceTimestamp)
+            else DateAxisValueFormatter(referenceTimestamp)
+
         val xAxis = priceGraph.xAxis
         xAxis.position = XAxis.XAxisPosition.BOTTOM
         xAxis.valueFormatter = axisValueFormatter
@@ -125,10 +148,13 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
         isDateFromCache = prices.isFromCache
         priceData = prices
         if(!isDateFromCache) {
-            drawGraph(prices.hourlyPrice)
+            drawGraph(prices.hourlyPrice, true)
         }
     }
 
+    override fun currentPriceRecieved(price: Double) {
+        currentPrice = price
+    }
 
     inner class GetBalanceAsync : AsyncTask<Void, Int, String>() {
         override fun doInBackground(vararg params: Void?): String {
@@ -138,8 +164,9 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
 
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
-            Log.d("BTC WALLET", "Balance = " + balance)
             setWalletbalance(balance)
+            val fiatBalance = currentPrice * balance.toDouble()
+            setFiatBalance(fiatBalance.toString())
         }
     }
 

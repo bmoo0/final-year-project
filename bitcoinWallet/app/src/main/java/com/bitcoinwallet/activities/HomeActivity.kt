@@ -91,7 +91,8 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
     }
 
     override fun onCurrentPriceReturned(price: Double) {
-        Log.d(Globals.LOG_TAG, "Current price: " + price.toString())
+        val priceDataReciever = homeFragment as PriceDataReceiver
+        priceDataReciever.currentPriceRecieved(price)
     }
 
     override fun onHttpError(errorMessage: String) {
@@ -119,5 +120,6 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
 
     interface PriceDataReceiver {
         fun priceDataRecieved(prices: HttpRequester.PriceData)
+        fun currentPriceRecieved(price: Double)
     }
 }

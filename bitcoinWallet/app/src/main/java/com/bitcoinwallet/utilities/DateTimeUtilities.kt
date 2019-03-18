@@ -17,7 +17,11 @@ class DateTimeUtilities {
             return epochTimeToFormattedString(time, "dd/MM/yy")
         }
 
-        fun epochTimeToISOTime(time: Long) : String{
+        fun epochTimeToTime(time: Long) : String {
+            return epochTimeToFormattedString(time, "HH:mm:ss")
+        }
+
+        fun epochTimeToISOTime(time: Long) : String {
             return epochTimeToFormattedString(time)
         }
 

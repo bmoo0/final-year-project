@@ -13,8 +13,9 @@
     <string name="txt_recovery_date_message">Below you will also find the date your seed which was created, writing it down is recommended as it can speed up recovery</string>
     <string name="txt_recover_wallet_message">To recover your wallet please enter your recovery seed below and the date and time it was created below</string>
     <string name="txt_creation_time_message">Input the creation time of your recovery seed\nDate (dd-mm-yy)\t Time (hh:mm:ss) </string>
-    <string name="txt_balance">Balance:&#x20;</string>
+    <string name="txt_balance">Balance</string>
     <string name="txt_zero_balance">₿0.00</string>
+    <string name="txt_zero_balance_fiat">£0.00</string>
     <string name="txt_address">Address:</string>
     <string name="txt_address_no_colon">Address</string>
     <string name="txt_hour">Hour</string>
