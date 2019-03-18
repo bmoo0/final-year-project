@@ -20,8 +20,6 @@
 
 
 * Links For research
-** [[https://github.com/gtcompscientist/KelloCharts][KelloCharts A Kotlin implementation of Android Charts]]
-
 
 * Weekly Planner
 ** Week One 28/01/19
@@ -53,7 +51,6 @@
 ** Week Five 25/02/19
 *** DONE Implement sending of money to other wallets.
     CLOSED: [2019-03-27 Thu 14:38]
-*** IN-PROGRESS Implement notifications when money is received
 *** DONE Add copy address button functionality on home screen
     CLOSED: [2019-02-28 Thu 16:44]
 ** Week Six 04/03/19
@@ -78,7 +75,14 @@
     CLOSED: [2019-03-15 Fri 23:39]
 *** DONE Add redrawing ability for different datasets on graph
     CLOSED: [2019-03-18 Mon 09:23]
-*** IN-PROGRESS Implement caching system to make API calls more effecient
+*** DONE Implement caching system to make API calls more effecient
+    CLOSED: [2019-03-17 Mon 15:08]
+** Week Eight 18/03/19
+*** TODO Implement notifications when money is received
+*** TODO Fix daily price graph so that it shows times instead of all the same date
+*** TODO Fix highlighting of buttons on home screen so that the relevant button for the relevant graph is highlighted
+*** TODO Create class diagram
+*** TODO Show balance in fiat currency as well as bitcoin on the home fragment
 
 
 * Outstanding Miscellaneous Bugs And Refactoring jobs
