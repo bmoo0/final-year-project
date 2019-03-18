@@ -80,6 +80,7 @@
 ** Week Eight 18/03/19
 *** TODO Implement notifications when money is received
 *** TODO Fix daily price graph so that it shows times instead of all the same date
+*** TODO Fix bug where dates are showing up incorrectly on the graph
 *** TODO Fix highlighting of buttons on home screen so that the relevant button for the relevant graph is highlighted
 *** TODO Create class diagram
 *** TODO Show balance in fiat currency as well as bitcoin on the home fragment
