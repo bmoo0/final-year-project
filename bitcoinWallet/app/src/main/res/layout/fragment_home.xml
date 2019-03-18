@@ -102,41 +102,57 @@
             android:orientation="horizontal"
             android:layout_below="@id/graphLayout">
 
-            <android.support.design.button.MaterialButton
+            <RadioGroup
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <ToggleButton
                 android:id="@+id/btnHourlyPrice"
                 android:layout_margin="5dp"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:text="@string/btn_one_day"
-                style="@style/InvertedButton"
+                android:checked="true"
+                android:textOn="@string/btn_one_day"
+                android:textOff="@string/btn_one_day"
+                android:textColor="@color/colour_state_graph_buttons"
+                android:background="@drawable/selector_graph_buttons"
                 android:layout_height="wrap_content" />
 
-            <android.support.design.button.MaterialButton
+            <ToggleButton
                 android:id="@+id/btnDailyPrice"
                 android:layout_margin="5dp"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:text="@string/btn_one_week"
-                style="@style/InvertedButton"
+                android:textOn="@string/btn_one_week"
+                android:textOff="@string/btn_one_week"
+                android:textColor="@color/colour_state_graph_buttons"
+                android:background="@drawable/selector_graph_buttons"
                 android:layout_height="wrap_content" />
 
-            <android.support.design.button.MaterialButton
+            <ToggleButton
                 android:id="@+id/btnWeeklyPrice"
                 android:layout_margin="5dp"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:text="@string/btn_one_month"
-                style="@style/InvertedButton"
+                android:textOn="@string/btn_one_month"
+                android:textOff="@string/btn_one_month"
+                android:textColor="@color/colour_state_graph_buttons"
+                android:background="@drawable/selector_graph_buttons"
                 android:layout_height="wrap_content" />
 
-            <android.support.design.button.MaterialButton
+            <ToggleButton
                 android:id="@+id/btnMonthlyPrice"
                 android:layout_margin="5dp"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:text="@string/btn_six_months"
-                style="@style/InvertedButton"
+                android:textOn="@string/btn_six_months"
+                android:textOff="@string/btn_six_months"
+                android:textColor="@color/colour_state_graph_buttons"
+                android:background="@drawable/selector_graph_buttons"
                 android:layout_height="wrap_content" />
+
+            </RadioGroup>
 
         </LinearLayout>
     </RelativeLayout>

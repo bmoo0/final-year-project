@@ -59,35 +59,30 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
         }
 
         btnHourlyPrice.setOnClickListener {
-            it.setBackgroundResource(R.drawable.button_selected)
-            btnDailyPrice.setBackgroundResource(R.drawable.button_deselected)
-            btnWeeklyPrice.setBackgroundResource(R.drawable.button_deselected)
-            btnMonthlyPrice.setBackgroundResource(R.drawable.button_deselected)
+            btnDailyPrice.isChecked = false
+            btnWeeklyPrice.isChecked = false
+            btnMonthlyPrice.isChecked = false
             drawGraph(priceData.hourlyPrice, true)
         }
 
         btnDailyPrice.setOnClickListener {
-            it.setBackgroundResource(R.drawable.button_selected)
-            btnHourlyPrice.setBackgroundResource(R.drawable.button_deselected)
-            btnWeeklyPrice.setBackgroundResource(R.drawable.button_deselected)
-            btnMonthlyPrice.setBackgroundResource(R.drawable.button_deselected)
+            btnHourlyPrice.isChecked = false
+            btnWeeklyPrice.isChecked = false
+            btnMonthlyPrice.isChecked = false
             drawGraph(priceData.dailyPrice)
         }
 
         btnWeeklyPrice.setOnClickListener {
-            it.setBackgroundResource(R.drawable.button_selected)
-            btnHourlyPrice.setBackgroundResource(R.drawable.button_deselected)
-            btnDailyPrice.setBackgroundResource(R.drawable.button_deselected)
-            btnMonthlyPrice.setBackgroundResource(R.drawable.button_deselected)
+            btnHourlyPrice.isChecked = false
+            btnDailyPrice.isChecked = false
+            btnMonthlyPrice.isChecked = false
             drawGraph(priceData.weeklyPrice)
-            btnDailyPrice.setBackgroundResource(R.drawable.button_deselected)
         }
 
         btnMonthlyPrice.setOnClickListener {
-            it.setBackgroundResource(R.drawable.button_selected)
-            btnHourlyPrice.setBackgroundResource(R.drawable.button_deselected)
-            btnDailyPrice.setBackgroundResource(R.drawable.button_deselected)
-            btnWeeklyPrice.setBackgroundResource(R.drawable.button_deselected)
+            btnHourlyPrice.isChecked = false
+            btnDailyPrice.isChecked = false
+            btnWeeklyPrice.isChecked = false
             drawGraph(priceData.monthlyPrice)
         }
     }
@@ -165,7 +160,7 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
             setWalletbalance(balance)
-            val fiatBalance = currentPrice * balance.toDouble()
+            val fiatBalance = currentPrice * balance.split(" ")[0].toDouble()
             setFiatBalance(fiatBalance.toString())
         }
     }
