@@ -34,7 +34,7 @@ class ShowQrDialog(val address: String) : DialogFragment() {
         txt_address.text = address
 
         // copy address on click
-        txt_address.setOnClickListener {
+        qrAddressLayout.setOnClickListener {
             Toast.makeText(context, "Address Copied", Toast.LENGTH_SHORT).show()
             val clipboardManager = ContextCompat.getSystemService(context!!, ClipboardManager::class.java)
             val clip = ClipData.newPlainText("BTC ADDRESS", address)

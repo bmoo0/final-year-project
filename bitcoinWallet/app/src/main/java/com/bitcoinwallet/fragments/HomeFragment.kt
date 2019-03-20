@@ -1,8 +1,15 @@
 package com.bitcoinwallet.fragments
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.NotificationCompat
+import android.support.v4.app.NotificationManagerCompat
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -42,10 +49,45 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
             GetAddressAsync().execute()
         }
 
-        Globals.kit?.wallet()?.addCoinsReceivedEventListener { _, _, _, newBalance ->
+        Globals.kit?.wallet()?.addCoinsReceivedEventListener { _, _, prevBalance, newBalance ->
             Log.d(Globals.LOG_TAG, "Recieved tx")
             Log.d(Globals.LOG_TAG, "New Balance is" + newBalance.toFriendlyString())
+            val CHANNEL_ID = "CHANNEL_TRANSACTION_RECEIVED"
+            val NOTIFICATION_ID = getString(R.string.notifacation_received_id)
+            val channelName = getString(R.string.notifacation_channel_name)
+            val channelImportance = NotificationManager.IMPORTANCE_DEFAULT
+            val amountRecieved = newBalance.subtract(prevBalance).toFriendlyString()
+            val intent = Intent(context, HomeActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
+
+            val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
+
+            val channel = NotificationChannel(CHANNEL_ID, channelName, channelImportance).apply {
+                description = getString(R.string.notifacation_channel_description)
+            }
+
+            var applicationBuilder = NotificationCompat.Builder(context!!, CHANNEL_ID)
+                .setSmallIcon(R.drawable.icons8_bitcoin_24)
+                .setContentTitle(getString(R.string.app_name))
+                .setContentText("Transaction Received")
+                .setStyle(NotificationCompat.BigTextStyle().bigText("You have recieved $amountRecieved"))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent)
+
+            val notificationManager : NotificationManager =
+                context!!.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+
+            with(NotificationManagerCompat.from(context!!)) {
+                notify(1, applicationBuilder.build())
+            }
+
+            val fiatBalance = newBalance.multiply(currentPrice.toLong())
+                ?.toFriendlyString()!!.split(" ")[0]
+
             setWalletbalance(newBalance.toFriendlyString())
+            setFiatBalance(fiatBalance)
         }
 
         return view
@@ -149,6 +191,9 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
 
     override fun currentPriceRecieved(price: Double) {
         currentPrice = price
+        val fiatBalance = Globals.kit?.wallet()?.balance?.multiply(currentPrice.toLong())
+            ?.toFriendlyString()!!.split(" ")[0]
+        setFiatBalance(fiatBalance)
     }
 
     inner class GetBalanceAsync : AsyncTask<Void, Int, String>() {
@@ -159,9 +204,8 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
 
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
+            Log.d(Globals.LOG_TAG, "Balance: " + balance)
             setWalletbalance(balance)
-            val fiatBalance = currentPrice * balance.split(" ")[0].toDouble()
-            setFiatBalance(fiatBalance.toString())
         }
     }
 

@@ -2,6 +2,11 @@
     <!-- App name and global strings -->
     <string name="app_name">Bitcoinwallet</string>
 
+    <!-- Notifacation channel name-->
+    <string name="notifacation_channel_name">BITCOIN_WALLET_CHANNEL</string>
+    <string name="notifacation_channel_description">TRANSACTION_RECEIVED_CHANNEL</string>
+    <string name="notifacation_received_id">TRANSACTION_NOTIFICATION</string>
+
     <!-- Text Views -->
     <string name="txt_no_wallet">No wallet found, would you like to either create or setup a wallet?</string>
     <string name="title_activity_create_wallet">CreateWalletActivity</string>

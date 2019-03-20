@@ -24,15 +24,34 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/txt_address_no_colon"
+        android:layout_marginBottom="2dp"
         android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/txt_address"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/qrAddressLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:textSize="20sp" />
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/txt_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/defaultText"
+            android:text="3f79bb7b435b05321651daefd374cdc681dc06faa65e374"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="2dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/icons8_copy_48"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
