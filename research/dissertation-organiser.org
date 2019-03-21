@@ -21,6 +21,7 @@
 
 * Links For research
 
+
 * Weekly Planner
 ** Week One 28/01/19
 *** DONE Outline functional Requirements
@@ -78,12 +79,18 @@
 *** DONE Implement caching system to make API calls more effecient
     CLOSED: [2019-03-17 Mon 15:08]
 ** Week Eight 18/03/19
-*** TODO Implement notifications when money is received
-*** TODO Fix daily price graph so that it shows times instead of all the same date
-*** TODO Fix bug where dates are showing up incorrectly on the graph
-*** TODO Fix highlighting of buttons on home screen so that the relevant button for the relevant graph is highlighted
+*** DONE Implement notifications when money is received
+    CLOSED: [2019-03-20 Thu 12:58]
+*** DONE Fix daily price graph so that it shows times instead of all the same date
+    CLOSED: [2019-03-19 Thu 12:58]
+*** DONE Fix highlighting of buttons on home screen so that the relevant button for the relevant graph is highlighted
+    CLOSED: [2019-03-18 Thu 12:58]
+*** DONE Show balance in fiat currency as well as bitcoin on the home fragment
+    CLOSED: [2019-03-20 Thu 12:59]
+
+** Week Nine 25/03/19
 *** TODO Create class diagram
-*** TODO Show balance in fiat currency as well as bitcoin on the home fragment
+*** TODO Fix bug where dates are showing up incorrectly on the graph
 
 
 * Outstanding Miscellaneous Bugs And Refactoring jobs
