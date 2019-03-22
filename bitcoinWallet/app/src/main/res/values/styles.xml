@@ -10,6 +10,8 @@
         <!-- Get rid of action bar -->
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
+        <!-- may or may not be needed -->
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
 

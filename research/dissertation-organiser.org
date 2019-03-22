@@ -21,7 +21,6 @@
 
 * Links For research
 
-
 * Weekly Planner
 ** Week One 28/01/19
 *** DONE Outline functional Requirements
@@ -87,10 +86,10 @@
     CLOSED: [2019-03-18 Thu 12:58]
 *** DONE Show balance in fiat currency as well as bitcoin on the home fragment
     CLOSED: [2019-03-20 Thu 12:59]
-
 ** Week Nine 25/03/19
 *** TODO Create class diagram
 *** TODO Fix bug where dates are showing up incorrectly on the graph
+*** TODO Fix bug where fiat price changes back to 0
 
 
 * Outstanding Miscellaneous Bugs And Refactoring jobs

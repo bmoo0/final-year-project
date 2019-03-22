@@ -54,7 +54,7 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        setSupportActionBar(homeToolbar)
+        setSupportActionBar(app_bar)
         GetAddressAsync().execute()
 
         if (intent.getBooleanExtra("EXIT", false)) {
