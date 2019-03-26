@@ -11,6 +11,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.bitcoinwallet.R
 import com.bitcoinwallet.animators.SendButtonOnClickListener
+import com.bitcoinwallet.animators.SettingsButtonOnClickListener
 import com.bitcoinwallet.fragments.HomeFragment
 import com.bitcoinwallet.fragments.SendFragment
 import com.bitcoinwallet.fragments.SettingsFragment
@@ -26,53 +27,17 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
     private val homeFragment = HomeFragment.newInstance()
     private val sendFragment = SendFragment.newInstance()
     private val settingsFragment = SettingsFragment.newInstance()
-
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        when (item.itemId) {
-            R.id.homeItem -> {
-                Log.d("BTC WALLET", "home pressed")
-                //supportActionBar?.title = "Home"
-                openFragment(homeFragment)
-                return@OnNavigationItemSelectedListener true
-            }
-
-            /*
-            R.id.sendItem -> {
-                Log.d("BTC WALLET", "send pressed")
-                //supportActionBar?.title = "Send"
-                openFragment(sendFragment)
-                return@OnNavigationItemSelectedListener true
-            }
-            */
-
-            R.id.setttingsItem -> {
-                Log.d("BTC WALLET", "settings pressed")
-                //supportActionBar?.title = "Settings"
-                openFragment(settingsFragment)
-                return@OnNavigationItemSelectedListener true
-            }
-        }
-        false
-    }
+    var isSendScreenShown = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setSupportActionBar(app_bar)
-        //setSupportActionBar(homeNavigationView)
         GetAddressAsync().execute()
-
 
         if (intent.getBooleanExtra("EXIT", false)) {
             finish()
         }
-
-        /*
-        show_qr_btn.setOnClickListener {
-            val qrDialog = ShowQrDialog(address)
-            qrDialog.show(supportFragmentManager, "qr dialog")
-        }
-        */
 
         send_btn_floating.setOnClickListener(SendButtonOnClickListener(this, send_screen))
 
@@ -81,12 +46,12 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
         httpRequester.requestCurrentPrice()
         httpRequester.requestPriceData()
         openFragment(homeFragment)
-        //homeNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        app_bar.setNavigationOnClickListener(SettingsButtonOnClickListener(this, homeScreenContainer, send_screen,
+            openIcon = getDrawable(R.drawable.btc_menu_icon), closeIcon = getDrawable(R.drawable.btc_menu_close_icon)))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_home_toolbar, menu)
-        //menuInflater.inflate(R.menu.menu_activity_home, menu)
         return super.onCreateOptionsMenu(menu)
     }
 

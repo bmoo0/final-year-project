@@ -17,8 +17,23 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
             android:theme="@style/AppTheme"
+            app:title="@string/app_name"
+            app:navigationIcon="@drawable/btc_menu_icon"
             app:titleTextColor="@color/offWhite" />
     </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="0dp"
+        android:paddingTop="88dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <include layout="@layout/btc_settings_menu_backdrop" />
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

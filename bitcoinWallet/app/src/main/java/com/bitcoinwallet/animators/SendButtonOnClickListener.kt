@@ -3,20 +3,20 @@ package com.bitcoinwallet.animators
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.app.Activity
-import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.animation.Interpolator
 import android.widget.ImageView
 import com.bitcoinwallet.R
+import com.bitcoinwallet.activities.HomeActivity
 
 /**
  * Created by Ben Moore on 26/03/2019.
  */
 
 class SendButtonOnClickListener @JvmOverloads internal constructor(
-    private val context: Context,
+    private val context: HomeActivity,
     private val hidingSheet: View,
     private val interpolator: Interpolator? = null,
     private val openIcon: Drawable? = null,
@@ -34,6 +34,7 @@ class SendButtonOnClickListener @JvmOverloads internal constructor(
 
     override fun onClick(view: View) {
         sendScreenShown = !sendScreenShown
+        context.isSendScreenShown = sendScreenShown
 
         // Cancel the existing animations
         animatorSet.removeAllListeners()
@@ -43,10 +44,7 @@ class SendButtonOnClickListener @JvmOverloads internal constructor(
         // once I have icons maybe?
         //updateIcon(view)
 
-        // needs updating
-        val translateY = height - context.resources.getDimensionPixelSize(R.dimen.show_send_screen_reveal_height)
-
-        val animator = ObjectAnimator.ofFloat(hidingSheet, "translationY", (if (sendScreenShown) 0 else translateY ).toFloat())
+        val animator = ObjectAnimator.ofFloat(hidingSheet, "translationY", (if (sendScreenShown) 0 else height).toFloat())
         animator.duration = 500
 
         if (interpolator != null) {

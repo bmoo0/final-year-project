@@ -4,11 +4,5 @@
     <item
         android:id="@+id/item_show_qr"
         android:icon="@drawable/icons8_qr_code_24"
-        app:showAsAction="always"
-        />
-
-    <item
-        android:id="@+id/setttingsItem"
-        android:icon="@drawable/icons8_services_24"
-        android:title="Settings"/>
+        app:showAsAction="always" />
 </menu>

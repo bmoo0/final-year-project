@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<dimen name="show_settings_screen_reveal_height">200dp</dimen>
-<dimen name="show_send_screen_reveal_height">0dp</dimen>
+    <dimen name="show_settings_screen_reveal_height">200dp</dimen>
 </resources>

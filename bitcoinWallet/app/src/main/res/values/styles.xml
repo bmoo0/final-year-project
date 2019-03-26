@@ -15,13 +15,23 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
+    <!-- App Toolar theme -->
+    <style name="Widget.Bitcoinwallet.Toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="titleTextAppearance">@style/TextAppearance.Bitcoinwallet.Toolbar</item>
+    </style>
+
+    <style name="TextAppearance.Bitcoinwallet.Toolbar" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+
     <!--  Alert Dialog theme. -->
     <style name="MyCustomDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:windowBackground">@drawable/dialog_background</item>
     </style>
 
-    <!-- Button theme. -->
+    <!-- Button themes -->
     <style name="MyContainedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -36,6 +46,14 @@
     <style name="InvertedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:background">@drawable/rounded_shape</item>
+    </style>
+    
+    <style name="Bitcoinwallet.Button" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/colorPrimary</item>
+    </style>
+    
+    <style name="Bitcoinwallet.Button.TextButton" parent="Bitcoinwallet.Button">
+        <item name="android:textColor">@color/offWhite</item>
     </style>
     
     <style name="BottomBarItemActive" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
