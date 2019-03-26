@@ -6,4 +6,9 @@
         android:icon="@drawable/icons8_qr_code_24"
         app:showAsAction="always"
         />
+
+    <item
+        android:id="@+id/setttingsItem"
+        android:icon="@drawable/icons8_services_24"
+        android:title="Settings"/>
 </menu>

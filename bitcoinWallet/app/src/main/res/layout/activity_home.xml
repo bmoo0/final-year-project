@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/offWhite"
+    android:background="@color/colorPrimary"
     tools:context=".activities.HomeActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -16,30 +16,103 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
-            android:elevation="8dp"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            app:titleTextColor="@color/offWhite" />
     </android.support.design.widget.AppBarLayout>
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/homeScreenContainer"/>
+        android:elevation="8dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
-    <android.support.design.widget.BottomNavigationView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="0dp"
-        android:layout_marginStart="0dp"
-        android:background="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:id="@+id/homeNavigationView"
-        app:itemIconTint="@color/offWhite"
-        app:itemTextColor="@color/offWhite"
-        app:menu="@menu/menu_activity_home">
+        <FrameLayout
+            android:id="@+id/homeScreenContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:background="@drawable/main_screen_background_shape"
+            android:elevation="8dp" />
 
+        <!-- this is for the send screen -->
+        <android.support.v7.widget.LinearLayoutCompat
+            android:id="@+id/send_screen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?android:attr/actionBarSize"
+            android:background="@drawable/main_screen_background_shape"
+            android:elevation="8dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:translationY="675dp">
 
-    </android.support.design.widget.BottomNavigationView>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:id="@+id/address_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/hint_address"
+                    android:inputType="text"
+                    android:padding="10sp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:id="@+id/amount_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/hint_amount"
+                    android:inputType="numberDecimal"
+                    android:padding="10sp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.button.MaterialButton
+                android:id="@+id/sendBtn"
+                style="@style/MyContainedButton"
+                android:text="@string/btn_send" />
+        </android.support.v7.widget.LinearLayoutCompat>
+
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@id/homeScreenContainer"
+            android:layout_alignParentBottom="true"
+            android:elevation="10dp">
+
+            <android.support.design.bottomappbar.BottomAppBar
+                android:id="@+id/homeNavigationView"
+                style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@color/colorPrimary"
+                app:fabAlignmentMode="center"
+                app:fabCradleMargin="5dp"
+                app:fabCradleRoundedCornerRadius="10dp"
+                app:itemTextAppearanceActive="@style/BottomBarItemActive"
+                app:itemTextAppearanceInactive="@style/BottomBarItemInactive" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/send_btn_floating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorSecondary"
+                android:elevation="2dp"
+                android:src="@drawable/icons8_bitcoin_logo96"
+                app:layout_anchor="@id/homeNavigationView" />
+
+        </android.support.design.widget.CoordinatorLayout>
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.bitcoinwallet.activities
 
+import android.app.Notification
 import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.bitcoinwallet.R
+import com.bitcoinwallet.animators.SendButtonOnClickListener
 import com.bitcoinwallet.fragments.HomeFragment
 import com.bitcoinwallet.fragments.SendFragment
 import com.bitcoinwallet.fragments.SettingsFragment
@@ -29,21 +31,23 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
         when (item.itemId) {
             R.id.homeItem -> {
                 Log.d("BTC WALLET", "home pressed")
-                supportActionBar?.title = "Home"
+                //supportActionBar?.title = "Home"
                 openFragment(homeFragment)
                 return@OnNavigationItemSelectedListener true
             }
 
+            /*
             R.id.sendItem -> {
                 Log.d("BTC WALLET", "send pressed")
-                supportActionBar?.title = "Send"
+                //supportActionBar?.title = "Send"
                 openFragment(sendFragment)
                 return@OnNavigationItemSelectedListener true
             }
+            */
 
             R.id.setttingsItem -> {
                 Log.d("BTC WALLET", "settings pressed")
-                supportActionBar?.title = "Settings"
+                //supportActionBar?.title = "Settings"
                 openFragment(settingsFragment)
                 return@OnNavigationItemSelectedListener true
             }
@@ -55,22 +59,34 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setSupportActionBar(app_bar)
+        //setSupportActionBar(homeNavigationView)
         GetAddressAsync().execute()
+
 
         if (intent.getBooleanExtra("EXIT", false)) {
             finish()
         }
 
-        supportActionBar?.title = "Home"
+        /*
+        show_qr_btn.setOnClickListener {
+            val qrDialog = ShowQrDialog(address)
+            qrDialog.show(supportFragmentManager, "qr dialog")
+        }
+        */
+
+        send_btn_floating.setOnClickListener(SendButtonOnClickListener(this, send_screen))
+
+       supportActionBar?.title = "Home"
 
         httpRequester.requestCurrentPrice()
         httpRequester.requestPriceData()
         openFragment(homeFragment)
-        homeNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        //homeNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_home_toolbar, menu)
+        //menuInflater.inflate(R.menu.menu_activity_home, menu)
         return super.onCreateOptionsMenu(menu)
     }
 

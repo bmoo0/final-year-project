@@ -89,7 +89,13 @@
 ** Week Nine 25/03/19
 *** TODO Create class diagram
 *** TODO Fix bug where dates are showing up incorrectly on the graph
+*** TODO Fix bug where notifacation notifies of negative transaction when sending
 *** TODO Fix bug where fiat price changes back to 0
+
+
+
+
+
 
 
 * Outstanding Miscellaneous Bugs And Refactoring jobs

@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/homeItem"
+        app:showAsAction="always"
         android:icon="@drawable/icons8_home_page_24"
+        android:orderInCategory="1"
         android:title="Home"/>
-    <item
+    <!--<item
         android:id="@+id/sendItem"
+        app:showAsAction="always"
         android:icon="@drawable/icons8_bitcoin_24"
-        android:title="Send"/>
+        android:title="Send"/> -->
     <item
         android:id="@+id/setttingsItem"
+        app:showAsAction="always"
         android:icon="@drawable/icons8_services_24"
+        android:orderInCategory="2"
         android:title="Settings"/>
 </menu>

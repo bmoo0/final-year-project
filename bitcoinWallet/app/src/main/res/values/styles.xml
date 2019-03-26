@@ -6,24 +6,13 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorSecondary">@color/offWhite</item>
 
         <!-- Get rid of action bar -->
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
         <!-- may or may not be needed -->
         <item name="android:windowLightStatusBar">true</item>
-    </style>
-
-
-    <style name="AppThemeWithTitleBar" parent="Theme.MaterialComponents.Light">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-
-        <!-- Get rid of title -->
-        <item name="android:windowNoTitle">false</item>
-        <item name="android:windowActionBar">true</item>
     </style>
 
     <!--  Alert Dialog theme. -->
@@ -48,6 +37,15 @@
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:background">@drawable/rounded_shape</item>
     </style>
+    
+    <style name="BottomBarItemActive" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="itemTextColor">@color/colorSecondary</item>
+        <item name="itemIconTint">@color/colorSecondary</item>
+    </style>
 
+    <style name="BottomBarItemInactive" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="itemTextColor">@color/colorSecondaryDark</item>
+        <item name="itemIconTint">@color/colorSecondaryDark</item>
+    </style>
 
 </resources>
