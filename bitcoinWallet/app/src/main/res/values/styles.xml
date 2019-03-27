@@ -41,6 +41,10 @@
         <item name="backgroundTint">@color/colorPrimary</item>
     </style>
 
+    <style name="CustomAlertDialogRightButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:background">@drawable/shape_rounded_bottom_right</item>
+    </style>
+
     <!-- Inverted Button theme. -->
     <style name="InvertedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:textColor">@color/colorPrimary</item>

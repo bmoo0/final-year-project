@@ -24,7 +24,6 @@ class ShowQrDialog(val address: String) : DialogFragment() {
 
         closeBtn.setOnClickListener { dismiss() }
 
-        //val bitmapQR = QRCode.from(address).withSize(300, 300).bitmap()
         val bitmapQR = QRCode.from(address).withSize(200, 200).bitmap()
 
         val roundedQR = getRoundedCornersOnBitmap(bitmapQR,20)

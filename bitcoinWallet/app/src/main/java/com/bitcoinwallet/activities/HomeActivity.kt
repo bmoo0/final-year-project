@@ -1,27 +1,23 @@
 package com.bitcoinwallet.activities
 
-import android.app.Notification
+import android.content.Intent
 import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
-import android.text.InputType
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
-import android.view.Window
 import android.widget.Toast
 import com.bitcoinwallet.R
 import com.bitcoinwallet.animators.SendButtonOnClickListener
 import com.bitcoinwallet.animators.SettingsButtonOnClickListener
 import com.bitcoinwallet.fragments.HomeFragment
-import com.bitcoinwallet.fragments.SendFragment
-import com.bitcoinwallet.fragments.SettingsFragment
 import com.bitcoinwallet.fragments.ShowQrDialog
 import com.bitcoinwallet.utilities.Globals
 import com.bitcoinwallet.utilities.HttpRequester
+import com.google.zxing.integration.android.IntentIntegrator
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
@@ -50,16 +46,13 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
             if (event.action == MotionEvent.ACTION_UP) {
                 if (event.rawX >= (address_input.right -
                             address_input.compoundDrawables[DRAWABLE_RIGHT].bounds.width())) {
-                    Toast.makeText(this, "QR pressed", Toast.LENGTH_SHORT).show()
-                    address_input.inputType = InputType.TYPE_NULL
-                    address_input.showSoftInputOnFocus = false
+                    scan_qr_code()
                     true
                 }
             }
-            address_input.inputType = InputType.TYPE_CLASS_TEXT
-            address_input.showSoftInputOnFocus = true
            false
         }
+
         httpRequester.requestPriceData()
         openFragment(homeFragment)
         app_bar.setNavigationOnClickListener(SettingsButtonOnClickListener(this, homeScreenContainer, send_screen,
@@ -85,6 +78,21 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
     // TODO: Fix back button on home screen so it closes app
     override fun onBackPressed() {
         super.onBackPressed()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        val result = IntentIntegrator.parseActivityResult(requestCode,resultCode, data)
+
+        if (result != null) {
+            if(result.contents == null) {
+                Toast.makeText(this, "QR scan cancelled", Toast.LENGTH_SHORT).show()
+            } else {
+                address_input.setText(result.contents)
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
     }
 
     override fun onCurrentPriceReturned(price: Double) {
@@ -113,6 +121,14 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
         transaction.replace(R.id.homeScreenContainer, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
+    }
+
+    private fun scan_qr_code() {
+        try {
+            val qrIntent = IntentIntegrator(this).initiateScan(IntentIntegrator.QR_CODE_TYPES)
+        } catch(e: Exception) {
+            Toast.makeText(this,"Error opening QR scaner", Toast.LENGTH_SHORT).show()
+        }
     }
 
     interface PriceDataReceiver {
