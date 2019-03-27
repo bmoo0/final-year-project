@@ -7,12 +7,11 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorSecondary">@color/offWhite</item>
+        <item name="android:windowLightStatusBar">true</item>
 
         <!-- Get rid of action bar -->
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
-        <!-- may or may not be needed -->
-        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <!-- App Toolar theme -->

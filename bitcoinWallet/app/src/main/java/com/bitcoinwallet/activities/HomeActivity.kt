@@ -6,9 +6,13 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
+import android.text.InputType
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.MotionEvent
+import android.view.Window
+import android.widget.Toast
 import com.bitcoinwallet.R
 import com.bitcoinwallet.animators.SendButtonOnClickListener
 import com.bitcoinwallet.animators.SettingsButtonOnClickListener
@@ -25,14 +29,13 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
     lateinit var weeklyPrices: List<HttpRequester.PriceEntry>
     val httpRequester = HttpRequester.getInstance(this)
     private val homeFragment = HomeFragment.newInstance()
-    private val sendFragment = SendFragment.newInstance()
-    private val settingsFragment = SettingsFragment.newInstance()
     var isSendScreenShown = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setSupportActionBar(app_bar)
+        //window.statusBarColor = getColor(R.color.offWhite)
         GetAddressAsync().execute()
 
         if (intent.getBooleanExtra("EXIT", false)) {
@@ -41,9 +44,22 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
 
         send_btn_floating.setOnClickListener(SendButtonOnClickListener(this, send_screen))
 
-       supportActionBar?.title = "Home"
+        address_input.setOnTouchListener { v, event ->
+            val DRAWABLE_RIGHT = 2
 
-        httpRequester.requestCurrentPrice()
+            if (event.action == MotionEvent.ACTION_UP) {
+                if (event.rawX >= (address_input.right -
+                            address_input.compoundDrawables[DRAWABLE_RIGHT].bounds.width())) {
+                    Toast.makeText(this, "QR pressed", Toast.LENGTH_SHORT).show()
+                    address_input.inputType = InputType.TYPE_NULL
+                    address_input.showSoftInputOnFocus = false
+                    true
+                }
+            }
+            address_input.inputType = InputType.TYPE_CLASS_TEXT
+            address_input.showSoftInputOnFocus = true
+           false
+        }
         httpRequester.requestPriceData()
         openFragment(homeFragment)
         app_bar.setNavigationOnClickListener(SettingsButtonOnClickListener(this, homeScreenContainer, send_screen,

@@ -42,7 +42,7 @@ class SendButtonOnClickListener @JvmOverloads internal constructor(
         animatorSet.cancel()
 
         // once I have icons maybe?
-        //updateIcon(view)
+        updateIcon(view)
 
         val animator = ObjectAnimator.ofFloat(hidingSheet, "translationY", (if (sendScreenShown) 0 else height).toFloat())
         animator.duration = 500
@@ -61,8 +61,10 @@ class SendButtonOnClickListener @JvmOverloads internal constructor(
             }
             if (sendScreenShown) {
                 view.setImageDrawable(closeIcon)
+                view.setBackgroundColor(context.resources.getColor(R.color.colorSecondary))
             } else {
                 view.setImageDrawable(openIcon)
+                view.setBackgroundColor(context.resources.getColor(R.color.buttonGreen))
             }
         }
     }

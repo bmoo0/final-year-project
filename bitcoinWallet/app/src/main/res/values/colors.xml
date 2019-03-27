@@ -21,5 +21,6 @@
     <color name="black">#000000</color>
     <color name="colorAccent">#D81B60</color>
     <color name="desertSand">#DBD5B2</color>
+    <color name="buttonGreen">#8BC762</color>
     <color name="defaultText">#727272</color>
 </resources>

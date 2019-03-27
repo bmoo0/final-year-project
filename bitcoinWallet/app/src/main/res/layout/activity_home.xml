@@ -9,7 +9,8 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:elevation="0dp">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/app_bar"
@@ -22,6 +23,7 @@
             app:titleTextColor="@color/offWhite" />
     </android.support.design.widget.AppBarLayout>
 
+    <!-- settings menu behind main display -->
     <LinearLayout
         android:layout_marginTop="?attr/actionBarSize"
         android:layout_marginBottom="?attr/actionBarSize"
@@ -59,37 +61,51 @@
             android:background="@drawable/main_screen_background_shape"
             android:elevation="8dp"
             android:gravity="center"
-            android:orientation="vertical"
-            android:translationY="675dp">
+            android:orientation="vertical">
+            <!-- android:translationY="675dp"> -->
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeColor="@color/colorPrimary"
+                android:textColorHint="@color/colorPrimary"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_marginTop="10dp">
 
-                <EditText
-                    android:id="@+id/address_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/hint_address"
-                    android:inputType="text"
-                    android:padding="10sp" />
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/address_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/hint_address"
+                        android:drawableEnd="@drawable/btc_qt_scan_icon"
+                        android:inputType="text"
+                        android:padding="10sp" />
+
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeColor="@color/colorPrimary"
+                android:textColorHint="@color/colorPrimary"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_marginTop="10dp">
 
-                <EditText
+                <android.support.design.widget.TextInputEditText
                     android:id="@+id/amount_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/hint_amount"
                     android:inputType="numberDecimal"
-                    android:padding="10sp" />
+                    android:padding="10sp"/>
+
+
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.button.MaterialButton
@@ -97,7 +113,6 @@
                 style="@style/MyContainedButton"
                 android:text="@string/btn_send" />
         </android.support.v7.widget.LinearLayoutCompat>
-
         <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -122,9 +137,10 @@
                 android:id="@+id/send_btn_floating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorSecondary"
+                android:backgroundTint="@color/buttonGreen"
                 android:elevation="2dp"
-                android:src="@drawable/icons8_bitcoin_logo96"
+                android:src="@drawable/btc_send_icon"
+                app:borderWidth="0dp"
                 app:layout_anchor="@id/homeNavigationView" />
 
         </android.support.design.widget.CoordinatorLayout>
