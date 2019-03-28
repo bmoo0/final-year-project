@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.NotificationCompat
 import android.support.v4.app.NotificationManagerCompat
+import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,7 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import kotlinx.android.synthetic.main.fragment_home.*
+import org.bitcoinj.core.Coin
 
 class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
     lateinit var balance: String
@@ -56,7 +58,7 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
             val NOTIFICATION_ID = getString(R.string.notifacation_received_id)
             val channelName = getString(R.string.notifacation_channel_name)
             val channelImportance = NotificationManager.IMPORTANCE_DEFAULT
-            val amountRecieved = newBalance.subtract(prevBalance).toFriendlyString()
+            val amountRecieved = newBalance.subtract(prevBalance)
             val intent = Intent(context, HomeActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             }
@@ -67,20 +69,24 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
                 description = getString(R.string.notifacation_channel_description)
             }
 
-            var applicationBuilder = NotificationCompat.Builder(context!!, CHANNEL_ID)
-                .setSmallIcon(R.drawable.icons8_bitcoin_24)
-                .setContentTitle(getString(R.string.app_name))
-                .setContentText("Transaction Received")
-                .setStyle(NotificationCompat.BigTextStyle().bigText("You have recieved $amountRecieved"))
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setContentIntent(pendingIntent)
 
-            val notificationManager : NotificationManager =
-                context!!.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
+             val applicationBuilder = NotificationCompat.Builder(context!!, CHANNEL_ID)
+                 .setSmallIcon(R.drawable.icons8_bitcoin_24)
+                 .setContentTitle(getString(R.string.app_name))
+                 .setContentText("Transaction Received")
+                 .setStyle(NotificationCompat.BigTextStyle().bigText("You have recieved " +
+                         "${amountRecieved.toFriendlyString()}"))
+                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                 .setContentIntent(pendingIntent)
 
-            with(NotificationManagerCompat.from(context!!)) {
-                notify(1, applicationBuilder.build())
+             val notificationManager: NotificationManager =
+                 context!!.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+             notificationManager.createNotificationChannel(channel)
+
+            if(amountRecieved.isGreaterThan(Coin.ZERO)) {
+                with(NotificationManagerCompat.from(context!!)) {
+                    notify(1, applicationBuilder.build())
+                }
             }
 
             val fiatBalance = newBalance.multiply(currentPrice.toLong())
@@ -145,7 +151,7 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
     private fun drawGraph(graphData: List<HttpRequester.PriceEntry>, isHourly: Boolean = false) {
         entries = ArrayList<Entry>()
         referenceTimestamp = graphData[0].timestamp
-        //val gradientDrawable = ContextCompat.getDrawable(context!!, R.drawable.fade_blue)
+        val gradientDrawable = ContextCompat.getDrawable(context!!, R.drawable.fade_graph)
 
         Log.d(Globals.LOG_TAG, "DRAWING")
 
@@ -168,8 +174,8 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
         xAxis.valueFormatter = axisValueFormatter
 
         val lineDataSet = LineDataSet(entries, "")
-        //lineDataSet.fillDrawable = gradientDrawable
-        lineDataSet.fillColor = R.color.colorPrimary
+        lineDataSet.fillDrawable = gradientDrawable
+        //lineDataSet.fillColor = R.color.colorPrimary
         lineDataSet.color = R.color.colorPrimary
         lineDataSet.setDrawFilled(true)
         lineDataSet.setDrawCircles(false)
@@ -193,6 +199,7 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
         currentPrice = price
         val fiatBalance = Globals.kit?.wallet()?.balance?.multiply(currentPrice.toLong())
             ?.toFriendlyString()!!.split(" ")[0]
+        Log.d(Globals.LOG_TAG, "Fiat balance: " + fiatBalance)
         setFiatBalance(fiatBalance)
     }
 

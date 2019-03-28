@@ -37,7 +37,6 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setSupportActionBar(app_bar)
-        //window.statusBarColor = getColor(R.color.offWhite)
         GetAddressAsync().execute()
 
         if (intent.getBooleanExtra("EXIT", false)) {
@@ -111,6 +110,7 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
         }
 
         httpRequester.requestPriceData()
+        httpRequester.requestCurrentPrice()
         openFragment(homeFragment)
         app_bar.setNavigationOnClickListener(SettingsButtonOnClickListener(this, homeScreenContainer, send_screen,
             openIcon = getDrawable(R.drawable.btc_menu_icon), closeIcon = getDrawable(R.drawable.btc_menu_close_icon)))
