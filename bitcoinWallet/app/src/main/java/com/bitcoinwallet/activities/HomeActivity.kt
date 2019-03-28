@@ -28,7 +28,6 @@ import org.bitcoinj.wallet.Wallet
 
 class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
     private lateinit var address: String
-    lateinit var weeklyPrices: List<HttpRequester.PriceEntry>
     val httpRequester = HttpRequester.getInstance(this)
     private val homeFragment = HomeFragment.newInstance()
     var isSendScreenShown = false

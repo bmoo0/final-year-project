@@ -21,6 +21,7 @@
                 android:id="@+id/balanceLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
                 android:textAlignment="center"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
@@ -41,6 +42,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
                 android:text="@string/txt_zero_balance"
                 android:textSize="20sp" />
 
@@ -50,6 +52,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
                 android:text="@string/txt_zero_balance_fiat"
                 android:textSize="20sp" />
 

@@ -51,11 +51,10 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
             GetAddressAsync().execute()
         }
 
-        Globals.kit?.wallet()?.addCoinsReceivedEventListener { _, _, prevBalance, newBalance ->
+        Globals.kit?.wallet()?.addCoinsReceivedEventListener { _, tx, prevBalance, newBalance ->
             Log.d(Globals.LOG_TAG, "Recieved tx")
             Log.d(Globals.LOG_TAG, "New Balance is" + newBalance.toFriendlyString())
             val CHANNEL_ID = "CHANNEL_TRANSACTION_RECEIVED"
-            val NOTIFICATION_ID = getString(R.string.notifacation_received_id)
             val channelName = getString(R.string.notifacation_channel_name)
             val channelImportance = NotificationManager.IMPORTANCE_DEFAULT
             val amountRecieved = newBalance.subtract(prevBalance)
@@ -69,21 +68,24 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
                 description = getString(R.string.notifacation_channel_description)
             }
 
+            val applicationBuilder = NotificationCompat.Builder(context!!, CHANNEL_ID)
+                .setSmallIcon(R.drawable.icons8_bitcoin_24)
+                .setContentTitle(getString(R.string.app_name))
+                .setContentText("Transaction Received")
+                .setStyle(
+                    NotificationCompat.BigTextStyle().bigText(
+                        "You have recieved " +
+                                "${amountRecieved.toFriendlyString()}"
+                    )
+                )
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent)
 
-             val applicationBuilder = NotificationCompat.Builder(context!!, CHANNEL_ID)
-                 .setSmallIcon(R.drawable.icons8_bitcoin_24)
-                 .setContentTitle(getString(R.string.app_name))
-                 .setContentText("Transaction Received")
-                 .setStyle(NotificationCompat.BigTextStyle().bigText("You have recieved " +
-                         "${amountRecieved.toFriendlyString()}"))
-                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                 .setContentIntent(pendingIntent)
+            val notificationManager: NotificationManager =
+                context!!.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
 
-             val notificationManager: NotificationManager =
-                 context!!.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-             notificationManager.createNotificationChannel(channel)
-
-            if(amountRecieved.isGreaterThan(Coin.ZERO)) {
+            if (amountRecieved.isGreaterThan(Coin.ZERO)) {
                 with(NotificationManagerCompat.from(context!!)) {
                     notify(1, applicationBuilder.build())
                 }
@@ -153,8 +155,6 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
         referenceTimestamp = graphData[0].timestamp
         val gradientDrawable = ContextCompat.getDrawable(context!!, R.drawable.fade_graph)
 
-        Log.d(Globals.LOG_TAG, "DRAWING")
-
         graphData.map {
             val graphTime = it.timestamp - referenceTimestamp
             entries.add(Entry(graphTime.toFloat(), it.price.toFloat()))
@@ -175,7 +175,6 @@ class HomeFragment : Fragment(), HomeActivity.PriceDataReceiver {
 
         val lineDataSet = LineDataSet(entries, "")
         lineDataSet.fillDrawable = gradientDrawable
-        //lineDataSet.fillColor = R.color.colorPrimary
         lineDataSet.color = R.color.colorPrimary
         lineDataSet.setDrawFilled(true)
         lineDataSet.setDrawCircles(false)
