@@ -17,8 +17,14 @@ import com.bitcoinwallet.fragments.HomeFragment
 import com.bitcoinwallet.fragments.ShowQrDialog
 import com.bitcoinwallet.utilities.Globals
 import com.bitcoinwallet.utilities.HttpRequester
+import com.bitcoinwallet.utilities.InterfaceUtilities
 import com.google.zxing.integration.android.IntentIntegrator
 import kotlinx.android.synthetic.main.activity_home.*
+import org.bitcoinj.core.Address
+import org.bitcoinj.core.AddressFormatException
+import org.bitcoinj.core.Coin
+import org.bitcoinj.core.InsufficientMoneyException
+import org.bitcoinj.wallet.Wallet
 
 class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
     private lateinit var address: String
@@ -51,6 +57,57 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
                 }
             }
            false
+        }
+
+        sendBtn.setOnClickListener {
+            // TODO: Some error checking for this badboi
+            val value = Coin.parseCoin(amount_input.text.toString())
+            var toAddr: Address
+            var sendResult : Wallet.SendResult
+
+            try {
+                toAddr = Address.fromBase58(Globals.networkParams, address_input.text.toString())
+            } catch (e : AddressFormatException) {
+                InterfaceUtilities.showErrorDialog(this,
+                    "Invalid Address",
+                    "Address not found, are you sure you have written your address correctly",
+                    "Ok"
+                ) { dialogInterface, _ -> dialogInterface.dismiss() }
+                return@setOnClickListener
+            }
+
+            InterfaceUtilities.showAlertDialog(this,
+                "Confirm Transaction",
+                "Are you sure you want to send " + value.toFriendlyString() + "BTC to " + toAddr.toBase58() + "?",
+                "Yes", { dialogInterface, _ ->
+                    dialogInterface.dismiss()
+                    // send transaction
+                    try {
+                        sendResult = Globals.kit?.wallet()!!.sendCoins(Globals.kit?.peerGroup(), toAddr, value)
+                        Log.d(Globals.LOG_TAG, "Transaction sent in block " + sendResult.tx.toString())
+                        InterfaceUtilities.showInfoDialog(this,
+                            "Transaction Sent",
+                            "You have successfully sent " + value.toFriendlyString() + " to " + toAddr.toBase58(),
+                            "Ok"
+                        ) { dialogInterface, _ ->
+                            dialogInterface.dismiss()
+                            address_input.setText("")
+                            amount_input.setText("")
+                        }
+                    } catch (e : InsufficientMoneyException) {
+                        InterfaceUtilities.showErrorDialog(
+                            this,
+                            "Insufficient Funds",
+                            "You have isufficient funds to make this transaction",
+                            "Ok"
+                        ) { dialogInterface, _ ->
+                            dialogInterface.dismiss()
+                        }
+                    }
+                },
+                "No", { dialogInterface, _ ->
+                    dialogInterface.dismiss()
+                })
         }
 
         httpRequester.requestPriceData()
