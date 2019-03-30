@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="@drawable/rounded_shape"
     android:backgroundTint="@color/offWhite"
+    android:padding="10dp"
     android:minWidth="400dp"
+    android:background="@drawable/rounded_shape"
     android:orientation="vertical">
 
     <ImageView
@@ -24,6 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:textColor="@color/colorPrimary"
         android:text="@string/txt_address_no_colon"
         android:layout_marginBottom="2dp"
         android:textSize="20sp" />
@@ -39,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="@color/defaultText"
+            android:textColor="@color/colorPrimary"
             android:text="3f79bb7b435b05321651daefd374cdc681dc06faa65e374"
             android:textAlignment="center"
             android:layout_weight="1"
@@ -50,7 +52,7 @@
             android:layout_weight="1"
             android:layout_marginLeft="2dp"
             android:layout_height="match_parent"
-            android:src="@drawable/icons8_copy_48"/>
+            android:src="@drawable/btc_copy_icon"/>
 
     </LinearLayout>
 

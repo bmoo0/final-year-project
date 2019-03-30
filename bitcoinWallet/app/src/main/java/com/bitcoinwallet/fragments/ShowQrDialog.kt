@@ -3,6 +3,7 @@ package com.bitcoinwallet.fragments
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.graphics.*
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v4.content.ContextCompat
@@ -21,6 +22,7 @@ class ShowQrDialog(val address: String) : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        dialog.window.setBackgroundDrawable(ColorDrawable(0))
 
         closeBtn.setOnClickListener { dismiss() }
 

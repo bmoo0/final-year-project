@@ -27,7 +27,8 @@
     <!--  Alert Dialog theme. -->
     <style name="MyCustomDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:windowBackground">@drawable/dialog_background</item>
+        <item name="android:windowBackground">@drawable/dialog_inset</item>
+        <item name="buttonStyle">@style/CustomAlertDialogRightButton</item>
     </style>
 
     <!-- Button themes -->
@@ -42,7 +43,9 @@
     </style>
 
     <style name="CustomAlertDialogRightButton" parent="Widget.MaterialComponents.Button">
-        <item name="android:background">@drawable/shape_rounded_bottom_right</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:background">@drawable/rounded_shape</item>
+        <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
     <!-- Inverted Button theme. -->

@@ -17,12 +17,14 @@
 
     <android.support.design.button.MaterialButton
         style="@style/Bitcoinwallet.Button.TextButton"
+        android:stateListAnimator="@null"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_view_recovery_seed"/>
 
     <android.support.design.button.MaterialButton
         style="@style/Bitcoinwallet.Button.TextButton"
+        android:stateListAnimator="@null"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_set_password"/>

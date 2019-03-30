@@ -58,7 +58,11 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
         }
 
         sendBtn.setOnClickListener {
-            // TODO: Some error checking for this badboi
+            // othwerise app crashes when button is pressed with empty inputs
+            if(amount_input.text.toString() == "" || address_input.toString() == "") {
+                return@setOnClickListener
+            }
+
             val value = Coin.parseCoin(amount_input.text.toString())
             var toAddr: Address
             var sendResult : Wallet.SendResult
