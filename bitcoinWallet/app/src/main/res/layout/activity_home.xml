@@ -61,8 +61,8 @@
             android:background="@drawable/main_screen_background_shape"
             android:elevation="8dp"
             android:gravity="center"
-            android:orientation="vertical"
-            android:translationY="675dp">
+            android:orientation="vertical">
+            <!-- android:translationY="675dp"> -->
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
