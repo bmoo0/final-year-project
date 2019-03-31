@@ -16,6 +16,7 @@
         android:backgroundTint="@color/offWhite"/>
 
     <android.support.design.button.MaterialButton
+        android:id="@+id/btn_settings_view_recovery_seed"
         style="@style/Bitcoinwallet.Button.TextButton"
         android:stateListAnimator="@null"
         android:layout_width="wrap_content"

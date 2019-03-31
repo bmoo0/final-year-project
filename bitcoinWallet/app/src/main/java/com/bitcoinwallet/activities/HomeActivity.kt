@@ -15,11 +15,13 @@ import com.bitcoinwallet.animators.SendButtonOnClickListener
 import com.bitcoinwallet.animators.SettingsButtonOnClickListener
 import com.bitcoinwallet.fragments.HomeFragment
 import com.bitcoinwallet.fragments.ShowQrDialog
+import com.bitcoinwallet.fragments.ShowRecoverySeedDialog
 import com.bitcoinwallet.utilities.Globals
 import com.bitcoinwallet.utilities.HttpRequester
 import com.bitcoinwallet.utilities.InterfaceUtilities
 import com.google.zxing.integration.android.IntentIntegrator
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.btc_settings_menu_backdrop.*
 import org.bitcoinj.core.Address
 import org.bitcoinj.core.AddressFormatException
 import org.bitcoinj.core.Coin
@@ -43,6 +45,11 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
         }
 
         send_btn_floating.setOnClickListener(SendButtonOnClickListener(this, send_screen))
+
+        btn_settings_view_recovery_seed.setOnClickListener {
+            val recoveryDialog = ShowRecoverySeedDialog()
+            recoveryDialog.show(supportFragmentManager, "recovery seed dialog")
+        }
 
         address_input.setOnTouchListener { v, event ->
             val DRAWABLE_RIGHT = 2
