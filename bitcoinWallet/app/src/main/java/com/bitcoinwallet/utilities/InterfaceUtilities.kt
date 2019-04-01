@@ -4,7 +4,6 @@ package com.bitcoinwallet.utilities
  * Created by Ben Moore on 11/02/2019.
  */
 
-//import android.app.AlertDialog
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface

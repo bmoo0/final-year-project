@@ -22,9 +22,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_shape"
+        android:layout_gravity="center"
         android:gravity="center"
         android:padding="5dp"
         android:text=""
+        android:textColor="@color/offWhite"
         android:textSize="15sp" />
 
     <TextView
@@ -40,6 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_shape"
+        android:layout_gravity="center"
         android:gravity="center"
         android:padding="5dp"
         android:text=""

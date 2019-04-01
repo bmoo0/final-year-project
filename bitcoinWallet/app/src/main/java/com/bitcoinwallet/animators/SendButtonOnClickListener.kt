@@ -5,15 +5,12 @@ import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.app.Activity
-import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.animation.Interpolator
-import android.widget.ImageView
 import com.bitcoinwallet.R
 import com.bitcoinwallet.activities.HomeActivity
-import kotlinx.android.synthetic.main.activity_home.*
 
 /**
  * Created by Ben Moore on 26/03/2019.
@@ -22,9 +19,7 @@ import kotlinx.android.synthetic.main.activity_home.*
 class SendButtonOnClickListener @JvmOverloads internal constructor(
     private val context: HomeActivity,
     private val hidingSheet: View,
-    private val interpolator: Interpolator? = null,
-    private val openIcon: Drawable? = null,
-    private val closeIcon: Drawable? = null) : View.OnClickListener {
+    private val interpolator: Interpolator? = null) : View.OnClickListener {
 
     private val animatorSet = AnimatorSet()
     private val height: Int
