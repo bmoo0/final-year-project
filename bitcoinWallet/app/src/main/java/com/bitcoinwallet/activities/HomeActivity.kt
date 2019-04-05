@@ -147,6 +147,16 @@ class HomeActivity : AppCompatActivity(), HttpRequester.HttpRequestDelegate {
         super.onBackPressed()
     }
 
+    override fun onPause() {
+        super.onPause()
+        //Log.d(Globals.LOG_TAG, "App is in paused state")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        //Log.d(Globals.LOG_TAG, "App is back")
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
         val result = IntentIntegrator.parseActivityResult(requestCode,resultCode, data)

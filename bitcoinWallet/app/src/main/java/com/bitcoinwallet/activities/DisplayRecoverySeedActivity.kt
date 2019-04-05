@@ -47,6 +47,7 @@ class DisplayRecoverySeedActivity : AppCompatActivity() {
                     { _, _ ->
                         val homeActivityIntent = Intent(this, HomeActivity::class.java)
                         startActivity(homeActivityIntent)
+                        finish()
                     },
                     "No",
                     { _, _ ->

@@ -47,6 +47,16 @@ class CreateWalletActivity : Activity() {
                 )
             }
 
+            /*
+            if (password_input.text.isNullOrEmpty()) {
+                // password is empty
+            } else if (password_input.text == password_input_confirm.text) {
+                if(!Globals.kit?.wallet()?.isEncrypted) {
+                    Globals.kit?.wallet()?.encrypt(password_input.text)
+                }
+            }
+            */
+
             changeToLoadingScreen()
 
             Globals.kit?.setDownloadListener(object : DownloadProgressTracker() {
@@ -63,6 +73,7 @@ class CreateWalletActivity : Activity() {
                     Log.d(Globals.LOG_TAG, "Download complete")
 
                     showRecoverySeed()
+                    finish()
                 }
             })
 
