@@ -17,7 +17,8 @@ import java.util.regex.Pattern
 
 class HttpRequester(context: Context) {
     // TODO: Add functionality for switching currencies like USD
-    private val COIN_API_KEY = "67544CAE-2A21-4718-A009-B6211B456707"
+    //private val COIN_API_KEY = "67544CAE-2A21-4718-A009-B6211B456707"
+    private val COIN_API_KEY = "3C0805F4-EA70-4F6A-8A70-DAE85236195E"
     private val BACKUP_COIN_API_KEY = "3C0805F4-EA70-4F6A-8A70-DAE85236195E"
     private val TAG = "BTC WALLET REQUEST"
     private var fiatCurrency = "GBP"
@@ -200,7 +201,11 @@ class HttpRequester(context: Context) {
                 returnedRequestCounter++
                 if (returnedRequestCounter == 4) {
                     returnedRequestCounter = 0
-                    requestPriceData(true)
+                    try {
+                        requestPriceData(true)
+                    } catch (e: Exception) {
+                        Log.d(Globals.LOG_TAG, "API Key blocked")
+                    }
                 }
                 delegate.onHttpError("Failed to get the price range $timePeriod between $start and $end")
             }) {
