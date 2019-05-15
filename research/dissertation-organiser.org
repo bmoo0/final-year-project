@@ -1,4 +1,4 @@
-#+TODO: TODO IN-PROGRESS | DONE
+#+TODO: TODO IN-PROGRESS  NEEDS-PROOFREADING | DONE
 #+TITLE: Dissertation Organiser
 
 * Ideas for Sections of Report
@@ -6,11 +6,36 @@
 *** Bitcoin Whitepaper
 *** Lightening Network Paper
 *** SPV verification wallets
-
+*** Proof-of-Work
+**** https://link.springer.com/content/pdf/10.1007/978-0-387-35568-9_18.pdf
 ** Ethics and Security
 *** Parity Wallet Leak
 *** MtGox Hack
 
+* Report Sections
+** DONE Introduction
+** DONE Background Objectives and Deliverables
+** DONE Social, Ethical and Legal Issues
+** DONE Method of Approach
+** DONE Architecture and Design
+** DONE Development Technologies
+** DONE Project Management
+** DONE Development
+** DONE Project Post-Mortem
+** DONE Conclusion
+** DONE Appendices
+
+* Final Report TODOS
+** DONE Fix paper walkthrough in appendicies
+** DONE Add highlight reports 
+** DONE Look at craigs notes
+** DONE Talk about disadvantages in the market research and talk about the bitcoinJ sample app
+** DONE Change All Proper nouns to capitals
+*** Bitcoin
+*** BitcoinJ
+*** Kotlin
+*** Java
+*** Android
 
 * Tasks
 ** DONE Write Project Proposal
@@ -29,6 +54,8 @@
     CLOSED: [2019-01-30 Thu 16:22]
 *** DONE Begin outline of the app
     CLOSED: [2019-01-00 Thu 17:22]
+*** DONE Complete use case diagram
+    CLOSED: [2019-02-26 Thu 11:56]
 ** Week Two 04/02/19
 *** DONE Create project repository
     CLOSED: [2019-02-04 Thu 14:30]
@@ -46,8 +73,6 @@
 ** Week Four 18/02/19
 *** DONE Implement listener functionality for incoming transactions
     CLOSED: [2019-02-21 Thu 18:45]
-*** DONE Complete use case diagram
-    CLOSED: [2019-02-26 Thu 11:56]
 ** Week Five 25/02/19
 *** DONE Implement sending of money to other wallets.
     CLOSED: [2019-03-27 Thu 14:38]
@@ -56,11 +81,11 @@
 ** Week Six 04/03/19
 *** DONE Build UI for recovery system of wallet
     CLOSED: [2019-03-11 Thu 15:32]
-**** DONE Build settings screen
+*** DONE Build settings screen
      CLOSED: [2019-03-08 Thu 15:30]
-**** DONE Access view recovery seed screen from settings menu
+*** DONE Access view recovery seed screen from settings menu
      CLOSED: [2019-03-11 Thu 16:22]
-**** DONE Build recovery screen
+*** DONE Build recovery screen
      CLOSED: [2019-03-07 Thu 17:42]
 ** Week Seven 11/03/19
 *** DONE Complete and test recovery system of wallet
@@ -87,8 +112,6 @@
 *** DONE Show balance in fiat currency as well as bitcoin on the home fragment
     CLOSED: [2019-03-20 Thu 12:59]
 ** Week Nine 25/03/19
-*** TODO Create class diagram
-*** TODO Fix bug where dates are showing up incorrectly on the graph
 *** DONE Fix bug where notifacation notifies of negative transaction when sending
 *** DONE Fix bug where fiat price changes back to 0
 
@@ -97,7 +120,8 @@
 
 
 
-* Outstanding Miscellaneous Bugs And Refactoring jobs
+* Outstanding Miscellaneous Bugs And Refactoring jobs (REFERENCE IN POST MORTEM)
+** TODO Fix bug where dates are showing up incorrectly on the graph
 ** TODO Back button on home screen still goes to create screen
 ** TODO Need to refactor date dialog using interface inheritance to make code cleaner
 ** TODO Refactor HTTP Request code once JSON parson functionality is complete
